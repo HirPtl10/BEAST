@@ -4,4 +4,4 @@ const Schema = new mongoose.Schema({
     guildId: String,
     roleId: String
 })
-module.exports = mongoose.model('autorole', Schema)
+module.exports = mongoose.model('db', Schema)

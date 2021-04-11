@@ -59,6 +59,9 @@ client.on('message', async message =>{
     if(message.author.bot) return;
 
     if(!message.content.startsWith(p)) return;
+	 blacklist.findOne({ id : message.author.id }, async(err, data) => {
+        if(err) throw err;
+        if(!data) {
     if(!message.guild) return;
     if(!message.member) message.member = await message.guild.fetchMember(message);
     const args = message.content.slice(p.length).trim().split(/ +/g);
@@ -84,7 +87,11 @@ client.on('message', async message =>{
             }, command.timeout)
         } else {
           command.run(client, message, args)
-        }
+        	} else {
+			message.channel.send(`you are blacklisted`)
+		}
+    })
+    	}
     }   
 })
 client.on('guildDelete', async (guild) => {

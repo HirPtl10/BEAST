@@ -1,7 +1,7 @@
 const { Discord, Client, MessageEmbed } = require('discord.js') 
 module.exports = {
   
-  name: 'guilds',
+  name: 'serverlist',
   description: 'List of servers',
   async run(client, message, args) {
    let serverlist = ''

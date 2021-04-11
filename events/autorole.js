@@ -4,7 +4,7 @@ const client = require('../index')
 const db = require('../models/autorole')
 
 client.on('guildMemberAdd', async (member) => {
-    blacklist.findOne({ roleId : Autorole.id }, async(err, data) => {
+    db.findOne({ roleId : Autorole.id }, async(err, data) => {
         if(err) throw err;
         if(!data) {
             return

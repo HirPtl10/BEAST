@@ -2,6 +2,7 @@ const { Client } = require('discord.js');
 const client = new Client();
 const prefix = '*';
 
+
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
 

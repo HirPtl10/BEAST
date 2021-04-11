@@ -3,6 +3,8 @@ const fs = require('fs')
 const ms = require('ms')
 const Levels = require('discord-xp')
 const client = new Client({ partials: ['MESSAGE', 'REACTION']});
+module.exports = client;
+
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://last:last@test.8ukwy.mongodb.net/Data', { useNewUrlParser: true, useUnifiedTopology: true, })

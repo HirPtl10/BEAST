@@ -6,7 +6,7 @@ module.exports = {
     
     run : async(client, message, args) => {
         if(message.author.id !== '827793921144913971') return message.channel.send('This is an owner only command.')
-        const User = message.mentions.users.first();
+        const User = message.mentions.members.first();
         if(!User) return message.channel.send('User is not valid.')
 
         blacklist.findOne({ id : User.user.id }, async(err, data) => {

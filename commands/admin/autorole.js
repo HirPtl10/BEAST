@@ -17,12 +17,12 @@ module.exports = {
     }, async (err, auto) => {
         if (err) console.error(err);
         if (!auto) {
-            const newAuto = new auto({
+            const data = new auto({
                guildId: message.guild.id,
                roleId: Autorole.id
             });
 
-            await newAuto.save()
+            await data.save()
             .then(result => console.log(result))
             .catch(err => console.error(err));
 

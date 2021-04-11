@@ -87,14 +87,15 @@ client.on('message', async message =>{
             }, command.timeout)
         } else {
           command.run(client, message, args)
-        	} else {
-			message.channel.send(`you are blacklisted`)
-		}
-   
-    	}
-    }  
+        } 
+    }
+	} else {
+	  message.channel.send('you are blacklisted')
+	}
+    	
   })
 })
+
 client.on('guildDelete', async (guild) => {
     prefixSchema.findOne({ Guild: guild.id }, async (err, data) => {
         if (err) throw err;

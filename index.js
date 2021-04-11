@@ -21,10 +21,17 @@ client.on('ready', () => {
 
 
 const Timeout = new Collection();
+const { GiveawaysManager } = require('discord-giveaways')
 const config = require('./config.json')
 const prefix = config.prefix
 
 client.banList = new Collection();
+client.giveways = new GiveawaysManager(client, {
+  storage: './giveaway.json',
+  updateCountdownEvery: 5000,
+  embedColor: '#fff000',
+  reaction: '🎉'
+})
 client.commands = new Collection();
 client.cachedMessageReactions = new Map();
 client.db = require("quick.db");

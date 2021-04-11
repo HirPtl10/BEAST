@@ -1,6 +1,6 @@
 const ms = require('ms')
 const { MessageEmbed } = require('discord.js')
-const GiveawayClient = require('../../client/index')
+
 module.exports = {
     name : 'start-giveaway',
     run : async(client, message, args) => {

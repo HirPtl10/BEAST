@@ -11,7 +11,7 @@ module.exports = {
    timeout: '',
    cooldown: '',
    run: async (client, message, args) => {
-    const Autorole = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(x => x.user.username.toLowerCase() === args.slice(0).join(" ") || x.user.username === args[0]);
+    const Autorole = message.mentions.roles.first() || message.guild.roles.cache.find(r => r.name.toLowerCase() === args.slice(1).join(' ') || r.name === args[0]) || message.guild.roles.cache.find(r => r.id.toLowerCase()=== args.slice(0).join(" ") || r.id === args[0])
     await db.findOne({
         guildId: message.guild.id
     }, async (err, db) => {

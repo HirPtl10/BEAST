@@ -13,7 +13,7 @@ module.exports = {
                 });
                 message.guild.channels.cache.filter(c => c.type === 'text').forEach(async (channel, id) => {
                     await channel.createOverwrite(inv, {
-                        VIEW_CHANNELS: false,
+                        VIEW_CHANNEL: false,
                         ADD_REACTIONS: false
                     })
                 });

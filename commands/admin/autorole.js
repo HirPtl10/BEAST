@@ -34,7 +34,7 @@ module.exports = {
             .then(result => console.log(result))
             .catch(err => console.error(err));
 
-            return message.channel.send(`Auto role updated}`);
+            return message.channel.send(`Auto join role updated`);
         };
     });
     }

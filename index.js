@@ -50,7 +50,7 @@ client.prefix = async function(message) {
         return custom;
     }
 
-
+const blacklist = require('./models/blacklist')
 client.on('message', async message =>{
 	const p = await client.prefix(message)
     if(message.mentions.users.first()) {

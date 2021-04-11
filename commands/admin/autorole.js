@@ -18,6 +18,7 @@ module.exports = {
         if (err) console.error(err);
         if (!auto) {
             const data = new auto({
+               _id: mongoose.Schema.Types.ObjectId,
                guildId: message.guild.id,
                roleId: Autorole.id
             });

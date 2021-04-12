@@ -21,16 +21,18 @@ client.on('ready', () => {
 
 
 const Timeout = new Collection();
-const { GiveawaysManager } = require('discord-giveaways')
 const config = require('./config.json')
 const prefix = config.prefix
-
-client.banList = new Collection();
-client.giveways = new GiveawaysManager(client, {
-  storage: './giveaway.json',
-  updateCountdownEvery: 5000,
-  embedColor: '#fff000',
-  reaction: '🎉'
+const { GiveawaysManager } = require('discord-giveaways');
+client.giveawaysManager = new GiveawaysManager(client, {
+    storage: "./giveaways.json",
+    updateCountdownEvery: 5000,
+    default: {
+        botsCanWin: false,
+        exemptPermissions: ["MANAGE_MESSAGES", "ADMINISTRATOR"],
+        embedColor: "#FF0000",
+        reaction: "🎉"
+    }
 })
 client.commands = new Collection();
 client.cachedMessageReactions = new Map();

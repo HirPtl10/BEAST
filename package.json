@@ -15,7 +15,7 @@
     "discord-player": "^3.2.0",
     "discord-xp": "^1.1.13",
     "discord-ytdl-core": "^5.0.0",
-    "discord.js": "github:monbrey/discord.js#inline-replies",
+    "discord.js": "^12.5.3",
     "discord.js-avatar": "^1.0.0",
     "discord.js-pagination": "^1.0.3",
     "express": "^4.17.1",

@@ -2,6 +2,8 @@ const { Collection, Client, Discord  } = require('discord.js');
 const fs = require('fs')
 const ms = require('ms')
 const Levels = require('discord-xp')
+const config = require('./config.json')
+const TOKEN = config.token
 const client = new Client({ partials: ['MESSAGE', 'REACTION']});
 module.exports = client;
 
@@ -10,7 +12,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://last:last@test.8ukwy.mongodb.net/Data', { useNewUrlParser: true, useUnifiedTopology: true, })
 
 const { ShardingManager } = require('discord.js');
-const manager = new ShardingManager('./bot.js', { token: process.env.token });
+const manager = new ShardingManager('./bot.js', { token: process.env.TOKEN });
 manager.on('shardCreate', shard => console.log(`Launched shard ${shard.id}`));
 manager.spawn();
 
@@ -21,7 +23,6 @@ client.on('ready', () => {
 
 
 const Timeout = new Collection();
-const config = require('./config.json')
 const prefix = config.prefix
 const { GiveawaysManager } = require('discord-giveaways');
 client.giveawaysManager = new GiveawaysManager(client, {
@@ -101,7 +102,7 @@ client.on('message', async message =>{
         } 
     }
 	} else {
-	  message.channel.send('you are blacklisted')
+	  message.channel.send('You are blacklisted')
 	}
     	
   })

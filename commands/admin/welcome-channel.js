@@ -6,6 +6,7 @@ module.exports = {
   description: 'Sets a welcome channel to send welcome user',
   run: async (client, message, args) => {
     const channel = message.mentions.channels.first();
+    const msg = args[1]
      await wlc.findOne({
             guildid: message.guild.id
         }, async (err, wlc) => {
@@ -14,7 +15,7 @@ module.exports = {
                 const newWlc = new wlc({
                     
                     guildid: message.guild.id,
-                  
+                    wlcmsg: msg,
                     
                     wlcid: channel.id
                 });
@@ -26,7 +27,9 @@ module.exports = {
                 return message.channel.send(`The welcome message channel has been set to ${channel}`);
             } else {
                 wlc.updateOne({
-                    wlcid: channel.id
+                    wlcid: channel.id,
+                    wlcmsg: msg
+
                 })
                 .then(result => console.log(result))
                 .catch(err => console.error(err));

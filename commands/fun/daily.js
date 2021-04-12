@@ -1,5 +1,6 @@
 const db = require('quick.db');
 const ms = require('parse-ms');
+require("../../ExtendedMessage");
 
 module.exports = {
     name: "daily",
@@ -16,8 +17,9 @@ module.exports = {
             let time = ms(timeout - (Date.now() - daily));
             const embed = new Discord.MessageEmbed();
             embed.setTitle(`Daily Income Alredy Collected`)
+            embed.setColor(`RED`)
             embed.setDescription(`You have already collected your daily coins \n Come back in ${time.days}d, ${time.hours}h, ${time.minutes}m, and ${time.seconds}s`)
-            return message.reply(embed)
+            message.inlineReply(embed)
         } else {
             db.add(`money_${message.guild.id}_${user.id}`, amount);
             db.set(`daily_${message.guild.id}_${user.id}`, Date.now());
@@ -25,7 +27,7 @@ module.exports = {
             embed.setTitle(`Daily Income`);
             embed.setDescription(`Successfully added ${amount} coins to your account`)
             embed.setColor(`Green`)
-            message.reply(embed)
+            message.inlineReply(embed)
         }
     }
 }

@@ -31,7 +31,7 @@ module.exports = {
         const embed = new MessageEmbed() 
         .setColor("RANDOM") 
         .setTitle("peepee size machine")
-        .setDescription(`${user.toString()}\'s pp\n${pp}`)
+        .setDescription(`${user}\'s pp\n${pp}`)
         message.channel.send(embed);
         
    }

@@ -116,7 +116,7 @@ client.on('guildDelete', async (guild) => {
         }
     })
 })
-client.login(process.env.TOKEN);
+client.login(process.env.TOKEN
 
   client.on('messageDelete', async(message) => {
 	  require('./Logging/MessageDelete')(message)

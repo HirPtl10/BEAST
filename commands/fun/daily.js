@@ -14,12 +14,18 @@ module.exports = {
 
         if(daily !== null && timeout - (Date.now() - daily) > 0){
             let time = ms(timeout - (Date.now() - daily));
-
-            return message.channel.send(`You've already collected your daily award. Come back in ${time.days}d, ${time.hours}h, ${time.minutes}m, and ${time.seconds}s`)
+            const embed = new Discord.MessageEmbed();
+            embed.setTitle(`Daily Income Alredy Collected`)
+            embed.setDescription(`You have already collected your daily coins \n Come back in ${time.days}d, ${time.hours}h, ${time.minutes}m, and ${time.seconds}s`)
+            return message.reply(embed)
         } else {
             db.add(`money_${message.guild.id}_${user.id}`, amount);
             db.set(`daily_${message.guild.id}_${user.id}`, Date.now());
-            message.channel.send(`Successfully added ${amount} coins to your account`)
+            const embed = new Discord.MessageEmbed();
+            embed.setTitle(`Daily Income`);
+            embed.setDescription(`Successfully added ${amount} coins to your account`)
+            embed.setColor(`Green`)
+            message.reply(embed)
         }
     }
 }

@@ -5,15 +5,15 @@ module.exports = {
   description: '8ball command',
 	run: async (client, message, args) => {
 	const answers = [
-		'It is certain.',
-		'It is decidedly so.',
-		'Without a doubt.',
+		'Yes',
+		'No.',
+		'Wait What.',
 		'Yes - definitely.',
-		'You may rely on it.',
+		'Lamo.',
 		'As I see it, yes.',
 		'Most likely.',
 		'Outlook good.',
-		'Yes.',
+		'Bad.',
 		'Signs point to yes.',
 		'Reply hazy, try again.',
 		'Ask again later.',
@@ -24,7 +24,7 @@ module.exports = {
 		'My reply is no.',
 		'My sources say no.',
 		'Outlook not so good.',
-		'Very doubtful.',
+		'Wtf.',
 	];
 	if (!args[0]) {return message.inlineReply('Please provide a question to ask', { allowedMentions: { repliedUser: true } });}
 

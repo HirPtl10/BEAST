@@ -1,13 +1,17 @@
 const db = require('../../models/warns')
 const Guild = require('../../models/guild');
-
-const { Message, MessageEmbed } = require('discord.js')
+const { Client, Message, MessageEmbed, Discord } = require('discord.js');
 
 module.exports = {
-    name :'strike',
-    description: 'Strikes a member',
-    
-    run : async(client, message, args) => {
+   name: 'strike',
+   description: 'Gives Strike To A member',
+   aliases: '["warn"]',
+   usage: '',
+   timeout: '2000',
+   cooldown: '2sec',
+   run: async (client, message, args) => {
+
+
         if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('You do not have permissions to use this command.')
         const user = message.mentions.members.first() || message.guild.members.cache.get(args[0])
       const guildDB = await Guild.findOne({

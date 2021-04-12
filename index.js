@@ -3,7 +3,7 @@ const fs = require('fs')
 const ms = require('ms')
 const Levels = require('discord-xp')
 const config = require('./config.json')
-const TOKEN = config.token
+// const TOKEN = config.token
 const client = new Client({ partials: ['MESSAGE', 'REACTION']});
 module.exports = client;
 

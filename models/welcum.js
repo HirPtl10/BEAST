@@ -5,4 +5,4 @@ const welcum = new mongoose.Schema({
   wlcid: String,
   wlcmsg: Array  
 })
-module.exports = mongoose.model('wlc', welcum)
+module.exports = mongoose.model('wlc', welcumSchema)

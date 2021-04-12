@@ -12,7 +12,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://last:last@test.8ukwy.mongodb.net/Data', { useNewUrlParser: true, useUnifiedTopology: true, })
 
 const { ShardingManager } = require('discord.js');
-const manager = new ShardingManager('./bot.js', { token: process.env.TOKEN });
+const manager = new ShardingManager('./bot.js', { token: process.env.token });
 manager.on('shardCreate', shard => console.log(`Launched shard ${shard.id}`));
 manager.spawn();
 
@@ -116,7 +116,7 @@ client.on('guildDelete', async (guild) => {
         }
     })
 })
-client.login(process.env.TOKEN)
+client.login(process.env.token)
 
   client.on('messageDelete', async(message) => {
 	  require('./Logging/MessageDelete')(message)

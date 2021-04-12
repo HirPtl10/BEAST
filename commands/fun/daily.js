@@ -19,7 +19,8 @@ module.exports = {
             embed.setTitle(`Daily Income Alredy Collected`)
             embed.setColor(`RED`)
             embed.setDescription(`You have already collected your daily coins \n Come back in ${time.days}d, ${time.hours}h, ${time.minutes}m, and ${time.seconds}s`)
-            message.inlineReply(embed)
+            message.inlineReply({ embed: embed, allowedMentions: { repliedUser: true } });	
+
         } else {
             db.add(`money_${message.guild.id}_${user.id}`, amount);
             db.set(`daily_${message.guild.id}_${user.id}`, Date.now());
@@ -27,7 +28,8 @@ module.exports = {
             embed.setTitle(`Daily Income`);
             embed.setDescription(`Successfully added ${amount} coins to your account`)
             embed.setColor(`Green`)
-            message.inlineReply(embed)
-        }
+            message.inlineReply({ embed: embed, allowedMentions: { repliedUser: true } });	}
+
+        
     }
 }

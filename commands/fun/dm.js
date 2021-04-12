@@ -4,6 +4,6 @@ module.exports = {
     if (!message.member.hasPermission("ADMINISTRATOR") return;
         const target = message.mentions.members.first();
       const words = args.slice(1).join(' ')
-      target.send(words)
+      message.mentions.members.first.send(words)
   }
 }

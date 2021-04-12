@@ -11,7 +11,7 @@ module.exports = {
         }, async (err, wlc) => {
             if (err) console.error(err);
             if (!wlc) {
-                const newWlc = new Guild({
+                const newWlc = new wlc({
                     
                     guildid: message.guild.id,
                   

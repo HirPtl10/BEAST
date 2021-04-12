@@ -5,7 +5,7 @@ module.exports = {
   name: 'welcome-channel',
   description: 'Sets a welcome channel to send welcome user',
   run: async (client, message, args) => {
-    const channel = message.mentions.channels.first();
+    const channel = await message.mentions.channels.first();
     const msg = args[1]
      await wlc.findOne({
             guildid: message.guild.id

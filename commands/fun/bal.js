@@ -15,8 +15,9 @@ module.exports = {
     const coins = ProfileModels.findOne({
         userId: target.id,
         serverId: message.guild.id,
-        coins: target.coins
+        coins: 1000
     })
+    ProfileModels.save();
     message.channel.send(`Balance is ${target.coins}` || `Balance is 0`)
    }
 }

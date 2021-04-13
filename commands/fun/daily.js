@@ -6,8 +6,8 @@ module.exports = {
    description: '',
    aliases: '',
    usage: '',
-   timeout: '',
-   cooldown: '',
+   timeout: '171936000',
+   cooldown: '1Day',
    run: async (client, message, args) => {
     const amount = 2000;
     client.add(message.author.id, parseInt(amount))

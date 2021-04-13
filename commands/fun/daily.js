@@ -9,7 +9,8 @@ module.exports = {
    timeout: '',
    cooldown: '',
    run: async (client, message, args) => {
-    client.add(message.author, parseInt('2000'))
+    const amount = 2000;
+    client.add(message.author.id, parseInt(amount))
     message.channel.send(`Done`)
    }
 }

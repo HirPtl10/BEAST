@@ -6,7 +6,7 @@ module.exports = {
    description: '',
    aliases: '',
    usage: '',
-   timeout: '171936000',
+   timeout: '86400000',
    cooldown: '1Day',
    run: async (client, message, args) => {
     const amount = 2000;

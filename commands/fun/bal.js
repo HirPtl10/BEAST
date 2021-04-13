@@ -1,17 +1,22 @@
-const db = require('quick.db');
-const Discord = require('discord.js');
+const ProfileModels = require('../../models/profileSchema')
+const mongoose = require('mongoose')
+
+const { Client, Message, MessageEmbed, Discord } = require('discord.js');
 
 module.exports = {
-    name: "bal",
-    description: "bleh",
-
-    async run (client, message, args) {
-
-        let user = message.mentions.users.first() || message.author;
-
-        let bal = await db.fetch(`money_${message.guild.id}_${user.id}`);
-        if(bal === null) bal = 0;
-
-        message.channel.send(`${user} currently has ${bal} coins`)
-    }
+   name: 'bal',
+   description: 'shos balance of a user',
+   aliases: '',
+   usage: '',
+   timeout: '',
+   cooldown: '',
+   run: async (client, message, args) => {
+    const target = message.mentions.members.first() || message.author;
+    await ProfileModels.findOne({
+        userId: target.id,
+        serverId: message.guild.id,
+        coins: 1000
+    })
+    message.channel.send(`Balance is ${ProfileModels.coins}`)
+   }
 }

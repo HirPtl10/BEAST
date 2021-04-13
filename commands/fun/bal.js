@@ -12,11 +12,11 @@ module.exports = {
    cooldown: '',
    run: async (client, message, args) => {
     const target = message.mentions.members.first() || message.author;
-    await ProfileModels.findOne({
+    const coins = ProfileModels.findOne({
         userId: target.id,
         serverId: message.guild.id,
-        coins: ProfileModels.coins
+        coins: target.coins
     })
-    message.channel.send(`Balance is ${coins}` || `Balance is 0`)
+    message.channel.send(`Balance is ${target.coins}` || `Balance is 0`)
    }
 }

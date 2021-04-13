@@ -12,7 +12,7 @@ module.exports = {
     client.add(message.author.id, parseInt(randomNumber));
     const embed = new MessageEmbed();
    embed.setTitle(`Lol You begged`)
-   embed.setDescription(`You begged And earned \`${randomNumber}\``)
+   embed.setDescription(`You begged And earned 🪙\`${randomNumber}\``)
    message.channel.send(embed)
    }
 }

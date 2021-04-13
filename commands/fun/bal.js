@@ -18,6 +18,6 @@ module.exports = {
         coins: 1000
     })
     ProfileModels.save();
-    message.channel.send(`Balance is ${target.coins}` || `Balance is 0`)
+    message.channel.send(`Balance is ${target.coins}`)
    }
 }

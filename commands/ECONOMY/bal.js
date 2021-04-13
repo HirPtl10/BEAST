@@ -1,4 +1,4 @@
-const { Client, Message, MessageEmbed, Discord } = require('discord.js');
+const { Client, Message, MessageEmbed, Discord, MessageAttachment } = require('discord.js');
 
 module.exports = {
    name: 'bal',
@@ -16,5 +16,5 @@ module.exports = {
        embed.setColor(`BLUE`)
        message.channel.send(embed);
 
-   }
-}
+   } 
+} 

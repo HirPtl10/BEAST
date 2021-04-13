@@ -11,6 +11,10 @@ module.exports = {
    run: async (client, message, args) => {
     const amount = 2000;
     client.add(message.author.id, parseInt(amount))
-    message.channel.send(`Done`)
+    const embed = new MessageEmbed();
+    embed.setTitle(`You claimed daily ammount`)
+    embed.setColor('BLUE')
+    embed.setDescription(`Added 🪙\`${amount}\` In your account as a daily reward`)
+    message.channel.send(embed)
    }
 }

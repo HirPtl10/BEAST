@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-module.exports = mongoose.module(
+module.exports = mongoose.model(
   'Money',
   new mongoose.Schema({
     id: String,

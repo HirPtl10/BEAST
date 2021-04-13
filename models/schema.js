@@ -2,9 +2,9 @@ const mongoose = require('mongoose')
 
 module.exports = mongoose.module(
   'Money',
-  new mongoos.Schema({
+  new mongoose.Schema({
     id: String,
     coins: Number,
-    
+
   })
 )

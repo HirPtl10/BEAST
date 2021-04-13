@@ -15,8 +15,8 @@ module.exports = {
     await ProfileModels.findOne({
         userId: target.id,
         serverId: message.guild.id,
-        coins: target.coins
+        coins: ProfileModels.coins
     })
-    message.channel.send(`Balance is ${tagret.coins}` || `Balance is 0`)
+    message.channel.send(`Balance is ${coins}` || `Balance is 0`)
    }
 }

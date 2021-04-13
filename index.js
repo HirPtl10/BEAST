@@ -2,6 +2,7 @@ const { Collection, Client, Discord  } = require('discord.js');
 const fs = require('fs')
 const ms = require('ms')
 const Levels = require('discord-xp')
+const schema = require('./models/schema')
 const config = require('./config.json')
 // const TOKEN = config.token
 const client = new Client({ partials: ['MESSAGE', 'REACTION']});
@@ -20,7 +21,34 @@ client.on('ready', () => {
     console.log('Bot is online');
     client.user.setActivity(`${client.guilds.cache.size} Guilds`, { type: "WATCHING"})
 });
-
+// functions
+client.bal = (id) => new Promise(async  ful => {
+    const data = await schema.findOne({ id })
+    if (!data) return ful(0);
+    ful(data.coins)
+})
+client.add = (id, coins) => {
+    schema.findOne({ id }, async (err, data)=> {
+        if(err) throw err;
+        if (data) {
+            data.coins += coins;
+        } else {
+            data = new schema ({ id, coins })
+        }
+        data.save();
+    })
+}
+client.rmv = (id, coins) => {
+    schema.findOne({ id }, async (err, data)=> {
+        if(err) throw err;
+        if (data) {
+            data.coins -= coins;
+        } else {
+            data = new schema ({ id, coins: -coins })
+        }
+        data.save();
+    })
+}
 
 const Timeout = new Collection();
 const prefix = config.prefix

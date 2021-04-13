@@ -11,6 +11,6 @@ module.exports = {
     const target = message.mentions.members.first()
         if (!target) message.reply(`Please mention a person`)
         client.add(target.id, parseInt(args[1]));
-        message.channel.send(`Added money on ${tagret} balance`)
+        message.channel.send(`Added money on ${target} balance`)
    }
 }

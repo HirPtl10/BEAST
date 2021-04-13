@@ -8,9 +8,9 @@ module.exports = {
    timeout: '',
    cooldown: '',
    run: async (client, message, args) => {
-    const member = message.mentions.members.first() || message.author;
-
-        client.add(member.id, parseInt(args[0]));
-        message.channel.send(`Added bal`)
+    const target = message.mentions.members.first()
+        if (!target) message.reply(`Please mention a person`)
+        client.add(target.id, parseInt(args[0]));
+        message.channel.send(`Added ${(args[0])} on ${tagret} balance`)
    }
 }

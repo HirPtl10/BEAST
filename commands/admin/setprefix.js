@@ -19,7 +19,7 @@ module.exports = {
                 data.save()
                 message.channel.send(`Your prefix has been updated to **${res}**`)
             } else {
-               data.updateOne({
+               data.findOneAndDelete({
                    Prefix: res
                })
                

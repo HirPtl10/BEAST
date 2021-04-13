@@ -16,6 +16,7 @@ module.exports = {
         },
       }
     );
+    ProfileModels.save();
     return message.channel.send(`${message.author.username}, you begged and received ${randomNumber} **coins**`);
   },
 };

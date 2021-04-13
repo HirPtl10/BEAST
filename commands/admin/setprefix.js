@@ -1,5 +1,6 @@
 const prefixSchema = require('../../models/prefix')
 const { Message } = require('discord.js')
+const mongoose = require('mongoose')
 module.exports = {
     name : 'setprefix',
    
@@ -18,7 +19,7 @@ module.exports = {
                 data.save()
                 message.channel.send(`Your prefix has been updated to **${res}**`)
             } else {
-               data.findOneAndDelete({
+               data.updateOne({
                    Prefix: res
                })
                

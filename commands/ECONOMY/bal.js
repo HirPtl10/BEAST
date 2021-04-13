@@ -9,9 +9,9 @@ module.exports = {
    cooldown: '',
    run: async (client, message, args) => {
        const target = message.author || message.mentions.members.first();
-       const bal = await client.bal(target.member.id)
+       const bal = await client.bal(target.id)
        const embed = new MessageEmbed();
-       embed.setTitle(`Balance of ${target.user.tag}`)
+       embed.setTitle(`Balance of ${target.username}`)
        embed.setDescription(bal+ " coins")
        message.channel.send(embed);
 

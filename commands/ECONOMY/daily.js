@@ -14,7 +14,7 @@ module.exports = {
     const embed = new MessageEmbed();
     embed.setTitle(`You claimed daily ammount`)
     embed.setColor('BLUE')
-    embed.setDescription(`Added 🪙\`${amount}\` In your account as a daily reward`)
+    embed.setDescription(`Added 🪙 \`${amount}\` In your account as a daily reward`)
     message.channel.send(embed)
    }
 }

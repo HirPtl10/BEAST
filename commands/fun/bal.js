@@ -17,6 +17,6 @@ module.exports = {
         serverId: message.guild.id,
         coins: 1000
     })
-    message.channel.send(`Balance is ${coins}` || `Balance is 0`)
+    message.channel.send(`Balance is ${tagret.coins}` || `Balance is 0`)
    }
 }

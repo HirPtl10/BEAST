@@ -2,7 +2,7 @@ const { Client, Message, MessageEmbed, Discord } = require('discord.js');
 const mongoose = require('mongoose')
 const schema = require('../../models/schema')
 module.exports = {
-   name: '',
+   name: 'daily',
    description: '',
    aliases: '',
    usage: '',

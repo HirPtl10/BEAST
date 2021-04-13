@@ -13,6 +13,7 @@ module.exports = {
        const embed = new MessageEmbed();
        embed.setTitle(`Balance of ${target.username}`)
        embed.setDescription(`${target} has \` `+ bal + '\` coins🪙')
+       embed.setColor(`BLUE`)
        message.channel.send(embed);
 
    }

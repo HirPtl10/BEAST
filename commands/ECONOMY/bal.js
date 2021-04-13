@@ -12,7 +12,7 @@ module.exports = {
        const bal = await client.bal(target.id)
        const embed = new MessageEmbed();
        embed.setTitle(`Balance of ${target.username}`)
-       embed.setDescription(`${target} has \` `+ bal + '\` coins🪙')
+       embed.setDescription(`${target} has \``+ bal + '\` coins🪙')
        embed.setColor(`BLUE`)
        message.channel.send(embed);
 

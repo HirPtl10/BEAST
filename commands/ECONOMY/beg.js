@@ -13,5 +13,6 @@ module.exports = {
     const embed = new MessageEmbed();
    embed.setTitle(`Lol You begged`)
    embed.setDescription(`You begged And earned \`${randomNumber}\``)
+   message.channel.send(embed)
    }
 }

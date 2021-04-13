@@ -1,4 +1,4 @@
-const ProfileModels = require("../models/profileSchema");
+const ProfileModels = require("../../models/profileSchema");
 module.exports = {
   name: "beg",
   aliases: [],

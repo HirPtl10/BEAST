@@ -5,7 +5,7 @@ module.exports = {
    description: '',
    aliases: '',
    usage: '',
-   timeout: '',
+   timeout: '130000',
    cooldown: '',
    run: async (client, message, args) => {
     const randomNumber = Math.floor(Math.random() * 500) + 1;

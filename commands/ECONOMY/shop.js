@@ -16,10 +16,11 @@ module.exports = {
       const embed = new MessageEmbed();
       embed.setTitle(`SHOP LIST`)
       embed.setDescription(
-      shopList.map((value, index)=>{
+      shopList.map(
+            (value, index) =>
           `**${index + 1}** ${value.item} -> ${value.price} coins`
       
-      })
+       )
       )
       message.channel.send(embed)
    }

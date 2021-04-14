@@ -32,7 +32,7 @@ module.exports = {
             if (!hasItem){
                data.Inventory[itemToBuy] = 1;
             } else {
-               data.Inventory[itemToBuy]++
+               data.Inventory[itemToBuy]++;
             }
             console.log(data);
            await inventory.findOneAndUpdate(params, data)

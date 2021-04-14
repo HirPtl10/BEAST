@@ -47,7 +47,7 @@ module.exports = {
             }).save()
          }
          message.channel.send(`You have bought ${itemToBuy}`)
-         client.rmv(message.authpr.id, itemPrice)
+         client.rmv(message.authpr.id, parseInt(itemPrice))
       })
    },
 };

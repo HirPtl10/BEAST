@@ -1,4 +1,4 @@
-const { Collection, Client, Discord  } = require('discord.js');
+const { Collection, Client, Discord, Intents  } = require('discord.js');
 const fs = require('fs')
 const ms = require('ms')
 const Levels = require('discord-xp')
@@ -9,7 +9,9 @@ const client = new Client({
 	disableMentions: 'everyone',
 	partials: ['CHANNEL', 'MESSAGE', 'GUILD_MEMBERS', 'REACTION'],
     ws: {
-        intents: Discord.Intents.ALL
+        intents: [
+            'GUILD_MESSAGE_REACTIONS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILDS'
+        ]
 
     }
 });

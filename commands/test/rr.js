@@ -1,4 +1,4 @@
-const { Client, Message, MessageEmbed, Discord } = require('discord.js');
+const { Client, Message, MessageEmbed, Discord, Util } = require('discord.js');
 const Schema = require('../../models/reaction-roles')
 
 module.exports = {

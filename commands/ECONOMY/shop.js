@@ -16,7 +16,7 @@ module.exports = {
       const embed = new MessageEmbed();
       embed.setTitle(`SHOP LIST`)
       embed.setDescription(
-      shopList.map(
+      shopList.map(  
             (value, index) =>
           `\n \`${index + 1}\` **${value.item}** \nPrice: \`${value.price}\` 🪙 \n About: ${value.description}`
       

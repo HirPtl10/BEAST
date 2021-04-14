@@ -23,10 +23,15 @@ module.exports = {
                 })
                 .join("\n\n")
             channel
-                .send(new MessageEmbed().setDescription(mapped))
-                .then((msg) => {
-
+                .send(new MessageEmbed().setDescription(mapped)).then((msg) => {
+                    data.Message = msg.id;
+                    data.save();
+                    const reactions = Object.keys(data.Roles).map(
+                        (val) => val[1].id
+                    )
+                    reactions.map((emoji) => msg.react(emoji))
                 })
-        })
+
+        });
     },
 }

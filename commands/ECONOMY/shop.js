@@ -23,7 +23,7 @@ module.exports = {
        )
       )
       embed.setColor('BLUE ')
-      embed.setFooter(`Requested by ${message.author}`)
+      embed.setFooter(`Requested by ${message.author.username}`)
       message.channel.send(embed)
    }
 }

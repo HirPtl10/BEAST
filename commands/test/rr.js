@@ -23,6 +23,7 @@ module.exports = {
                 role.id,
                 {
                     id: parsedEmoji.id,
+                    raw: emoji,
                 }
             ]
             await Schema.findOneAndUpdate({ Guild: message.guild.id }, data);

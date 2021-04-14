@@ -11,10 +11,16 @@ module.exports = {
    run: async (client, message, args) => {
       if (items.length === 0) return message.channel.send('There is no item for sale')
 
+      
       const shopList = items
-      .map((value, index)=>{
-         return `**${index + 1}** ${value.item} -> ${value.price} coins`
+      const embed = new MessageEmbed();
+      embed.setTitle(`SHOP LIST`)
+      embed.setDescription(
+      embed.map((value, index)=>{
+          `**${index + 1}** ${value.item} -> ${value.price} coins`
+      
       })
-      message.channel.send(shopList)
+      )
+      message.channel.send(embed)
    }
 }

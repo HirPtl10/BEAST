@@ -9,7 +9,7 @@ module.exports = {
    timeout: '',
    cooldown: '',
    run: async (client, message, args) => {
-    if (!message.member.hasPermission("BAN_MEMBERS")) return;
+    if (!message.member.hasPermission("ADMINISTRATOR")) return;
     const role = message.mentions.roles.first();
 
     let [, emoji] = args;

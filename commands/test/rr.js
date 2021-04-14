@@ -16,7 +16,7 @@ module.exports = {
 
     if (!emoji) return message.channel.send('Please specify a emoji')
 
-    const parsedEmoji = Util.parsedEmoji(emoji);
+    const parsedEmoji = Util.parseEmoji(emoji);
     Schema.findOne({ Guild: message.guild.id }, async (err, data) => {
         if (data) {
             data.Roles[parsedEmoji.name] = [

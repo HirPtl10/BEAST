@@ -30,9 +30,10 @@ module.exports = {
                 Guild: message.guild.id,
                 Prefix: res
             })
+            
             newData.save();
         }
 
-        
+
     }
 }

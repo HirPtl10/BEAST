@@ -28,7 +28,7 @@ module.exports = {
       }
       inventory.findOne(params, async (err, data)=>{
          if (data){
-            const hasItem = Object.keys(data.Inventory.includes).includes(itemToBuy);
+            const hasItem = Object.keys(data.Inventory).includes(itemToBuy);
             if (!hasItem){
                data.Inventory[itemToBuy] = 1;
             } else {

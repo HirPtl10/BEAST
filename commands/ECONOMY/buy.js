@@ -41,7 +41,7 @@ module.exports = {
                Guild: message.guild.id,
                User: message.author.id,
                Inventory: {
-                  [itemToBuy]: 1
+                  [itemToBuy]: 1,
                },
                
             }).save()

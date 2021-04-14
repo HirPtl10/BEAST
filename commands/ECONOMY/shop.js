@@ -18,7 +18,7 @@ module.exports = {
       embed.setDescription(
       shopList.map(
             (value, index) =>
-          `**${index + 1}** **${value.item}** \n ${value.price} 🪙 \n ${value.description}`
+          `\`${index + 1}\` **${value.item}** \n ${value.price} 🪙 \n ${value.description}`
       
        )
       )

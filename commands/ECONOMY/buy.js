@@ -23,7 +23,7 @@ module.exports = {
       if (userBalance < itemPrice) return message.channel.send(`You cant buy this item u only have ${userBalance} coins`)
       const params = {
          Guild: message.guild.id,
-         User: message.author,
+         User: message.author.id,
          
       }
       inventory.findOne(params, async (err, data)=>{
@@ -39,7 +39,7 @@ module.exports = {
          } else {
             new inventory({
                Guild: message.guild.id,
-               User: message.author,
+               User: message.author.id,
                Inventory: {
                   [itemToBuy]: 1
                },
@@ -47,6 +47,7 @@ module.exports = {
             }).save()
          }
          message.channel.send(`You have bought ${itemToBuy}`)
+         client.rmv(message.authpr.id, itemPrice)
       })
    },
 };

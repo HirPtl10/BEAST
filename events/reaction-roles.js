@@ -9,7 +9,7 @@ client.on('messageReactionAdd', async (reaction, user)=>{
         if (!data) return;
         if (!Object.keys(data.Roles).includes(reaction.emoji.name)) return;
 
-        const [ roleid ] = data.Roles[reaction.emoji.name];
+        const roleid = data.Roles[reaction.emoji.name];
         await reaction.message.guild.members.cache.get(user.id).roles.add(roleid)
 
     })
@@ -26,6 +26,6 @@ client.on('messageReactionRemove', async (reaction, user)=>{
 
         const [ roleid ] = data.Roles[reaction.emoji.name];
        await  reaction.message.guild.members.cache.get(user.id).roles.remove(roleid)
-
+        console.log(reaction)
     })
 })

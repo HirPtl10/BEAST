@@ -1,85 +1,46 @@
-const { MessageCollector } = require('discord.js');
-const MessageModel = require('../../models/message');
-
-let msgCollectorFilter = (newMsg, originalMsg) => {
-let { cache } = originalMsg.guild.emojis;
-if (newMsg.author.id !== originalMsg.author.id) return false;
-let [ emojiName, roleName ] = originalMsg.content.split(/,\s+/)
-if (!emojiName && !roleName) return false;
-console.log(cache)
-let emoji = cache.find(emoji => emoji.name.toLowerCase() === emojiName.toLowerCase())
-if (!emoji) {
-    originalMsg.channel.send(`msg dosen't exist`)
-  }
-}
+const { Client, Message, MessageEmbed, Discord } = require('discord.js');
+const Schema = require('../../models/reaction-roles')
 
 module.exports = {
-  name: 'rr',
-    run: async(client, message, args) => {
-        if(args.split(/\s+/).length !== 1) {
-            let msg = await message.channel.send("Too many arguments. Must only provide 1 message id");
-            await msg.delete({ timeout: 3500 }).catch(err => console.log(err));
-        }
-        else {
-            try {
-                let fetchedMessage = await message.channel.messages.fetch(args);
-                if(fetchedMessage) {
-                    await originalMsg.channel.send("Please provide all of the emoji names with the role name, one by one, separated with a comma.\ne.g: snapchat, snapchat, where the emoji name comes first, role name comes second.");
-                    let collector = new MessageCollector(message.channel, msgCollectorFilter.bind(null, message));
-                    let emojiRoleMappings = new Map();
-                    collector.on('collect', msg => {
-                        let { cache } = msg.guild.emojis;
-                        if(msg.content.toLowerCase() === '?done') {
-                            collector.stop('done command was issued.');
-                            return;
-                        }
-                        let [ emojiName, roleName ] = msg.content.split(/,\s+/);
-                        if(!emojiName && !roleName) return;
-                        let emoji = cache.find(emoji => emoji.name.toLowerCase() === emojiName.toLowerCase());
-                        if(!emoji) {
-                            msg.channel.send("Emoji does not exist. Try again.")
-                                .then(msg => msg.delete({ timeout: 2000 }))
-                                .catch(err => console.log(err));
-                            return;
-                        }
-                        let role = msg.guild.roles.cache.find(role => role.name.toLowerCase() === roleName.toLowerCase());
-                        if(!role) {
-                            msg.channel.send("Role does not exist. Try again.")
-                                .then(msg => msg.delete({ timeout: 2000 }))
-                                .catch(err => console.log(err));
-                            return;
-                        }
-                        fetchedMessage.react(emoji)
-                            .then(emoji => console.log("Reacted."))
-                            .catch(err => console.log(err));
-                        emojiRoleMappings.set(emoji.id, role.id);
-                    });
-                    collector.on('end', async (collected, reason) => {
-                        let findMsgDocument = await MessageModel
-                            .findOne({ messageId: fetchedMessage.id })
-                            .catch(err => console.log(err));
-                        if(findMsgDocument) {
-                            console.log("The message exists.. Don't save...");
-                            message.channel.send("A role reaction set up exists for this message already...");
-                        }
-                        else {
-                            let dbMsgModel = new MessageModel({
-                                messageId: fetchedMessage.id,
-                                emojiRoleMappings: emojiRoleMappings
-                            });
-                            dbMsgModel.save()
-                                .then(m => console.log(m))
-                                .catch(err => console.log(err));
-                        }
-                    });
+   name: 'rr',
+   description: '',
+   aliases: '',
+   usage: '',
+   timeout: '',
+   cooldown: '',
+   run: async (client, message, args) => {
+    if (!message.member.hasPermission("BAN_MEMBERS")) return;
+    const role = message.mentions.roles.first();
+
+    let [, emoji] = args;
+
+    if (!emoji) return message.channel.send('Please specify a emoji')
+
+    const parsedEmoji = Util.parsedEmoji(emoji);
+    Schema.findOne({ Guild: message.guild.id }, async (err, data) => {
+        if (data) {
+            data.Roles[parsedEmoji.name] = [
+                role.id,
+                {
+                    id: parsedEmoji.id,
                 }
-            }
-            catch(err) {
-                console.log(err);
-                let msg = await message.channel.send("Invalid id. Message was not found.");
-                await msg.delete({ timeout: 3500 }).catch(err => console.log(err));
-            }
+            ]
+            await Schema.findOneAndUpdate({ Guild: message.guild.id }, data);
+        } else {
+            new Schema({
+                Guild: message.guild.id,
+                Message: 0,
+                Roles: {
+                    [parsedEmoji.name]: [
+                        role.id,
+                        {
+                            id: parsedEmoji.id,
+                        },
+                    ],
+                },
+            }).save();
         }
-    },
-    
-}
+        message.channel.send(`new role added`)
+    });
+   },
+};

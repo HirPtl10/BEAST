@@ -5,7 +5,7 @@ const Levels = require('discord-xp')
 const schema = require('./models/schema')
 const config = require('./config.json')
 // const TOKEN = config.token
-const client = new Client({ partials: ['MESSAGE', 'REACTION']});
+const client = new Client({ partials: ['MESSAGE', 'REACTION', 'CHANNEL', 'GUILD_MEMBER']});
 module.exports = client;
 
 

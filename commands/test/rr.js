@@ -43,7 +43,8 @@ module.exports = {
                         },
                     ],
                 },
-            }).save();
+            });
+            Schema.save()
         }
         message.channel.send(`new role added`)
     });

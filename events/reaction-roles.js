@@ -10,12 +10,11 @@ client.on('messageReactionAdd', async (reaction, user)=>{
         if (!Object.keys(data.Roles).includes(reaction.emoji.name)) return;
 
         const [ roleid ] = data.Roles[reaction.emoji.name];
-        reaction.message.guild.members.cache.get(user.id).roles.add(roleid)
+        await reaction.message.guild.members.cache.get(user.id).roles.add(roleid)
 
     })
 })
-const client = require('../index')
-const Schema = require("../models/reaction-roles")
+
 
 client.on('messageReactionRemove', async (reaction, user)=>{
     if(reaction.message.partial) await message.reaction.fetch();
@@ -26,7 +25,7 @@ client.on('messageReactionRemove', async (reaction, user)=>{
         if (!Object.keys(data.Roles).includes(reaction.emoji.name)) return;
 
         const [ roleid ] = data.Roles[reaction.emoji.name];
-        reaction.message.guild.members.cache.get(user.id).roles.remove(roleid)
+       await  reaction.message.guild.members.cache.get(user.id).roles.remove(roleid)
 
     })
 })

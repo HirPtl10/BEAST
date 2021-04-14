@@ -9,9 +9,7 @@ const client = new Client({
 	disableMentions: 'everyone',
 	partials: ['CHANNEL', 'MESSAGE', 'GUILD_MEMBERS', 'REACTION'],
     ws: {
-        intents: [
-            'GUILDS', 'GUILD_MESSAGE_REACTIONS', 'GUILD_MEMBERS'
-        ],
+        intents: Discord.Intents.ALL
 
     }
 });

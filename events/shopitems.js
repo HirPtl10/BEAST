@@ -6,6 +6,7 @@ module.exports = [
     },
     {
         item: 'DILDO',
-        price: 'Just of show and fun and chill'
+        price: '2000',
+        description: 'Just of Show Just have fun using'
     },
 ]

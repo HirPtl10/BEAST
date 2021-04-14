@@ -25,7 +25,7 @@ module.exports = {
                      } - ${role}`;
             })
             .join("\n\n")
-
+            
             channel.send(new MessageEmbed().setTitle(`${message.guild.name}'s Reaction Roles`).setColor("RANDOM").setDescription(mapped)).then((msg) => {
                 data.Message = msg.id;
                 data.save();

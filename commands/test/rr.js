@@ -1,52 +1,49 @@
-const { Client, Message, MessageEmbed, Discord, Util } = require('discord.js');
-const Schema = require('../../models/reaction-roles')
+const { Client, Message, Util } = require("discord.js");
+const Schema = require("../../models/reaction-roles");
 
 module.exports = {
-   name: 'rr',
-   description: '',
-   aliases: '',
-   usage: '',
-   timeout: '',
-   cooldown: '',
-   run: async (client, message, args) => {
-    if (!message.member.hasPermission("ADMINISTRATOR")) return;
-    const role = message.mentions.roles.first();
+  name: 'rr',
+  /**
+   * @param {Client} client
+   * @param {Message} message
+   * @param {String[]} args
+   */
+  run: async (client, message, args) => {
+    if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('You do not have permissions!')
+    const role = message.mentions.roles.first()
 
     let [, emoji] = args;
-
-    if (!emoji) return message.channel.send('Please specify a emoji')
+    if(!emoji) return message.reply('Lütfen bir emoji seçin!');
 
     const parsedEmoji = Util.parseEmoji(emoji);
-    Schema.findOne({ Guild: message.guild.id }, async (err, data) => {
-        if (data) {
-            data.Roles[parsedEmoji.name] = [
-                role.id,
-                {
-                    id: parsedEmoji.id,
-                    raw: emoji,
-                }
-            ]
-            await Schema.findOneAndUpdate(
-               { Guild: message.guild.id },
-               data
-            );
-        } else {
-            new Schema({
-                Guild: message.guild.id,
-                Message: 0,
-                Roles: {
-                    [parsedEmoji.name]: [
-                        role.id,
-                        {
-                            id: parsedEmoji.id,
-                            raw: emoji,
-                        },
-                    ],
-                },
-            });
-            Schema.save()
-        }
-        message.channel.send(`new role added`)
+
+    Schema.findOne({ Guild: message.guild.id }, async(err, data) => {
+      if(data) {
+        data.Roles[parsedEmoji.name] = [
+            role.id,
+            {
+              id: parsedEmoji.id,
+              raw: emoji
+            }
+        ]
+
+        await Schema.findOneAndUpdate({ Guild: message.guild.id }, data);
+      } else {
+        new Schema({
+          Guild: message.guild.id,
+          Message: 0,
+          Roles: {
+            [parsedEmoji.name]: [
+              role.id,
+              {
+                id: parsedEmoji.id,
+                raw: emoji
+              },
+          ],
+          },
+        }).save();
+      }
+      message.channel.send('Yeni rol eklendi!')
     });
-   },
+  },
 };

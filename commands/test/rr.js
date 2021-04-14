@@ -26,7 +26,10 @@ module.exports = {
                     raw: emoji,
                 }
             ]
-            await Schema.findOneAndUpdate({ Guild: message.guild.id }, data);
+            await Schema.findOneAndUpdate(
+               { Guild: message.guild.id },
+               data
+            );
         } else {
             new Schema({
                 Guild: message.guild.id,

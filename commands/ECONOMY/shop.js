@@ -22,6 +22,8 @@ module.exports = {
       
        )
       )
+      embed.setColor('BLUE ')
+      embed.setFooter(`Requested by ${message.author}`)
       message.channel.send(embed)
    }
 }

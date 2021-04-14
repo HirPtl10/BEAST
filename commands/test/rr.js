@@ -35,6 +35,7 @@ module.exports = {
                         role.id,
                         {
                             id: parsedEmoji.id,
+                            raw: emoji,
                         },
                     ],
                 },

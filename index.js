@@ -119,11 +119,9 @@ client.on('message', async message =>{
         const user = await Levels.fetch(message.author.id, message.guild.id);
         message.channel.send(`You leveled up to ${user.level}! Keep it going!`);
     }	    
-const schema = require('./models/custom-commands')
 
     if(cmd.length == 0 ) return;
-	const data = await schema.findOne({ Guild: message.guild.id, Command: cmd })
-	if (data) message.channel.send(data.Response)
+	
     let command = client.commands.get(cmd)
     if(!command) command = client.commands.get(client.aliases.get(cmd));
     if (command) {

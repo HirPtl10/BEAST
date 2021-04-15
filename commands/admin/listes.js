@@ -3,7 +3,7 @@ const schema = require('../../models/custom-commands');
 const { MessageEmbed } = require('discord.js');
 
 module.exports = {
-    name: "cc-list",
+    name: "listes",
     run: async(client, message, args) => {
         const data  = await schema.find({ Guild: message.guild.id });
         if(!!data === false) return message.channel.send('There is no custom commands!');

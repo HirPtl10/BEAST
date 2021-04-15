@@ -1,10 +1,5 @@
-const { Client, Discord } = require('discord.js')
-const client = new Client({
-    disableMentions: 'everyone',
-    partials: [
-        'GUILD_MEMBER', 'MESSAGE', 'REACTION', 'USER', 'CHANNEL'
-    ]
-})
+const client = require('..')
+
 
 client.on('messageDelete', async(message) => {
     require('../Logging/MessageDelete')(message)

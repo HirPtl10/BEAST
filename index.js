@@ -4,7 +4,7 @@ const ms = require('ms')
 const Levels = require('discord-xp')
 const schema = require('./models/schema')
 const config = require('./config.json')
-// const TOKEN = config.token
+
 const client = new Client({
 	disableMentions: 'everyone',
 	partials: ['CHANNEL', 'MESSAGE', 'GUILD_MEMBERS', 'REACTION'],
@@ -26,10 +26,7 @@ const manager = new ShardingManager('./bot.js', { token: process.env.token });
 manager.on('shardCreate', shard => console.log(`Launched shard ${shard.id}`));
 manager.spawn();
 
-client.on('ready', () => {
-    console.log('Bot is online');
-    client.user.setActivity(`${client.guilds.cache.size} Guilds`, { type: "WATCHING"})
-});
+
 // functions
 client.bal = (id) => new Promise(async  ful => {
     const data = await schema.findOne({ id })
@@ -155,22 +152,7 @@ client.on('guildDelete', async (guild) => {
 })
 client.login(process.env.token)
 
-  client.on('messageDelete', async(message) => {
-	  require('./Logging/MessageDelete')(message)
-})
-client.on('messageUpdate', async(oldMessage, newMessage) => {
-	  require('./Logging/MessageEdit')(oldMessage, newMessage)
-})
-client.on('roleCreate', async (role) => {
-  require('./Logging/RoleCreate')(role)
-})
-client.on('memberRoleUpdate', async (member, role)=>{
-  require('./Logging/memberUpdate')(member, role)
-})
 
-client.on('guildBanAdd', async (user, guild)=>{
-  require('./Logging/Ban')(user, guild)
-})
 
 
 

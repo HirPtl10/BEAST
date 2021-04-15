@@ -5,4 +5,4 @@ module.exports = mongoose.model('custom-commands', new mongoose.Schema{(
    Command: String,
    Response: String,
 
- )})
+   }))

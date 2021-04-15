@@ -2,9 +2,9 @@ const { Collection, Client, Discord, Intents  } = require('discord.js');
 const fs = require('fs')
 const ms = require('ms')
 const Levels = require('discord-xp')
-
+const schema = require('./models/schema')
 const config = require('./config.json')
-const schema = require('./models/custom-commands')
+
 
 const client = new Client({
 	disableMentions: 'everyone',
@@ -119,7 +119,7 @@ client.on('message', async message =>{
         const user = await Levels.fetch(message.author.id, message.guild.id);
         message.channel.send(`You leveled up to ${user.level}! Keep it going!`);
     }	    
-
+const schema = require('./models/custom-commands')
 
     if(cmd.length == 0 ) return;
 	const data = await Schema.findOne({ Guild: message.guild.id, Command: cmd })

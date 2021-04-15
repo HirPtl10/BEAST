@@ -4,6 +4,7 @@ const ms = require('ms')
 const Levels = require('discord-xp')
 const schema = require('./models/schema')
 const config = require('./config.json')
+const Schema = require('../models/custom-commands')
 
 const client = new Client({
 	disableMentions: 'everyone',
@@ -121,6 +122,8 @@ client.on('message', async message =>{
 
 
     if(cmd.length == 0 ) return;
+	const data = await Schema.findOne({ Guild: message.guild.id, Command: cmd })
+	if (data) message.channel.send(data.Response)
     let command = client.commands.get(cmd)
     if(!command) command = client.commands.get(client.aliases.get(cmd));
     if (command) {

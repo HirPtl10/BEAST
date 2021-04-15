@@ -20,3 +20,4 @@ require('../Logging/Ban')(user, guild)
 client.on('guildMemberAdd', async (member)=>{
     require('../Logging/guildMemberAdd')(member)
 })
+

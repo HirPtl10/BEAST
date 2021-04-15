@@ -2,9 +2,9 @@ const { Collection, Client, Discord, Intents  } = require('discord.js');
 const fs = require('fs')
 const ms = require('ms')
 const Levels = require('discord-xp')
-const schema = require('./models/schema')
+
 const config = require('./config.json')
-const Schema = require('../models/custom-commands')
+const schema = require('./models/custom-commands')
 
 const client = new Client({
 	disableMentions: 'everyone',

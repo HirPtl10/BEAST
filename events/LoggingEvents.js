@@ -1,4 +1,6 @@
 const client = require('../index')
+const Discord = require('discord.js')
+
 
 client.on('messageDelete', async(message) => {
     require('../Logging/MessageDelete')(message)

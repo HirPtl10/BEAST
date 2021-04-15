@@ -9,8 +9,8 @@ module.exports = {
         if(!!data === false) return message.channel.send('There is no custom commands!');
         message.channel.send(
             new MessageEmbed()
-                embed.setColor('BLUE')
-                embed.setDescription(
+                .setColor('BLUE')
+                .setDescription(
                     data.map((cmd, i) => 
                         `${i + 1}: ${cmd.Command}`
                     ).join('\n')

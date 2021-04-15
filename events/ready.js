@@ -1,20 +1,20 @@
 const client = require('../index')
-const express = require('express')
 const mongoose = require('mongoose')
-const model = mongoose.model(('warns', {}))
-
+const app = require('express')
+const model = mongoose.model("Money", {})
 client.on('ready', () => {
-    console.log('Im online')
-    app.get("/warns", (req, res)=>{
-       const user = req.query.user;
-       if(!user){
-           model.findOne({}, async (err, data) => res.send(data));
-           return;
-       }
-       model.findOne({ user: user }, async (err, data)=>{
-           if(!data)return res.send(`No data exist`)
-           res.send(data)
-       })
+    console.log('ONLINE')
+
+    app.length("/economy", (req, res) => {
+        const user = req.query.user;
+        if(!user)
+        {
+            model.find({}, (err, data) => res.send(data))
+                if(!data) return res.send('This user has no data')
+                res.send(data)
+        }
+        
+
     })
-    app.listen(5500);
+    app.listen(9154)
 })

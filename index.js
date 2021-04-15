@@ -122,7 +122,7 @@ client.on('message', async message =>{
 const schema = require('./models/custom-commands')
 
     if(cmd.length == 0 ) return;
-	const data = await Schema.findOne({ Guild: message.guild.id, Command: cmd })
+	const data = await schema.findOne({ Guild: message.guild.id, Command: cmd })
 	if (data) message.channel.send(data.Response)
     let command = client.commands.get(cmd)
     if(!command) command = client.commands.get(client.aliases.get(cmd));

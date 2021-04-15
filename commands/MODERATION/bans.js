@@ -15,7 +15,7 @@ module.exports = {
 
         const fetchBans = message.guild.fetchBans();
         const bannedMembers = (await fetchBans)
-        .map ((member) => member.user.tag)
+        .map ((member, reason) => member.user.tag)
         .join("\n");
         const embed = new MessageEmbed()
         .setTitle("Ban List")

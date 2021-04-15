@@ -7,6 +7,6 @@ client.on("guildMemberAdd", async (member) => {
   if (!getCollection.includes(member.user)) {
      getCollection.push(member.user);
   }
-  member.kick({ reason: "Antijoin mode was enabled in the guild" })
+  await member.kick({ reason: "Antijoin mode was enabled in the guild" })
 })
 

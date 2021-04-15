@@ -3,12 +3,8 @@ const { Client, Message, MessageEmbed } = require('discord.js');
 module.exports = {
     name: 'bans',
     description : 'Shws banned users in server',
-    aliases : ['fetchBans'],
-    /**
-     * @param {Client} client
-     * @param {Message} message
-     * @param {String[]} args
-     */
+    aliases: ["banlist"],
+    
     run: async(client, message, args) => {
   if(!message.member.permissions.has("BAN_MEMBERS")) return;
   

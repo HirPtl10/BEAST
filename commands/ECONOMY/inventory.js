@@ -14,9 +14,12 @@ module.exports = {
       inventory.findOne({ Guild: message.guild.id, User: message.author.id}, async(err, data)=>{
         if (!data) return message.channel.send(`${message.author} You have no items in your inventory`)  
        
-       const mapd = Object.keys(data.Inventory).map((key)=>
-        return `${key} (${data.Inventory[key]})`
-        );
+       const mapd = Object.keys(data.Inventory)
+       .map((key) => {
+       
+        )
+           return `${key} (${data.Inventory[key]})`
+       } 
        })
       const embed = new MessageEmbed()
       embed.setTitle(`ok`)

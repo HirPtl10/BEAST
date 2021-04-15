@@ -7,10 +7,9 @@ module.exports = {
   run: async (client, message, args) => { 
     let userArray = message.content.split(" "); 
     let userArgs = userArray.slice(1);
-    let member = args[0]
+    let member = message.mentions.members.first();
 
 
-    client.users.fetch(member).then(async user => {
 
     if (member.presence.status === 'dnd') member.presence.status = '<:DND:818327321735200799> Do Not Disturb';
     if (member.presence.status === 'online') member.presence.status = '<:Online:818329141614215208> Online';
@@ -37,6 +36,6 @@ module.exports = {
     .addField("Status", status)
     .setFooter(`Requested By ${message.author.username}`)
     message.channel.send(userEmbed);
-    })
+
   }
 }

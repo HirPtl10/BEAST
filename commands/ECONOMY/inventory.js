@@ -15,7 +15,7 @@ module.exports = {
         if (!data) return message.channel.send(`${message.author} You have no items in your inventory`)  
        
        const mapd = Object.keys(data.Inventory).map((key)=>
-        `${key} (${data.Inventory[key]})`
+        return `${key} (${data.Inventory[key]})`
         );
        })
       const embed = new MessageEmbed()

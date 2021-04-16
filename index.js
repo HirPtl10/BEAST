@@ -152,7 +152,7 @@ client.on('guildDelete', async (guild) => {
     })
 })
 const masag = message.content.toLowerCase()
-const data = await schema.findOne({ Guild: message.guild.id, Command: masag })
+const data = schema.findOne({ Guild: message.guild.id, Command: masag })
 	if (data) message.channel.send(data.Response)
 client.login(process.env.token)
 

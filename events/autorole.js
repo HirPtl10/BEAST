@@ -9,7 +9,7 @@ client.on('guildMemberAdd', async (member) => {
         if(!data) {
             return
             } else {
-                await member.roles.add(Autorole)
-            }
+                await member.roles.add(Autorole.id)
+            } 
         })
 })

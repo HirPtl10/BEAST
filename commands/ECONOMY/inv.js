@@ -13,7 +13,7 @@ module.exports = {
       })
       .join("\n\n")
       const embed = new Discord.MessageEmbed();
-      .setTitle(`${message.author.username} Inventory`)
+     embed.setTitle(`${message.author.username} Inventory`)
       .setDescription(mappedData)
       message.channel.send(embed)
     }

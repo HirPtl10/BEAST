@@ -1,3 +1,4 @@
+const Discord = require('discord.js);
 module.exports = {
   // Do this according to your command handler
   name: "quick-embed",

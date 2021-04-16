@@ -9,18 +9,18 @@ module.exports = {
     if (!channel) return message.channel.send('Specify a channel to send embed!')
     args.shift(); // Shifting argument because args[0] is channel mention!
     const arg = args.join(" "); // Joining args to split it by '^' Symbol!
-    const title = arg.split('^')[1];
+    const title = arg.split('^')[0];
     if (!title) return message.channel.send('Specify a title for the embed!')
-    const description = arg.split('^')[2];
+    const description = arg.split('^')[1];
     if (!description) return message.channel.send('Specify a description for the embed!')
-    const footer = arg.split('^')[3];
+    const footer = arg.split('^')[2];
     if (!footer) return message.channel.send('Specify a footer for the embed!')
 
     // As Color, Thumbnail and Image is optional, We check if the user has specified it and make our move.
 
-    const color = `#${arg.split('^')[4]}`
-    const thumbnail = arg.split('^')[5]
-    const image = arg.split('^')[6]
+    const color = `#${arg.split('^')[3]}`
+    const thumbnail = arg.split('^')[4]
+    const image = arg.split('^')[5]
 
     if (![color, thumbnail, image]) {
       let embed = new Discord.MessageEmbed()

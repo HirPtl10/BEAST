@@ -121,8 +121,7 @@ client.on('message', async message =>{
     }	    
     const schema = require('./models/custom-commands')
     if(cmd.length == 0 ) return;
-	const data = await schema.findOne({ Guild: message.guild.id, Command: cmd })
-	if (data) message.channel.send(data.Response)
+	
     let command = client.commands.get(cmd)
     if(!command) command = client.commands.get(client.aliases.get(cmd));
     if (command) {
@@ -152,6 +151,9 @@ client.on('guildDelete', async (guild) => {
         }
     })
 })
+const masag = message.content.toLowerCase()
+const data = await schema.findOne({ Guild: message.guild.id, Command: masag })
+	if (data) message.channel.send(data.Response)
 client.login(process.env.token)
 
 

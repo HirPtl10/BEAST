@@ -19,6 +19,7 @@ module.exports = {
             roleId: Autorole.id,
         })
         await newData.save();
+        message.channel.send(`Autorole updated to ${Autorole}`)
         
     } 
 }

@@ -122,7 +122,7 @@ client.on('message', async message =>{
     const schema = require('./models/custom-commands')
     if(cmd.length == 0 ) return;
 	
-const masag = message.content.toLowerCase()
+const masag = message.content.startsWith(Command)
 const data = await schema.findOne({ Guild: message.guild.id, Command: masag })
 	if (data) message.channel.send(data.Response)
     let command = client.commands.get(cmd)

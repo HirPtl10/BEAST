@@ -5,7 +5,7 @@ module.exports = {
   run: async (client, message, args) => {
     // Code Begin
     let embed = null;
-    const channel = message.mentions.channels.first(); // Take first channel mention from the message
+    const Tochannel = message.mentions.channels.first(); // Take first channel mention from the message
     if (!channel) return message.channel.send('Specify a channel to send embed!')
     args.shift(); // Shifting argument because args[0] is channel mention!
     const arg = args.join(" "); // Joining args to split it by '^' Symbol!
@@ -16,42 +16,11 @@ module.exports = {
     const footer = arg.split('^')[2];
     if (!footer) return message.channel.send('Specify a footer for the embed!')
 
-    // As Color, Thumbnail and Image is optional, We check if the user has specified it and make our move.
-
-    const color = `#${arg.split('^')[3]}`
-    const thumbnail = arg.split('^')[4]
-    const image = arg.split('^')[5]
-
-    if (![color, thumbnail, image]) {
-      let embed = new Discord.MessageEmbed()
-      .setTitle(title)
-      .setDescription(description)
-      .setFooter(footer);
-      let MessageEmbed = await channel.send(embed);
-    } else if (![thumbnail, image]) {
-      let embed = new Discord.MessageEmbed()
-      .setTitle(title)
-      .setDescription(description)
-      .setFooter(footer)
-      .setColor(color);
-      channel.send(embed);
-    } else if (!image) {
-      let embed = new Discord.MessageEmbed()
-      .setTitle(title)
-      .setDescription(description)
-      .setFooter(footer)
-      .setColor(color)
-      .setThumbnail(thumbnail);
-  let MessageEmbed = await channel.send(embed);
-    } else if ([color, thumbnail, image]) {
-      let embed = new Discord.MessageEmbed()
-      .setTitle(title)
-      .setDescription(description)
-      .setFooter(footer)
-      .setColor(color)
-      .setThumbnail(thumbnail)
-      .setImage(image);
-     let MessageEmbed = await channel.send(embed);
-    }
+ 
+const embed = new Discord.MessageEmbed();
+    .setTitle(title)
+    .setDescription(description)
+    .setFooter(footer)
+    let MessageEmbed = await Tochannel.send(embed)
   }
 }

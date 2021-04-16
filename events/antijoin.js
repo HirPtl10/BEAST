@@ -1,5 +1,5 @@
 const client = require('../index')
-const { antijoin } = require('../Collection/index')
+const { antijoin } = require('../Collection/index');
 
 client.on("guildMemberAdd", async (member) => {
   const getCollection = antijoin.get(member.guild.id)
@@ -9,4 +9,5 @@ client.on("guildMemberAdd", async (member) => {
   }
   await member.kick({ reason: "Antijoin mode was enabled in the guild" })
 })
+
 

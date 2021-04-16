@@ -19,8 +19,8 @@ module.exports = {
         })
         await newData.save();
         message.channel.send(`Saved **${name}** as a custom command!`);
-        if (message.content === name) {
-            const data = schema.findOne({ Guild: message.guild.id, Command: name }, async(err, data) => {
+        if (message.content === Command) {
+            const data = await schema.findOne({ Guild: message.guild.id, Command: Command }, async(err, data) => {
                 if (data) return message.channel.send(data.Response)
             }
                 

@@ -19,6 +19,7 @@ module.exports = client;
 client.on("ready", () => {
     const channel = ('832100464329490473')
     mesage.channel.send('I m online')
+    client.user.setActivity(`F`, {type: 'WATCHING'})
 })
 
 const mongoose = require('mongoose');

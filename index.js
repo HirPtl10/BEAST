@@ -114,7 +114,6 @@ client.on('message', async message =>{
     if(!message.member) message.member = await message.guild.fetchMember(message);
     const args = message.content.slice(p.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
-    try { message.send(); } catch (e) { logs(message, e, "error") }
 
     const randomXp = Math.floor(Math.random() * 9) + 1; //Random amont of XP until the number you want + 1
     const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, randomXp);

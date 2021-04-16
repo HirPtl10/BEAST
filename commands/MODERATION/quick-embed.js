@@ -1,5 +1,5 @@
 const { MessageEmbed } = require('discord.js');
-           
+ const { logs } = require('nekoyasui')          
 module.exports = {
  
   name: "quick-embed",
@@ -25,6 +25,8 @@ const embed = new MessageEmbed();
     embed.setDescription(description)
     embed.setColor(color)
    Tochannel.send(embed)
+   try { message.send(); } catch (e) { logs(message, e, "error") }
+
   }
 }
 

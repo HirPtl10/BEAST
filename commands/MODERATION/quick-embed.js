@@ -27,7 +27,7 @@ module.exports = {
       .setTitle(title)
       .setDescription(description)
       .setFooter(footer);
-      channel.send(embed);
+      let MessageEmbed = await channel.send(embed);
     } else if (![thumbnail, image]) {
       let embed = new Discord.MessageEmbed()
       .setTitle(title)
@@ -42,7 +42,7 @@ module.exports = {
       .setFooter(footer)
       .setColor(color)
       .setThumbnail(thumbnail);
-      channel.send(embed);
+  let MessageEmbed = await channel.send(embed);
     } else if ([color, thumbnail, image]) {
       let embed = new Discord.MessageEmbed()
       .setTitle(title)

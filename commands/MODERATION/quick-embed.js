@@ -1,4 +1,5 @@
-const Discord = require('discord.js);
+const { MessageEmbed } = require('discord.js);
+           
 module.exports = {
  
   name: "quick-embed",
@@ -18,10 +19,10 @@ module.exports = {
     if (!footer) return message.channel.send('Specify a footer for the embed!')
 
  
-const embed = new Discord.MessageEmbed();
-    .setTitle(title)
-    .setDescription(description)
-    .setFooter(footer)
+const embed = new MessageEmbed();
+    embed.setTitle(title)
+    embed.setDescription(description)
+    embed.setFooter(footer)
    Tochannel.send(embed)
   }
 }

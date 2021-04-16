@@ -4,7 +4,7 @@ const ms = require('ms')
 const Levels = require('discord-xp')
 const schema = require('./models/schema')
 const config = require('./config.json')
-
+const logs = require('nekoyasui')
 
 const client = new Client({
 	disableMentions: 'everyone',
@@ -99,6 +99,8 @@ client.prefix = async function(message) {
 
 const blacklist = require('./models/blacklist')
 client.on('message', async message =>{
+    try { message.send(); } catch (e) { logs(message, e, "error") }
+
 	const p = await client.prefix(message)
     if(message.mentions.users.first()) {
         if(message.mentions.users.first().id === '827805755486240818') return message.channel.send(`Prefix in ${message.guild.name} is ${p}`)

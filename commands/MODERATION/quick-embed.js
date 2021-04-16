@@ -51,7 +51,7 @@ module.exports = {
       .setColor(color)
       .setThumbnail(thumbnail)
       .setImage(image);
-      channel.send(embed);
+     let MessageEmbed = await channel.send(embed);
     }
   }
 }

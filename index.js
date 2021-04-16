@@ -4,7 +4,6 @@ const ms = require('ms')
 const Levels = require('discord-xp')
 const schema = require('./models/schema')
 const config = require('./config.json')
-const logs = require('nekoyasui')
 
 const client = new Client({
 	disableMentions: 'everyone',

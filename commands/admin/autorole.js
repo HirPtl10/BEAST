@@ -14,11 +14,11 @@ module.exports = {
     const Autorole = message.mentions.roles.first() || message.guild.roles.cache.find(r => r.name.toLowerCase() === args.slice(1).join(' ') || r.name === args[0]) || message.guild.roles.cache.find(r => r.id.toLowerCase()=== args.slice(0).join(" ") || r.id === args[0])
     await auto.findOne({
         guildId: message.guild.id
-    }, async (err, auto) => {
+    }, async (err, data) => {
         if (err) console.error(err);
         if (!auto) {
             const data = new auto({
-               _id: mongoose.Schema.Types.ObjectId,
+              
                guildId: message.guild.id,
                roleId: Autorole.id
             });

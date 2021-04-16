@@ -16,7 +16,10 @@ const client = new Client({
     }
 });
 module.exports = client;
-
+client.on("ready", () => {
+    const channel = ('832100464329490473')
+    mesage.channel.send('I m online')
+})
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://last:last@test.8ukwy.mongodb.net/Data', { useNewUrlParser: true, useUnifiedTopology: true, })

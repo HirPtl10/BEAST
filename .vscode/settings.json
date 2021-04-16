@@ -1,4 +1,4 @@
 {
     "discord.enabled": false,
-    "VSCord.enabled": false
+    "VSCord.enabled": true
 }

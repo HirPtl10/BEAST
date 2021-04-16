@@ -4,7 +4,7 @@ const app = require('express')
 const model = mongoose.model("Money", {})
 client.on('ready', () => {
     console.log('ONLINE')
-
+client.user.setActivity(`${client.guilds.cache.size}`, { type: 'WATCHING' })
     app.length("/economy", (req, res) => {
         const user = req.query.user;
         if(!user)

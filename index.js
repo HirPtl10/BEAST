@@ -153,7 +153,7 @@ client.on('guildDelete', async (guild) => {
 const schema = require('./models/custom-commands')
  if (message.content === Command) {
 const data = await schema.findOne({ Guild: message.guild.id, Command: Command })
-	if (data) message.channel.send(data.Response)
+	if (data) return message.channel.send(data.Response)
  } 
 })
 

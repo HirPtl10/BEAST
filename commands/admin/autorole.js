@@ -29,7 +29,7 @@ module.exports = {
 
             return message.channel.send(`Auto join role updated`);
         } else {
-            data.updateOne({
+            auto.updateOne({
                 roleId: Autorole.id
             })
             .then(result => console.log(result))

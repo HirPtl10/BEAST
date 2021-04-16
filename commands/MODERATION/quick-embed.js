@@ -6,7 +6,7 @@ module.exports = {
   aliases: ['make-embed'],
   run: async (client, message, args) => {
   
-    let embed = null;
+    
     const Tochannel = message.mentions.channels.first(); 
     if (!Tochannel) return message.channel.send('Specify a channel to send embed!')
     args.shift(); 

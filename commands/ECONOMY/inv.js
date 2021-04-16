@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const inventory = require('../../models/inventory')
+const discord = require('discord.js');
 
 module.exports = {
   name: 'inv',

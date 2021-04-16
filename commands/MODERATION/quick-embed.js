@@ -6,7 +6,7 @@ module.exports = {
     // Code Begin
     let embed = null;
     const Tochannel = message.mentions.channels.first(); // Take first channel mention from the message
-    if (!channel) return message.channel.send('Specify a channel to send embed!')
+    if (!Tochannel) return message.channel.send('Specify a channel to send embed!')
     args.shift(); // Shifting argument because args[0] is channel mention!
     const arg = args.join(" "); // Joining args to split it by '^' Symbol!
     const title = arg.split('^')[0];

@@ -21,6 +21,6 @@ const embed = new Discord.MessageEmbed();
     .setTitle(title)
     .setDescription(description)
     .setFooter(footer)
-    let MessageEmbed = await Tochannel.send(embed)
+   Tochannel.send(embed)
   }
 }

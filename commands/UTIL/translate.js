@@ -1,5 +1,11 @@
 const {translate} = require('@vitalets/google-translate-api');
 const Discord = require('discord.js');
+module.exorts = {
+    name: 'translate',
+    description: 'translate command',
+
+
+run: async (client, message, args) => {
 let langs = {
     "auto": "Automatic",
     "hi": "Hindi",
@@ -20,7 +26,7 @@ let langs = {
     "ru": "Russo",
     "es": "Espanhol"
 }
- exports.run = (client, message, args) => {
+
  
   if (!args[0]) {
     return message.channel.send(`Please enter some args.`)
@@ -43,4 +49,5 @@ let langs = {
   }).catch(err => {
     message.channel.send('Error')
   })
-};  
+},  
+}

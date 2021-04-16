@@ -9,9 +9,9 @@ module.exports = {
       if (!data) return message.reply('You have nothing')
       const mappedData = Object.keys(data.Inventory)
       .map((key) => {
-        return `**${key}** --- ${data.Inventory[key]}`;
+        return `> **${key}** ➣ ${data.Inventory[key]}`;
       })
-      .join("\n")
+      .join("\n\n")
       const embed = new Discord.MessageEmbed();
      embed.setTitle(`${message.author.username} Inventory`)
       .setDescription(mappedData)

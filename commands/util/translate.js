@@ -6,7 +6,7 @@ module.exorts = {
 
 
 run: async (client, message, args) => {
-let langs = {
+let langs = [
     "auto": "Automatic",
     "hi": "Hindi",
     "ar": "Arabe",
@@ -25,7 +25,7 @@ let langs = {
     "ro": "Romano",
     "ru": "Russo",
     "es": "Espanhol"
-}
+]
 
  
   if (!args[0]) {

@@ -5,7 +5,7 @@ module.exports = {
     name: 'rank',
     run: async(client, message, args) => {
         const userData = await Levels.fetch(message.author.id, message.guild.id)
-        const requiredXP = (userData.level +1) * (userData.level +1) *100 // Enter the formula for calculating the experience here. I used mine, which is used in discord-xp.
+        const requiredXP = Levels.xpFor(parseInt(userData.level) + 1)
         const rank = new canvacord.Rank()
         .setAvatar(message.author.displayAvatarURL({format: "png", size: 1024}))
         .setProgressBar("#F81818", "COLOR")

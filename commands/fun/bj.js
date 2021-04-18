@@ -11,7 +11,7 @@ module.exports = {
           return
       }
 
-      if (await client.bal(userId.id) < bet) {
+      if (client.bal(userId.id) < bet) {
           message.channel.send("You dont have enough money")
           return
       }

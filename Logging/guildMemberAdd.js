@@ -28,8 +28,8 @@ module.exports = async (member) => {
         } else {
             const embed = new Discord.MessageEmbed()
                 .setColor('GREEN')
-                .setTitle(`Guild Member Add ${member.username}  `)
-                .setURL(member.displayAvatarURL({ dynamic: true }))
+                .setTitle(`Guild Member Add ${member.username}`)
+                
                 .setThumbnail(member.displayAvatarURL({ dynamic: true }))
                 .setDescription(`${member} Joined The server`)
                 .setTimestamp();

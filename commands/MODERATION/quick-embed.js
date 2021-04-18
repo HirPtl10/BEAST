@@ -10,7 +10,7 @@ module.exports = {
     const Tochannel = message.mentions.channels.first(); 
     if (!Tochannel) return message.channel.send('Specify a channel to send embed!')
     args.shift(); 
-    const arg = args.join(",");
+    const arg = args.join(" ");
     const title = arg.split(',')[0];
     if (!title) return message.channel.send('Specify a title for the embed!')
     const description = arg.split(',')[1];

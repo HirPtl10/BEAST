@@ -15,6 +15,7 @@ module.exports = {
           message.channel.send("You dont have enough money")
           return
       }
+         
 
 
       var numCardsPulled = 0;

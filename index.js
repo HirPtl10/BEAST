@@ -17,8 +17,8 @@ const client = new Client({
 });
 module.exports = client;
 client.on("ready", () => {
-    const channel = ('832100464329490473')
-    mesage.channel.send('I m online')
+
+    console.log(`Done`)
     client.user.setActivity(`F`, {type: 'WATCHING'})
 })
 

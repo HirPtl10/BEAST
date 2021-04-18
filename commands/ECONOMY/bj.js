@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 
 module.exports = {
     name: 'bj',
+    description: 'Fun command',
+    aliases: ["blackjack"],
     run: async (client, message, args) => {
         const money = parseInt(args[0])
         const userId = message.author

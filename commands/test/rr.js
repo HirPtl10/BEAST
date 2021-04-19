@@ -1,49 +1,95 @@
-const { Client, Message, Util } = require("discord.js");
-const Schema = require("../../models/reaction-roles");
+const { fetchCache, addToCache } = require('../../events/rr')
+const RMSchema = require('../../models/message')
+const { MessageEmbed } = require('discord.js')
 
 module.exports = {
   name: 'rr',
-  /**
-   * @param {Client} client
-   * @param {Message} message
-   * @param {String[]} args
-   */
   run: async (client, message, args) => {
-    if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply('You do not have permissions!')
-    const role = message.mentions.roles.first()
+    const { guild } = message
 
-    let [, emoji] = args;
-    if(!emoji) return message.reply('Lütfen bir emoji seçin!');
+    if (!guild.me.hasPermission('MANAGE_ROLES')) {
+      message.reply('The bot requires access to manage roles to work correctly')
+      return
+    }
 
-    const parsedEmoji = Util.parseEmoji(emoji);
+    let emoji = args.shift() // 🎮
+    let role = args.shift() // Warzone
+    const displayName = args.join(' ') // 'Warzone game nights'
 
-    Schema.findOne({ Guild: message.guild.id }, async(err, data) => {
-      if(data) {
-        data.Roles[parsedEmoji.name] = [
-            role.id,
-            {
-              id: parsedEmoji.id,
-              raw: emoji
-            }
-        ]
+    if (role.startsWith('<@&')) {
+      role = role.substring(3, role.length - 1)
+      console.log(role)
+    }
 
-        await Schema.findOneAndUpdate({ Guild: message.guild.id }, data);
-      } else {
-        new Schema({
-          Guild: message.guild.id,
-          Message: 0,
-          Roles: {
-            [parsedEmoji.name]: [
-              role.id,
-              {
-                id: parsedEmoji.id,
-                raw: emoji
-              },
-          ],
-          },
-        }).save();
+    const newRole =
+      guild.roles.cache.find((r) => {
+        return r.name === role || r.id === role
+      }) || null
+
+    if (!newRole) {
+      message.reply(`Could not find a role for "${role}"`)
+      return
+    }
+
+    role = newRole
+
+    if (emoji.includes(':')) {
+      const emojiName = emoji.split(':')[1]
+      emoji = guild.emojis.cache.find((e) => {
+        return e.name === emojiName
+      })
+    }
+
+    const [fetchedMessage] = fetchCache(guild.id)
+    if (!fetchedMessage) {
+      message.reply('An error occurred, please try again')
+      return
+    }
+
+    const newLine = `${emoji} ${displayName}`
+    let { content } = fetchedMessage
+
+    if (content.includes(emoji)) {
+      const split = content.split('\n')
+
+      for (let a = 0; a < split.length; ++a) {
+        if (split[a].includes(emoji)) {
+          split[a] = newLine
+        }
       }
-      message.channel.send('Yeni rol eklendi!')
-    });
+
+      content = split.join('\n')
+    } else {
+      content += `\n${newLine}`
+      fetchedMessage.react(emoji)
+    }
+console.log(content)
+     let desc = fetchedMessage.embeds[0].description || '';
+    const embedd = new MessageEmbed(fetchedMessage.embeds[0]).setDescription(desc + `\n` + content)
+    fetchedMessage.edit(fetchedMessage.content, embedd)
+
+    const obj = {
+      guildId: guild.id,
+      channelId: fetchedMessage.channel.id,
+      messageId: fetchedMessage.id,
+    }
+
+    await RMSchema.findOneAndUpdate(
+      obj,
+      {
+        ...obj,
+        $addToSet: {
+          roles: {
+            emoji,
+            roleId: role.id,
+          },
+        },
+      },
+      {
+        upsert: true,
+      }
+    )
+
+    addToCache(guild.id, fetchedMessage, emoji, role.id)
   },
-};
+}

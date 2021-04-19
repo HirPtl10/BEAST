@@ -1,4 +1,4 @@
-const Discord = require('discord.js')
+const { Client, MessageEmbed, Discord } = require('discord.js')
 
 const { inspect } = require('util')
 

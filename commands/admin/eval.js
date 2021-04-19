@@ -5,7 +5,7 @@ const { inspect } = require('util')
 module.exports = {
   name: 'eval',
   run: async (client, message, args) => {
-  if (message.author.id !=== '827793921144913971') return;
+  if (message.author.id !== '827793921144913971') return;
     const code = args.join(' ')
     try {
       const result = await eval(code);

@@ -16,7 +16,7 @@ module.exports = {
       message.channel.send(output, {code: 'js'})
     } catch (error) {
       console.log(error)
-      message.channel.send(`Its too long`)
+      message.channel.send(error)
     }
   }
 }

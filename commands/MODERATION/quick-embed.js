@@ -1,11 +1,9 @@
 const Discord = require("discord.js")
 module.exports = {
     name: 'quick-embed',
-    
+
     description: 'embedgen',
-  
     run: async(client, message, args) => {
-       
         try {
 
             const filter = msg => msg.author.id == message.author.id;

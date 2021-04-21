@@ -22,7 +22,7 @@ module.exports = {
             embed.setColor("RANDOM")
             embed.setAuthor(`${msg.author.username} kissed ${member.username}`)
             embed.setImage(randomMessages);
-            msg.channel.send(embed);
+            message.channel.send(embed);
         } else {
             let embed = new discord.MessageEmbed()
             embed.setColor("RANDOM")

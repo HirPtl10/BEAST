@@ -8,8 +8,6 @@ module.exports = {
    timeout: '',
    cooldown: '',
    run: async (client, message, args) => {
-       const messageId = args[0]
-    const message = message.channel.messages.fetch(messageId)
-    .then(message => message.pin())
+ 
    }
 }

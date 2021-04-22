@@ -27,8 +27,11 @@ module.exports = {
         if (output.length > 1024) {
           const {body} = await post("https://hastebin.com").send(output);
           embed.addField("Output", `https://hastebin.com/${body.key}.js`)
-          message.channel.send(embed);
+         
+        } else {
+            embed.addField("Output", "```js\n" + output + "```")
         }
+       message.channel.send(embed)
       } catch(error) {
 
       }

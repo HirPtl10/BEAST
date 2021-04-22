@@ -20,7 +20,7 @@ module.exports = {
         
             let embed = new MessageEmbed()
             embed.setColor("RANDOM")
-            embed.setAuthor(`${msg.author.username} kissed ${member.username}`)
+            embed.setAuthor(`${message.author.username} kissed ${member.username}`)
             embed.setImage(randomMessages);
             message.channel.send(embed);
       

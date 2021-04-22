@@ -17,18 +17,12 @@ module.exports = {
             `https://cdn.weeb.sh/images/HJlWhpdw-.gif`
         ]
         var randomMessages = messages[Math.floor(Math.random() * messages.length)];
-        if(member){
+        
             let embed = new MessageEmbed()
             embed.setColor("RANDOM")
             embed.setAuthor(`${msg.author.username} kissed ${member.username}`)
             embed.setImage(randomMessages);
             message.channel.send(embed);
-        } else {
-            let embed = new discord.MessageEmbed()
-            embed.setColor("RANDOM")
-            embed.setAuthor("Imagine kissing your mirror reflection xD")
-            embed.setImage(randomMessages);
-            message.channel.send(embed);
-        }   
+      
     }
 }

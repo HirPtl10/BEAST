@@ -9,7 +9,7 @@ module.exports = {
    cooldown: '',
    run: async (client, message, args) => {
        const messageId = args[0]
-    const msg = message.channel.messages.fetch(messageId)
-    msg.pin();
+    const message = message.channel.messages.fetch(messageId)
+    .then(message => message.pin())
    }
 }

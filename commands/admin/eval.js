@@ -1,24 +1,45 @@
-const { Client, MessageEmbed, Discord } = require('discord.js')
+const { Client, Message, MessageEmbed, Discord } = require('discord.js');
+const { post } = require('node-superfetch');
 
-const { inspect } = require('util')
 
 module.exports = {
-  name: 'eval',
-  run: async (client, message, args) => {
-  if (message.author.id !== '827793921144913971') return;
-    const code = args.join(' ')
+   name: 'eval',
+   description: '',
+   aliases: '',
+   usage: '',
+   timeout: '',
+   cooldown: '',
+   run: async (client, message, args) => {
+    if (message.author.id !== '827793921144913971') return;
+    const embed = new MessageEmbed()
+    .setTitle('Eval')
+    .addField("Input", "```js\n" + args.join(" ") + "```")
     try {
-      const result = await eval(code);
-      let outpout = result;
-      if (typeof result !== 'string') {
-        output = inspect(result)
+      const code = args.join(" ")
+      let evaled;
+      if (code.includes(`SECRET`) || code.includes(`TOKEN`) || code.includes(`process.env`)) {
+        evaled = "Nope"
+      } else {
+        evaled = eval(code)
       }
-      message.channel.send(output, {code: 'js'})
-    } catch (error) {
-      console.log(error)
-      message.channel.send(error)
+      if (typeof evaled !== "string") evaled = require("util").inspect(evaled, {depth: 0})
+        let output = clean(evaled)
+        if (output.length > 1024) {
+          const {body} = await post("https://hastebin.com").send(output);
+          embed.addField("Output", `https://hastebin.com/${body.key}.js`)
+          message.channel.send(embed);
+        }
+      } catch(error) {
+
+      }
+
     }
   }
-}
-
-
+ function clean(string) {
+   if (typeof text === "string") {
+     return message.reply(/` /g, "`" + String.fromCharCode(8203))
+     .replace(/@/g, "@" + String.fromCharCode(8203))
+   } else {
+     return string;
+   }
+ }

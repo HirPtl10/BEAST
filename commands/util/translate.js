@@ -1,53 +1,31 @@
-const {translate} = require('@vitalets/google-translate-api');
-const Discord = require('discord.js');
-module.exorts = {
-    name: 'translate',
-    description: 'translate command',
+const {Client, Message, MessageEmbed } = require ('discord.js');
+const translate = require('@iamtraction/google-translate')
+module.exports = {
+  name: 'translate',
+  /**
+   * @param {Client} client
+   * @param {Message} message
+   * @param {String[]} args
+   */
 
+  async execute(client , message , args) {
+    try {
+      const query = args.slice(1).join(" ");
+    if (!query) return message.reply("Please type a text to translate.")
+const arg = args[0]
 
-run: async (client, message, args) => {
-let langs = {
-    "auto": "Automatic",
-    "hi": "Hindi",
-    "ar": "Arabe",
-    "ho": "Holandes",
-    "in": "Inglês",
-    "en": "Inglês",
-    "fr": "Frances",
-    "al": "Alemão",
-    "el": "Grego",
-    "it": "Italiano",
-    "ja": "Japones",
-    "jw": "Javanes",
-    "kn": "Kannada",
-    "ko": "Coreano",
-    "pt": "Portugues",
-    "ro": "Romano",
-    "ru": "Russo",
-    "es": "Espanhol"
-}
-
- 
-  if (!args[0]) {
-    return message.channel.send(`Please enter some args.`)
-  }
- 
-  let msg = args.slice(2).join(' ');
-  translate(msg, { from: args[0], to: args[1] }).then(res => {
-     let embed = new Discord.MessageEmbed()
-      .setTitle(`Google Tradutor`)
-      .setColor('BLUE')
-      .setThumbnail('https://upload.wikimedia.org/wikipedia/commons/d/db/Google_Translate_Icon.png')
-      .setDescription(`Translation: ` + "`" + `${langs[args[0]]}` + "`" + " para " + "`" + `${langs[args[1]]}` + "`")
-      .addField('Texto original:', msg)
-      .addField(`Texto traduzido:`, res.text)   
-      .setTimestamp()
- 
+    const translated = await translate(query, {to: `${arg}`});
+    const embed = new MessageEmbed()
+    .setTitle("Translated Successfully.")
+    .addField("Your Query", `\`\`\`fix\n${query}\`\`\``)
+    .addField('Selected Language', `\`\`\`fix\n${arg}\`\`\``)
+    .addField('Result', `\`\`\`fix\n${translated.text}\`\`\``)
+    .setColor("#d4c5a2")
     message.channel.send(embed)
- 
- 
-  }).catch(err => {
-    message.channel.send('Error')
-  })
-},  
+
+    } catch (error) {
+      return message.channel.send("Your question is invalid! You need to use the command like this: `>translate <language> <text>`")
+      .then(() => console.log(error));
+    }
+  }
 }

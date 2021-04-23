@@ -1,39 +1,38 @@
-const prefixSchema = require('../../models/prefix')
-const { Message } = require('discord.js')
+const prefixModel = require("../../models/prefix")
 const mongoose = require('mongoose')
 module.exports = {
-    name : 'setprefix',
-   
-    run : async(client, message, args) => {
-        if (!message.member.hasPermission("MANAGE_GUILD")) return;
-        const res = await args.join(" ")
-        
-        if(!res) return message.channel.send('Please specify a prefix to change to.')
-        
-        const data = await prefixSchema.findOne({
-            Guild: message.guild.id
-        });
-        if (data) {
-            message.channel.send(`Your prefix is now ${res}`)
-            
-            let newData = new prefixSchema({
-                Guild: message.guild.id,
-                Prefix: res
-            })
-            newData.save();
-        } else if (!data) {
-            await prefixSchema.findOneAndRemove({
-                Guild: message.guild.id
-            })
-            message.channel.send(`Your prefix is now ${res}`)
-            let newData = new prefixSchema({
-                Guild: message.guild.id,
-                Prefix: res
-            })
-            
-            newData.save();
-        }
+    name: 'prefix',
+run: async (client, message, args) => {
+    const data = await prefixModel.findOne({
+        GuildID: message.guild.id
+    });
 
+    if (!args[0]) return message.channel.send('You must provide a **new prefix**!');
 
+    if (args[0].length > 5) return message.channel.send('Your new prefix must be under \`5\` characters!')
+
+    if (data) {
+        await prefixModel.findOneAndRemove({
+            GuildID: message.guild.id
+        })
+        
+        message.channel.send(`The new prefix is now **\`${args[0]}\`**`);
+
+        let newData = new prefixModel({
+            Prefix: args[0],
+            GuildID: message.guild.id
+        })
+        newData.save();
+    } else if (!data) {
+        message.channel.send(`The new prefix is now **\`${args[0]}\`**`);
+
+        let newData = new prefixModel({
+            Prefix: args[0],
+            GuildID: message.guild.id
+        })
+        newData.save();
     }
+
+}
+
 }

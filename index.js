@@ -201,7 +201,7 @@ client.ws.on('INTERACTION_CREATE', async interaction => {
     if (!client.commands.has(interaction.data.name)) return;
 
     try {
-        client.commands.get(interaction.data.name).run: async(client, interaction, args);
+        client.commands.get(interaction.data.name).run(client, interaction, args);
     } catch (error) {
         console.log(`Error from command ${interaction.data.name} : ${error.message}`);
         console.log(`${error.stack}\n`)

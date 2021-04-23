@@ -11,7 +11,7 @@ module.exports = {
             required: true
 		}
     ],
-	run: async (client, interaction) => {
+	execute (client, interaction) {
 	const embed = new Discord.MessageEmbed()
 		.setDescription(args[0].value)
 		.setAuthor(`${interaction.member.user.username}`, new Discord.User(client, interaction.member.user).displayAvatarURL())

@@ -16,7 +16,17 @@ const client = new Client({
     }
 });
 module.exports = client;
-client.on("ready", () => {
+const testGuildId = '805086929426579477';
+
+const getApp = (testGuildId) => {
+	const app = client.api.applications(client.user.id);
+	if (testGuildId) {
+		app.guilds(testGuildId)
+	};
+	return app
+};
+
+client.on("ready", async () => {
 
     console.log(`Done`)
     client.user.setActivity(`F`, {type: 'WATCHING'})

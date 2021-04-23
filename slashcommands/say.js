@@ -5,13 +5,13 @@ module.exports = {
 	description: 'say command',
 	commandOptions: [
 		{
-			type: 4,
+			type: 3,
             name: "say",
             description: "Say command",
             required: true
 		}
     ],
-	run: async (client, interaction, args) => {
+	run: async (client, interaction) => {
 	const embed = new Discord.MessageEmbed()
 		.setDescription(args[0].value)
 		.setAuthor(`${interaction.member.user.username}`, new Discord.User(client, interaction.member.user).displayAvatarURL())
@@ -19,7 +19,7 @@ module.exports = {
 		.setColor('RANDOM');
 	client.api.interactions(interaction.id, interaction.token).callback.post({
 		data: {
-			type: 4,
+			type: 3,
 			data: {
 				embeds: [embed],
 			},

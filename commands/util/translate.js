@@ -2,11 +2,7 @@ const {Client, Message, MessageEmbed } = require ('discord.js');
 const translate = require('@iamtraction/google-translate')
 module.exports = {
   name: 'translate',
-  /**
-   * @param {Client} client
-   * @param {Message} message
-   * @param {String[]} args
-   */
+  
 
   async execute(client , message , args) {
     try {

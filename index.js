@@ -167,7 +167,7 @@ client.on("ready", async () => {
 const slashFiles = fs.readdirSync('./slashcommands').filter(file => file.endsWith('.js'));
     for (const file of commandFiles) {
         const command = require(`./slashcommands/${file}`);
-        client.api.applications(client.user.id).guilds('805086929426579477').commands.post({ data: {
+        client.api.applications(client.user.id).commands.post({ data: {
             name: command.name,
             description: command.description,
             options: command.commandOptions
@@ -185,7 +185,7 @@ const slashFiles = fs.readdirSync('./slashcommands').filter(file => file.endsWit
     console.log("")
     
     let cmdArrGlobal = await client.api.applications(client.user.id).commands.get()
-    let cmdArrGuild = await client.api.applications(client.user.id).guilds('805086929426579477').commands.get()
+    let cmdArrGuild = await client.api.applications(client.user.id).commands.get()
     cmdArrGlobal.forEach(element => {
         console.log("Global command loaded : " + element.name + " (" + element.id + ")" )
     });

@@ -24,6 +24,7 @@
     "ffmpeg-static": "^4.2.7",
     "got": "^11.8.1",
     "mathjs": "^9.3.2",
+    "memer-api": "^2.1.5",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",
     "mongoose": "^5.11.15",

@@ -97,20 +97,14 @@ client.prefix = async function(message) {
 
 const blacklist = require('./models/blacklist')
 client.on('message', async message =>{
-
-	const p = await client.prefix(message)
-    if(message.mentions.users.first()) {
-        if(message.mentions.users.first().id === '827805755486240818') return message.channel.send(`Prefix in ${message.guild.name} is ${p}`)
-    }
-    if(message.author.bot) return;
-
-    if(!message.content.startsWith(p)) return;
+	 if(message.author.bot) return;
+    	if(!message.content.startsWith(prefix)) return;
 	 blacklist.findOne({ id : message.author.id }, async(err, data) => {
         if(err) throw err;
         if(!data) {
     if(!message.guild) return;
     if(!message.member) message.member = await message.guild.fetchMember(message);
-    const args = message.content.slice(p.length).trim().split(/ +/g);
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
 
     const randomXp = Math.floor(Math.random() * 6) + 1; //Random amont of XP until the number you want + 1

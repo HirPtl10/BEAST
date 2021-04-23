@@ -195,13 +195,12 @@ const commandFiles = fs.readdirSync('./slashcommands').filter(file => file.endsW
     });
     console.log("")
 });
-const args = interaction.data.options;
 client.ws.on('INTERACTION_CREATE', async interaction => {
 
     if (!client.commands.has(interaction.data.name)) return;
 
     try {
-        client.commands.get(interaction.data.name).run(client, interaction, args);
+        client.commands.get(interaction.data.name).run(client, interaction);
     } catch (error) {
         console.log(`Error from command ${interaction.data.name} : ${error.message}`);
         console.log(`${error.stack}\n`)

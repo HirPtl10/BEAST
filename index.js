@@ -57,17 +57,6 @@ client.rmv = (id, coins) => {
 
 const Timeout = new Collection();
 const prefix = config.prefix
-const { GiveawaysManager } = require('discord-giveaways');
-client.giveawaysManager = new GiveawaysManager(client, {
-    storage: "./giveaways.json",
-    updateCountdownEvery: 5000,
-    default: {
-        botsCanWin: false,
-        exemptPermissions: ["MANAGE_MESSAGES", "ADMINISTRATOR"],
-        embedColor: "#FF0000",
-        reaction: "🎉"
-    }
-})
 client.commands = new Collection();
 client.cachedMessageReactions = new Map();
 client.db = require("quick.db");

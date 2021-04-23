@@ -4,7 +4,7 @@ module.exports = {
   name: 'translate',
   
 
-  async execute(client , message , args) {
+  run: async(client , message , args) => {
     try {
       const query = args.slice(1).join(" ");
     if (!query) return message.reply("Please type a text to translate.")

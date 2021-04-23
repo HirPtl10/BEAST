@@ -20,7 +20,125 @@ client.on("ready", () => {
 
     console.log(`Done`)
     client.user.setActivity(`F`, {type: 'WATCHING'})
-})
+const commands = await getApp(testGuildId).commands.get();
+
+	await getApp(testGuildId).commands.post({
+		data: {
+			name: 'embed',
+			description: 'Create an embed. (Total embed cannot exceed 4,000 characters due to slash command limitations.)',
+			options: [
+				{
+					name: 'Title',
+					description: 'Sets thembed title. (256 characters max)',
+					required: true,
+					type: 3
+				},
+				{
+					name: 'Description',
+					description: 'Sets the embed description. (2048 characters max)',
+					required: true,
+					type: 3
+				},
+				{
+					name: 'Footer',
+					description: 'Sets the footer of your embed (2048 characters max)',
+					required: false,
+					type: 3
+				},
+				{
+					name: 'Color',
+					description: 'Sets the embed color. Use the hex-code color value. (e.g. #ffffff)',
+					required: false,
+					type: 3
+				},
+				{
+					name: 'Thumbnail',
+					description: 'Adds an image/gif to the upper-right corner of your embed. (Use a direct media link.)',
+					required: false,
+					type: 3
+				},
+				{
+					name: 'Image',
+					description: 'Adds an image/gif to the bottom of your embed. (Use a direct media link.)',
+					required: false,
+					type: 3
+				}
+			]
+		}
+	})
+});
+
+client.ws.on('INTERACTION_CREATE', async (interaction) => {
+	const { name, options } = interaction.data;
+	const slash = name.toLowerCase();
+
+	const args = {};
+
+	const createAPIMessage = async(interaction, content) => {
+		const { data, files } = await Discord.APIMessage.create(
+			client.channels.resolve(interaction.channel_id),
+			content
+		)
+		.resolveData()
+		.resolveFiles()
+		return { ...data, files }
+	}
+
+	const reply = async (interaction, response) => {
+		let data = {
+			content: response
+		}
+
+		if (typeof response === 'object') {
+			data = await createAPIMessage(interaction, response)
+		}
+
+		client.api.interactions(interaction.id, interaction.token).callback.post({
+			data: {
+				type: 4,
+				data,
+			}
+		})
+	};
+
+	if (options) {
+		for (const option of options) {
+			const { name, value } = option
+			args[name] = value
+		}
+	};
+
+	if (slash === 'embed') {
+		const avatar = `https://cdn.discordapp.com/avatars/${interaction.member.user.id}/${interaction.member.user.avatar}.png`
+		const embed = new Discord.MessageEmbed()
+			for (const arg in args) {
+				if (arg === 'title') {
+					embed.setTitle(args[arg])
+				};
+				if (arg === 'description') {
+					embed.setDescription(args[arg])
+				};
+				if (arg === 'footer') {
+					embed.setFooter(args[arg])
+				};
+				if (arg === 'color') {
+					embed.setColor(`${args[arg]}`)
+				};
+				if (arg === 'thumbnail') {
+					embed.setThumbnail(args[arg])
+				};
+				if (arg === 'image') {
+					embed.setImage(args[arg])
+				};
+
+			};
+		embed.setAuthor(`${interaction.member.user.username}#${interaction.member.user.discriminator}`, avatar)
+		embed.setTimestamp()
+			
+		reply(interaction, embed)	
+	};
+});
+
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://last:last@test.8ukwy.mongodb.net/Data', { useNewUrlParser: true, useUnifiedTopology: true, })

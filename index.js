@@ -164,7 +164,7 @@ client.on("ready", async () => {
     console.log(`Done`)
     client.user.setActivity(`F`, {type: 'WATCHING'})
 
-const slashFiles = fs.readdirSync('./slashcommands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./slashcommands').filter(file => file.endsWith('.js'));
     for (const file of commandFiles) {
         const command = require(`./slashcommands/${file}`);
         client.api.applications(client.user.id).commands.post({ data: {

@@ -20,7 +20,7 @@ module.exports = {
         } else {
             await PrefixSchema.findOneAndUpdate({
                 Guild: message.guild.id,
-                Prefix: newprefix,
+                Prefix: res
             })
         }
         message.channel.send(`The Prefix has Been set to ${res}`)

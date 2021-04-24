@@ -4,7 +4,22 @@ const ms = require('ms')
 const Levels = require('discord-xp')
 const schema = require('./models/schema')
 const config = require('./config.json')
-const prefix = require('./models/prefix');
+const prefix = config.prefix
+const prefixSchema = require('./models/prefix')
+
+client.prefix = async function(message) {
+        let custom;
+
+        const data = await prefixSchema.findOne({ Guild : message.guild.id })
+            .catch(err => console.log(err))
+        
+        if(data) {
+            custom = data.Prefix;
+        } else {
+            custom = prefix;
+        }
+        return custom;
+    }
 
 const client = new Client({
 	disableMentions: 'everyone',
@@ -70,14 +85,15 @@ client.categories = fs.readdirSync("./commands/");
 
 const blacklist = require('./models/blacklist')
 client.on('message', async message =>{
+	const p = await client.prefix(message)
 	 if(message.author.bot) return;
-	 if(!message.content.startsWith(prefix)) return;
+	if(!message.content.startsWith(p)) return;
 	 blacklist.findOne({ id : message.author.id }, async(err, data) => {
         if(err) throw err;
         if(!data) {
     if(!message.guild) return;
     if(!message.member) message.member = await message.guild.fetchMember(message);
-    const args = message.content.slice(prefix.length).trim().split(/ +/g);
+    const args = message.content.slice(p.length).trim().split(/ +/g);
     const cmd = args.shift().toLowerCase();
 
     const randomXp = Math.floor(Math.random() * 6) + 1; //Random amont of XP until the number you want + 1
@@ -107,7 +123,14 @@ client.on('message', async message =>{
 })
   
 })
-      
+client.on('guildDelete', async (guild) => {
+    prefixSchema.findOne({ Guild: guild.id }, async (err, data) => {
+        if (err) throw err;
+        if (data) {
+            prefixSchema.findOneAndDelete({ Guild : guild.id }).then(console.log('deleted data.'))
+        }
+    })
+})      
 
 
 

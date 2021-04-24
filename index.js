@@ -139,18 +139,15 @@ client.on('message', async message =>{
                 Timeout.delete(`${command.name}${message.author.id}`)
             }, command.timeout)
         } else {
-          command.run(client, message, args)
-        } 
+         command.run(client, message, args)
+        
     }
-	} else {
-	  message.channel.send('You are blacklisted')
-	}
-})
-     }
+    } else {
+        message.channel.send('You r blacklisted')
+    }
 
-       
 })
-    
+     }    
 
 
 
@@ -236,7 +233,4 @@ client.on('guildMemberAdd', async (member)=>{
 
 
 
-
-
-
-
+})

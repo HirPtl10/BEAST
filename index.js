@@ -4,6 +4,7 @@ const ms = require('ms')
 const Levels = require('discord-xp')
 const schema = require('./models/schema')
 const config = require('./config.json')
+const prefix = require('./models/prefix');
 
 const client = new Client({
 	disableMentions: 'everyone',
@@ -67,26 +68,14 @@ client.categories = fs.readdirSync("./commands/");
   require(`./handlers/${handler}`)(client)
 })
 
-	
-const prefixSchema = require('./models/prefix')
-
-client.prefix = async function(message) {
-        let custom;
-
-        const data = await prefixSchema.findOne({ Guild : message.guild.id })
-            .catch(err => console.log(err))
-        
-        if(data) {
-            custom = data.Prefix;
-        } else {
-            custom = prefix;
-        }
-        return custom;
-    }
-
 const blacklist = require('./models/blacklist')
 client.on('message', async message =>{
 	 if(message.author.bot) return;
+	 const data = await prefix.findOne({
+        GuildID: message.guild.id
+    });
+	   if(data) {
+        const prefix = data.Prefix;
     	if(!message.content.startsWith(prefix)) return;
 	 blacklist.findOne({ id : message.author.id }, async(err, data) => {
         if(err) throw err;
@@ -120,6 +109,10 @@ client.on('message', async message =>{
 	} else {
 	  message.channel.send('You are blacklisted')
 	}
+	 } else {
+		 const prefix = "!";
+		command.run(client, message, args)
+	} 
     	
   })
 })

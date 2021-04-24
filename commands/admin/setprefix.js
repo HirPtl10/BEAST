@@ -17,7 +17,7 @@ module.exports = {
                 data.save()
                 message.channel.send(`Your prefix has been updated to **${res}**`)
             } else {
-                newData = new prefixSchema.({
+                newData = new prefixSchema({
                     Guild : message.guild.id,
                     Prefix : res
                 })

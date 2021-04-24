@@ -71,12 +71,7 @@ client.categories = fs.readdirSync("./commands/");
 const blacklist = require('./models/blacklist')
 client.on('message', async message =>{
 	 if(message.author.bot) return;
-	 const data = await prefix.findOne({
-        GuildID: message.guild.id
-    });
-	   if(data) {
-        const prefix = data.Prefix;
-    	if(!message.content.startsWith(prefix)) return;
+	 if(!message.content.startsWith(prefix)) return;
 	 blacklist.findOne({ id : message.author.id }, async(err, data) => {
         if(err) throw err;
         if(!data) {
@@ -110,44 +105,9 @@ client.on('message', async message =>{
 	  message.channel.send('You are blacklisted')
 	}
 })
-     } else {
-         const prefix = '!'
-         if(message.author.bot) return;
-	 if(!message.content.startsWith(prefix)) return;
-	 blacklist.findOne({ id : message.author.id }, async(err, data) => {
-        if(err) throw err;
-    if(!message.guild) return;
-    if(!message.member) message.member = await message.guild.fetchMember(message);
-    const args = message.content.slice(prefix.length).trim().split(/ +/g);
-    const cmd = args.shift().toLowerCase();
-
-    const randomXp = Math.floor(Math.random() * 6) + 1; //Random amont of XP until the number you want + 1
-    const hasLeveledUp = await Levels.appendXp(message.author.id, message.guild.id, randomXp);
-    if (hasLeveledUp) {
-        const user = await Levels.fetch(message.author.id, message.guild.id);
-        message.channel.send(`You leveled up to ${user.level}! Keep it going!`);
-    }	    
-    if(cmd.length == 0 ) return;
-    let command = client.commands.get(cmd)
-    if(!command) command = client.commands.get(client.aliases.get(cmd));
-    if (command) {
-        if(command.timeout) {
-            if(Timeout.has(`${command.name}${message.author.id}`)) return message.reply(`Wait for moment You are on cooldown`)
-            command.run(client, message, args)
-            Timeout.set(`${command.name}${message.author.id}`, Date.now() + command.timeout)
-            setTimeout(() => {
-                Timeout.delete(`${command.name}${message.author.id}`)
-            }, command.timeout)
-        } else {
-         command.run(client, message, args)
-        
-    }
-    } else {
-        message.channel.send('You r blacklisted')
-    }
-
+  
 })
-     }    
+      
 
 
 

@@ -23,7 +23,7 @@ module.exports = {
                 Prefix: newprefix,
             })
         }
-        message.channel.send(`The Prefix has Been set to ${red}`)
+        message.channel.send(`The Prefix has Been set to ${res}`)
     } catch (err) {
         console.log(err)
     }

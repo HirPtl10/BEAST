@@ -1,10 +1,8 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-const PrefixSchema = new mongoose.Schema({
-    Prefix: {
-        type: String
-    },
-    GuildID: String
-});
+let Schema = new mongoose.Schema({
+    Guild : String,
+    Prefix : String, 
+})
 
-const MessageModel = module.exports = mongoose.model('prefixes', PrefixSchema);
+module.exports = mongoose.model('prefix', Schema)

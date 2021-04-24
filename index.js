@@ -109,20 +109,17 @@ client.on('message', async message =>{
 	} else {
 	  message.channel.send('You are blacklisted')
 	}
-	 } else {
-		 const prefix = "!";
-		command.run(client, message, args)
-	} 
-    	
-  })
 })
+     } else {
+         const prefix = '!'
+         command.run(client, message, args)
+     }
 
-const schema = require('./models/custom-commands')
-const name = require('./commands/ADMIN/')
-const data = await schema.findOne({ Guild: message.guild.id, Command: name })
-	if (data) return message.channel.send(data.Response)
- 
+       
 })
+    
+
+
 
 
 

@@ -1,7 +1,7 @@
 const prefixSchema = require('../../models/prefix')
 const { Message } = require('discord.js')
 module.exports = {
-    name : 'prefix',
+    name : 'setprefix',
     
     run : async(client, message, args) => {
         const res = await args.join(" ")
@@ -23,7 +23,7 @@ module.exports = {
                 Prefix: res
             })
         }
-        message.channel.send(`The Prefix has Been set to ${res}`)
+        message.channel.send(`The Prefix has Been Updated`)
     } catch (err) {
         console.log(err)
     }

@@ -57,7 +57,7 @@ client.rmv = (id, coins) => {
 }
 
 const Timeout = new Collection();
-const prefix = config.prefix
+
 client.commands = new Collection();
 client.cachedMessageReactions = new Map();
 client.db = require("quick.db");

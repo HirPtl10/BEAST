@@ -31,8 +31,10 @@ module.exports = async (message) => {
                 .setTitle('Message Delete Case')
                 .setDescription(`A message by ${message.author} has been deleted in <#${message.channel.id}>`)
             .addField(`Content`, message.content, true)
-
+            
+            if (message.author.bot) return;
             return logChannel.send(embed);
+            
           }
   
 }

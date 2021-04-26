@@ -231,9 +231,9 @@ channel.send(embed);
  }
 })
 client.on('message', (message, args, async) =>{
-const t = `-`;
-if (!args[0]) return message.reply('Invalid Usage. `reply <user> <message>`');
-if (!args[1]) return message.reply('Invalid Usage. `reply <user> <message>'`);
+const t = `-`
+if (!args[0]) return message.reply(`Invalid use \n reply <member> <message>`);
+if (!args[1]) return message.reply(`Invalid use \n reply <member> <message>`);
 const member = message.mentions.users.first()
 if (!member) member = message.guild.members.cache.get(args[0]);
 const args = message.content.slice(t.length).trim().split(' ');

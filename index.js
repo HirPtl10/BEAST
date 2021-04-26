@@ -216,10 +216,10 @@ client.on('guildMemberAdd', async (member)=>{
 
 client.on("message", (message, async) =>{
 if (message.channel.type === 'dm') {
-const channel = 'YOUR MODMAIL CHANNEL ID';
+const channel = '817317526806462475';
 const mod = message.content;
 const embed = new Discord.MessageEmbed()
-.setAuthor(`${message.author.username}'s`, message.author.displayAvatarURL({ dynamic: boolean }))
+.setAuthor(`${message.author.username}s`, message.author.displayAvatarURL({ dynamic: true }))
 .setTitle('Modmail')
 .setDescription(mod)
 .setColor('RED')
@@ -229,6 +229,18 @@ const embed = new Discord.MessageEmbed()
 await message.channel.send('Thank you. Your message has been submitted.')
 channel.send(embed);
  }
+})
+client.on('message', (message, args, async) =>{
+const t = `-`;
+if (!args[0]) return message.reply('Invalid Usage. `reply <user> <message>`');
+if (!args[1]) return message.reply('Invalid Usage. `reply <user> <message>'`);
+const member = message.mentions.users.first()
+if (!member) member = message.guild.members.cache.get(args[0]);
+const args = message.content.slice(t.length).trim().split(' ');
+const mail = args.slice(1).join(' ');
+if (!member) return message.reply('member not found lol');
+await member.send(`You received a reply to your modmail. \n *${mail}*`)
+message.channel.send(`Successfully replied to ${member}.`);
 })
 
 

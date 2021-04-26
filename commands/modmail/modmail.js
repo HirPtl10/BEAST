@@ -1,4 +1,4 @@
-const client = require('../../../index')
+const client = require('../index')
 const Discord = require('discord.js')
 client.on("message", (message, async) =>{
     if (message.channel.type === 'dm') {

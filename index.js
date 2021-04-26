@@ -214,6 +214,21 @@ client.on('guildMemberAdd', async (member)=>{
     require('./Logging/guildMemberAdd')(member)
 })
 
-
+client.on("message", (message, async) =>{
+if (message.channel.type === 'dm') {
+const channel = 'YOUR MODMAIL CHANNEL ID';
+const mod = message.content;
+const embed = new Discord.MessageEmbed()
+.setAuthor(`${message.author.username}'s`, message.author.displayAvatarURL({ dynamic: boolean }))
+.setTitle('Modmail')
+.setDescription(mod)
+.setColor('RED')
+.setTimestamp()
+.addField('Sent by', message.author.tag, false)
+.addField ('User ID', message.author.id, false);
+await message.channel.send('Thank you. Your message has been submitted.')
+channel.send(embed);
+ }
+})
 
 

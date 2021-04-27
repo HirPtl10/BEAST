@@ -5,7 +5,7 @@ module.exports = {
     description: 'Clears messages in a channel (between 1 & 100)',
     timeout: '5000',
     cooldown: '5 seconds',
-    aliases: ['purge'],
+    aliases: [''],
     usage: '*clear 50 or *purge 50',
    run: async (client, message, args) => {
        if (!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send('Lack of Perms!');

@@ -30,7 +30,7 @@ module.exports = async (channel) => {
             const embed = new Discord.MessageEmbed()
                 .setColor(15158332)
                 .setTitle('Channel Created')
-                .setDescription(`${channel} Channel Has been created`)
+                .setDescription(`Channel Has been created`)
            
 
 

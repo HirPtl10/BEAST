@@ -1,5 +1,5 @@
-const Discord = require('discord.js')
 
+const {WebhookClient} = require('discord.js')
 module.exports = {
     name: 'say',
 async execute(client, message, args)  {

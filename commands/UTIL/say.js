@@ -2,7 +2,7 @@
 const {WebhookClient} = require('discord.js')
 module.exports = {
     name: 'say',
-run: async (client, message, args)  {
+run: async (client, message, args) =>  {
 
   if (!message.guild.me.hasPermission("MANAGE_WEBHOOKS")) return message.reply('Looks like i\'m missing the `Manage Webhooks` permission!')
         if (!args[0]) return message.reply('please provide a message to send')

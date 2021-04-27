@@ -8,7 +8,7 @@ async execute(client, message, args)  {
         if (!args[0]) return message.reply('please provide a message to send')
     
  else {
- message.channel.createWebhook(message.member.username, {
+ message.channel.createWebhook("hahahah", {
      avatar: "https://cdn.discordapp.com/avatars/827805755486240818/09eaebbed8b99cdec734220afa69d4cd.webp?size=4096"
  }).then(webhook => {
      webhook.send(args.join(' '))

@@ -29,4 +29,3 @@ class Message extends Structures.get("Message") {
 
 
 Structures.extend("Message", () => Message);
-module.exports = inlineReply

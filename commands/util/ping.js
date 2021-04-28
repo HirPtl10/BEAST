@@ -12,7 +12,7 @@ module.exports = {
    const embed = new Discord.MessageEmbed()
    .setDescription('Pinging....')
    message.channel.send(embed)
-   .then(embed => embed.edit(new Discord.MessageEmbed().setTitle('🏓 Ping').setDescription(`➣ \`${client.ws.ping}\`ms`)))
+   .then(sent => sent.edit(new Discord.MessageEmbed().setTitle('🏓 Ping').setDescription(`➣ \`${client.ws.ping}\`ms`)))
     
   },
 }

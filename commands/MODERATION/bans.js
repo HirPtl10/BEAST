@@ -8,13 +8,13 @@ module.exports = {
     run: async(client, message, args) => {
   if(!message.member.permissions.has("BAN_MEMBERS")) return;
   
-  if(!message.guild.me.permissions.has("BAN_MEMBERS")) {
-    return message.reply("I am not having \`BAN_MEMBERS\` permission")
-  }
+
   
 
         const fetchBans = message.guild.fetchBans();
         const bannedMembers = (await fetchBans)
+      
+      
         .map ((member, reason) => member.user.tag)
         .join("\n");
         const embed = new MessageEmbed()
@@ -23,7 +23,8 @@ module.exports = {
         .setColor("FF0000")
         .setTimestamp()
 
-        message.channel.send(embed);
+        message.channel.send(embed)
+        .join("\n")
     },
 
 };

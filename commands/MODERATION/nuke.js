@@ -8,7 +8,7 @@ module.exports = {
         if(!message.member.hasPermission("ADMINISTRATOR")) {
             return message.reply("You do not have the perms to use this cmd! missing perms: `ADMINISTRATOR`")
         }
-        let reason = args.join(" ") || "No Reason :/"
+        let reason = args.join(" ") || "No Reason Given"
         if(!message.channel.deletable) {
             return message.reply("This channel cannot be nuked! what are you thinking?")
         }
@@ -18,5 +18,6 @@ module.exports = {
         .setTitle(`BAM! \`${message.channel.name}\` **has been NUKED**`)
         .setDescription(reason)
         .setImage('https://cdn.discordapp.com/attachments/811143476522909718/819507596302090261/boom.gif')
-        await newchannel.send(embed)
-   
+         newchannel.send(embed)
+    }
+}

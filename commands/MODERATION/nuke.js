@@ -5,9 +5,7 @@ module.exports = {
     usage: "nuke <rsn>",
    
     run: async(client, message, args) => {
-        if(!message.member.hasPermission("ADMINISTRATOR")) {
-            return message.reply("You do not have the perms to use this cmd! missing perms: `ADMINISTRATOR`")
-        }
+        if(!message.member.hasPermission("ADMINISTRATOR")) return message.author.send(`You need to have \`ADMINISTRATOR\` permission to run this command in \`${message.guild}\``)
         let reason = args.join(" ") || "No Reason Given"
         if(!message.channel.deletable) {
             return message.reply("This channel cannot be nuked! what are you thinking?")

@@ -3,11 +3,12 @@ const { MessageEmbed } = require('discord.js');
 const mongoose = require('mongoose');
 const User = require('../../models/user');
 const Guild = require('../../models/guild');
+const p = require('../../index')
 
 module.exports = {
     name: 'ban',
     description: 'Bans A Member From The Server',
-    usage: '<@member> reason',
+    usage: '`${p}`@member reason',
     permissions: 'BAN MEMBERS',
     run: async (client, message, args) => {
         message.delete();

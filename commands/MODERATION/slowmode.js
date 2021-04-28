@@ -10,13 +10,7 @@ module.exports = {
 
         const embed = new Discord.MessageEmbed()
 
-       if (!message.member.hasPermission("MANAGE_CHANNELS")) {
-        
-           embed.setDescription('<a:opa5:797429643245387797> You cant use this')
-           embed.setColor('e70619')
-          
-           return message.channel.send(embed)
-       } 
+       if (!message.member.hasPermission("MANAGE_CHANNELS")) return;
        
     
         if(!args[0]) {

@@ -12,7 +12,7 @@ module.exports = {
    run: async (client, message, args) => {
 
 
-        if(!message.member.hasPermission('ADMINISTRATOR')) return message.channel.send('You do not have permissions to use this command.')
+        if(!message.member.hasPermission('BAN_MEMBERS')) return;
         const user = message.mentions.members.first() || message.guild.members.cache.get(args[0])
       const guildDB = await Guild.findOne({
             guildID: message.guild.id

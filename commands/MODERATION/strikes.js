@@ -7,7 +7,7 @@ module.exports = {
     usage: '@member',
     permissions: 'BAN MEMBERS',
     run : async(client, message, args) => {
-        if(!message.member.hasPermission('BAN_MEMBERS')) return message.channel.send('You do not have permissions to use this command.')
+        if(!message.member.hasPermission('BAN_MEMBERS')) return;
         const user = message.mentions.members.first() || message.guild.members.cache.get(args[0])
         if(!user) return message.channel.send('User not found.')
         const reason = args.slice(1).join(" ")

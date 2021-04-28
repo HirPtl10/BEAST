@@ -9,7 +9,7 @@ module.exports = {
     
     run : async (client, message, args) => {
         const Member = message.mentions.members.first() || message.guild.members.cache.get(args[0])
-        if (!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send(`You can\'t use this`)
+        if (!message.member.hasPermission('MANAGE_ROLES')) return;
 const guildDB = await Guild.findOne({
     guildID: message.guild.id
 }, async (err, guild) => {

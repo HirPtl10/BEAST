@@ -4,6 +4,7 @@ module.exports = {
 
     description: 'embedgen',
     run: async(client, message, args) => {
+        if (!message.member.hasPermission("MANAGE_MESSAGES")) return;
         try {
 
             const filter = msg => msg.author.id == message.author.id;

@@ -8,7 +8,7 @@ const p = require('../../index')
 module.exports = {
     name: 'ban',
     description: 'Bans A Member From The Server',
-    usage: '`${p}`@member reason',
+    usage: `${p}@member reason`,
     permissions: 'BAN MEMBERS',
     run: async (client, message, args) => {
         message.delete();

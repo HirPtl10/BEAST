@@ -9,14 +9,10 @@ module.exports = {
   description: 'ping command',
   
   run: async (client, message, args) => {
-    message.channel.startTyping(1);
-
-    message.inlineReply("Calculating Ping....", { allowedMentions: { repliedUser: false } }).then((resultMessage) => {
-      const ping = resultMessage.createdTimestamp - message.createdTimestamp
-
-      resultMessage.edit(`Bot latency: ${ping} \nAPI Latency: ${client.ws.ping}`)
-      message.channel.stopTyping(2)
-    })
+   const embed = new Discord.MessageEmbed()
+   .setDescription('Pinging....')
+   .then(sent => sent.edit(new Discord.MessageEmbed().setTitle('🏓 Ping').setDescription(`➣ \`${client.ws.ping}\`ms`)))
+    
   },
 }
 

@@ -3,7 +3,7 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: 'sourcebin',
-    aliases: ['sourcecode', 'bin', 'sb'],
+    aliases: ['sourcecode', 'sb'],
     run: async (client, message, args) => {
         if(message.author.id !== '827793921144913971') return;
         let content = args.join(' ');

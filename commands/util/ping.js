@@ -11,7 +11,8 @@ module.exports = {
   run: async (client, message, args) => {
    const embed = new Discord.MessageEmbed()
    .setDescription('Pinging....')
-   .then(sent => sent.edit(new Discord.MessageEmbed().setTitle('🏓 Ping').setDescription(`➣ \`${client.ws.ping}\`ms`)))
+   message.channel.send(embed)
+   .then(embed => embed.edit(new Discord.MessageEmbed().setTitle('🏓 Ping').setDescription(`➣ \`${client.ws.ping}\`ms`)))
     
   },
 }

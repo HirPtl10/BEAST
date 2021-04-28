@@ -33,9 +33,7 @@ module.exports = {
 
         const logChannel = message.guild.channels.cache.get(guildDB.logChannelID);
 
-        if (!message.member.hasPermission('KICK_MEMBERS'))
-            return message.channel.send('You do not have permission to use this command.').then(m => m.delete({timeout: 5000}));
-
+        if (!message.member.hasPermission('KICK_MEMBERS')) return;
         if (!member)
             return message.channel.send('I cannot find the specified member. Please mention a member in this Discord server.').then(m => m.delete({timeout: 5000}));
 

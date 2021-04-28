@@ -8,7 +8,7 @@ module.exports = {
     aliases: [''],
     usage: '*clear 50 or *purge 50',
    run: async (client, message, args) => {
-       if (!message.member.permissions.has("MANAGE_MESSAGES")) return message.channel.send('Lack of Perms!');
+       if (!message.member.permissions.has("MANAGE_MESSAGES")) return;
     
     let deleteAmount;
     const helpembed = require('../test/test')

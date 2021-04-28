@@ -4,7 +4,7 @@ module.exports = {
   description: 'no text channel on user',
   
     run: async (client, message, args) => {
-      if (!message.member.hasPermission('MANAGE_ROLES')) return message.channel.send(`You can\'t use this`)
+      if (!message.member.hasPermission('MANAGE_ROLES')) return;
              let inv = await message.guild.roles.create({
                     data : {
                         name : 'Invisible',

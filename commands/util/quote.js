@@ -20,7 +20,7 @@ module.exports = {
         const appStart = await message.author.send(questions[collectCounter++])
         .catch(console.error)
         const channel = appStart.channel;
-
+   
         const collector = channel.createMessageCollector(filter);
 
         collector.on('collect', () => {

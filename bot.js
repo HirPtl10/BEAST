@@ -1,7 +1,6 @@
 const { Client } = require('discord.js');
 const client = new Client();
 const prefix = '*';
-require('dotenv').config
 
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -32,4 +31,4 @@ client.on('message', message => {
 	}
 });
 
-client.login(process.env.TOKEN);
+client.login(process.env.token);

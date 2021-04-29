@@ -9,7 +9,7 @@ module.exports = {
    cooldown: '',
    run: async (client, message, args) => {
     let choices = [
-        "8D",
+            "8D",
             "8=D",
             "8==D",
             "8===D",
@@ -28,7 +28,8 @@ module.exports = {
             "8================D",
         ]
         let pp = choices[Math.floor(Math.random * choices.length)];
-        const embed = new MessageEmbed() 
+        var user = message.mentions.members.first() || message.author;
+        const embed = new MessageEmbed()
         .setColor("RANDOM") 
         .setTitle("peepee size machine")
         .setDescription(`${user}\'s pp\n${pp}`)

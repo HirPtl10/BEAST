@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { MessageEmbed, MessageCollector } = require('discord.js');
 
 module.exports = {
     name: 'reportbug',
@@ -31,6 +31,7 @@ module.exports = {
                 collector.stop('fulfilled');
             }
         });
+    
         const appChannel = client.users.cache.get('837019385234587678');
         collector.on('end', (collected, reason) => {
             if (reason === 'fulfilled') {

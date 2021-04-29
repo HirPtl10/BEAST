@@ -32,7 +32,7 @@ module.exports = {
         const embed = new MessageEmbed()
         .setColor("RANDOM") 
         .setTitle("peepee size machine")
-        .setDescription(`${user}\'s pp\n${pp}`)
+        .setDescription(`${user}\'s pp\n ${choices[Math.floor(Math.random() * choices.length)]}`)
         message.channel.send(embed);
         
    }

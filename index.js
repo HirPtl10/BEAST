@@ -1,5 +1,5 @@
 const { Collection, Client, Discord, Intents  } = require('discord.js');
-require('dotenv').config();
+
 const fs = require('fs')
 const ms = require('ms')
 const Levels = require('discord-xp')

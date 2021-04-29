@@ -1,4 +1,5 @@
 const { Collection, Client, Discord, Intents  } = require('discord.js');
+require('dotenv').config();
 const fs = require('fs')
 const ms = require('ms')
 const Levels = require('discord-xp')
@@ -192,7 +193,7 @@ client.ws.on('INTERACTION_CREATE', async interaction => {
     
 })
 
-client.login(process.env.token)
+client.login(process.env.TOKEN)
 
 client.on('messageDelete', async(message) => {
     require('./Logging/MessageDelete')(message)

@@ -1,27 +1,56 @@
-const Discord = require('discord.js')
-const canvacord = require('canvacord')
+const { MessageEmbed } = require('discord.js');
 
 module.exports = {
-  name: 'quote',
-  category: 'Image',
-  description: 'quote',
-  usage: 'quote <user>', 
-  
-  run: async (client, message, args) => {
+    name: 'reportbug',
+    aliases: ['bug'],
+    run: async (client, message, args) => {
+        message.reply('Check dms!');
+        const questions = [
+            'What is your username and tag?',
+            'What is the bug title?',
+            'What is the bug?',
+            'What is the command',
+            "Do you have any idea, How can we fix the bug? (If you don't, Respond with (no))"
+        ];
 
-    let user = message.mentions.users.first()
-    if (!user) return message.channel.send("You need to mention a user and provide text!")
+        let collectCounter = 0;
+        let endCounter = 0;
 
-    let msg = args.slice(1).join(' ')
+        const filter = m => m.author.id === message.author.id;
+        const appStart = await message.author.send(questions[collectCounter++]);
+        const channel = appStart.channel;
 
+        const collector = channel.createMessageCollector(filter);
 
-
-
-
-    const e = user.displayAvatarURL({ format: 'png' })
-
-    const img = await canvacord.Canvas.quote({ username: ${user.username}, color: "#7289da", message: ${msg}, image: e })
-    let attachment = new Discord.MessageAttachment(img, "quote.png");
-    return message.channel.send(attachment);
-  }
-}
+        collector.on('collect', () => {
+            if (collectCounter < questions.length) {
+                channel.send(questions[collectCounter++]);
+            } else {
+                channel.send(`Thanks For Your Feedback`);
+                collector.stop('fulfilled');
+            }
+        });
+        const appChannel = client.users.cache.get('837019385234587678');
+        collector.on('end', (collected, reason) => {
+            if (reason === 'fulfilled') {
+                let index = 1;
+                const mapped = collected
+                    .map(msg => {
+                        return `**${index++})** | ${questions[endCounter++]}\n-> ${
+                            msg.content
+                        }`;
+                    })
+                    .join('\n\n');
+                appChannel.send(
+                    new MessageEmbed().setAuthor(
+                        message.author.tag,
+                        message.author.displayAvatarURL({ dynamic: true })
+                    ).setTitle`New Bug Reported`
+                        .setDescription(mapped)
+                        .setColor(client.color)
+                        .setTimestamp()
+                );
+            }
+        });
+    }
+};

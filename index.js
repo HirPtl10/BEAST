@@ -193,7 +193,7 @@ client.ws.on('INTERACTION_CREATE', async interaction => {
     
 })
 
-client.login(process.env.TOKEN)
+client.login(process.env.token)
 
 client.on('messageDelete', async(message) => {
     require('./Logging/MessageDelete')(message)

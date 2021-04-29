@@ -12,7 +12,7 @@ module.exports = {
     let user = message.mentions.users.first()
     if (!user) return message.channel.send("You need to mention a user and provide text!")
 
-    let msg = args.slice(1).join
+    let msg = args.slice(1).join(' ')
 
 
 

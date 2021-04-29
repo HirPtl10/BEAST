@@ -17,7 +17,8 @@ module.exports = {
         let endCounter = 0;
 
         const filter = m => m.author.id === message.author.id;
-        const appStart = await message.author.send(questions[collectCounter++]);
+        const appStart = await message.author.send(questions[collectCounter++])
+        .catch(console.error)
         const channel = appStart.channel;
 
         const collector = channel.createMessageCollector(filter);

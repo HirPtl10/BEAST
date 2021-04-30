@@ -1,21 +1,8 @@
 
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const MessageSchema = new mongoose.Schema({
+    messageId: { type: String, required: true },
+    emojiRoleMappings: { type: mongoose.Schema.Types.Mixed }
+});
 
-const reqString = {
-  type: String,
-  required: true,
-}
-
-const messageSchema = new mongoose.Schema({
-  guildId: reqString,
-  channelId: reqString,
-  messageId: reqString,
-  roles: [
-    {
-      emoji: reqString,
-      roleId: reqString,
-    },
-  ],
-})
-
-module.exports = mongoose.model('tutorial-message-schema', messageSchema)
+const MessageModel = module.exports = mongoose.model('message', MessageSchema);

@@ -9,7 +9,7 @@ module.exports = {
 			required: true,
 		},
 	],
-	async execute(_bot, say, interaction, args) {
+	async execute(client, say, interaction, args) {
 		await say(interaction, args[0].value);
 	},
 };

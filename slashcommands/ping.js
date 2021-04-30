@@ -6,7 +6,7 @@ module.exports = {
 	global: true,
 	execute (interaction, client) {
 		
-		client.api.interactions(interaction.id, interaction.token).callback.post({
+		client.api.applications(client.user.id).commands.post({
             data: {
                 type: 4,
                 data: {

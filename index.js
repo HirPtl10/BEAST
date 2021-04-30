@@ -190,8 +190,8 @@ client.ws.on('INTERACTION_CREATE', async interaction => {
 			}
 		})
     }
-    
 })
+
 
 client.login(process.env.token)
 

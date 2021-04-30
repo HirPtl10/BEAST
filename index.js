@@ -136,7 +136,7 @@ client.on("ready", async () => {
    for (const fileName of cmdFiles) {
 		const File = require(`./commands/${fileName}`);
 		Commands.push(File);
-		await Bot.api.applications(Bot.user.id).commands.post({
+		await client.api.applications(client.user.id).commands.post({
 			data: {
 				name: File.name,
 				description: File.description,
@@ -144,20 +144,20 @@ client.on("ready", async () => {
 			},
 		});
 	}
-	console.info(`Logged in as ${Bot.user.username}`);
+	console.info(`Logged in as ${client.user.username}`);
 	
 })
-Bot.ws.on("INTERACTION_CREATE", (interaction) => {
+client.ws.on("INTERACTION_CREATE", (interaction) => {
 	const CMDFile = Commands.find(
 		(cmd) => cmd.name.toLowerCase() === interaction.data.name.toLowerCase(),
 	);
 	if (CMDFile)
-		CMDFile.execute(Bot, say, interaction, interaction.data.options);
+		CMDFile.execute(client, say, interaction, interaction.data.options);
 });
 
 client.login(process.env.token)
 async function say(interaction, content) {
-	return Bot.api
+	return client.api
 		.interactions(interaction.id, interaction.token)
 		.callback.post({
 			data: {
@@ -169,7 +169,7 @@ async function say(interaction, content) {
 
 async function createAPIMessage(interaction, content) {
 	const apiMessage = await APIMessage.create(
-		Bot.channels.resolve(interaction.channel_id),
+		client.channels.resolve(interaction.channel_id),
 		content,
 	)
 		.resolveData()

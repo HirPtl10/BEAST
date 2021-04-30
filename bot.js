@@ -22,7 +22,7 @@ client.on('message', message => {
                return message.channel.send(`Server count: ${totalGuilds}\nMember count: ${totalMembers}\nShardCount: ${totalShards}`);
            })
            client.on('ready', () => {
-           console.log('I am ready!');
+           console.log('I am ready!');mo
           client.user.setActivity(`Watching ${totalGuilds}`, {type: 'PLAYING'})
           
           })

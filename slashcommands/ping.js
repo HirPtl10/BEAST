@@ -8,6 +8,7 @@ module.exports = {
 		
 		client.api.applications(client.user.id).commands.post({
             data: {
+				
                 type: 4,
                 data: {
                     content: "hello world!!!"

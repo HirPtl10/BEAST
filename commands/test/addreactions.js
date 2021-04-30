@@ -5,11 +5,7 @@ let msgCollectorFilter = (newMsg, originalMsg) => newMsg.author.id === originalM
 module.exports = {
     name: 'addreactions',
     run: async(client, message, args) => {
-        if(args.split(/\s+/).length !== 1) {
-            let msg = await message.channel.send("Too many arguments. Must only provide 1 message id");
-            await msg.delete({ timeout: 3500 }).catch(err => console.log(err));
-        }
-        else {
+      
             try {
                 let fetchedMessage = await message.channel.messages.fetch(args);
                 if(fetchedMessage) {

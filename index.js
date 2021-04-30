@@ -1,6 +1,7 @@
 const { Collection, Client, Discord, Intents  } = require('discord.js');
 
-const { fs, readdirSync } = require('fs')
+const fs = require('fs')
+const {readdirSync} = require('fs')
 const ms = require('ms')
 const Levels = require('discord-xp')
 const schema = require('./models/schema')

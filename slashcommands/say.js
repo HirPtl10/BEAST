@@ -1,28 +1,15 @@
-const Discord = require('discord.js')
-
 module.exports = {
-	name: 'say',
-	description: 'say command',
-	commandOptions: [
+	name: "say",
+	description: "Say command.",
+	options: [
 		{
+			name: "Text",
+			description: "You can print something on the bot.",
 			type: 3,
-            name: "say",
-            description: "Say command",
-            required: true
-		}
-    ],
-	execute (client, interaction) {
-	const embed = new Discord.MessageEmbed()
-		.setDescription(args[0].value)
-		.setTimestamp()
-		.setColor('RANDOM');
-	client.api.interactions(interaction.id, interaction.token).callback.post({
-		data: {
-			type: 3,
-			data: {
-				embeds: [embed],
-			},
+			required: true,
 		},
-		});
+	],
+	async execute(_bot, say, interaction, args) {
+		await say(interaction, args[0].value);
 	},
 };

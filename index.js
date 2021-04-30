@@ -125,67 +125,57 @@ client.on('guildDelete', async (guild) => {
 })      
 
 
-
+const cmdFiles = readdirSync("./slashcommands").filter((file) =>
+	file.endsWith(".js"),
+);
 
 
 client.on("ready", async () => {
 
     console.log(`Done`)
-    client.user.setActivity(`F`, {type: 'WATCHING'})
-
-const commandFiles = fs.readdirSync('./slashcommands').filter(file => file.endsWith('.js'));
-    for (const file of commandFiles) {
-        const command = require(`./slashcommands/${file}`);
-        client.api.applications(client.user.id).commands.post({ data: {
-            name: command.name,
-            description: command.description,
-            options: command.commandOptions
-        }})
-        if (command.global == true) {
-            client.api.applications(client.user.id).commands.post({ data: {
-                name: command.name,
-                description: command.description,
-                options: command.commandOptions
-            }})
-        }
-        client.commands.set(command.name, command);
-        console.log(`Command POST : ${command.name} from ${file} (${command.global ? "global" : "guild"})`)
-    }
-    console.log("")
-    
-    let cmdArrGlobal = await client.api.applications(client.user.id).commands.get()
-    let cmdArrGuild = await client.api.applications(client.user.id).commands.get()
-    cmdArrGlobal.forEach(element => {
-        console.log("Global command loaded : " + element.name + " (" + element.id + ")" )
-    });
-    console.log("")
-    cmdArrGuild.forEach(element => {
-        console.log("Guild command loaded : " + element.name + " (" + element.id + ")")
-    });
-    console.log("")
-});
-client.ws.on('INTERACTION_CREATE', async interaction => {
-
-    if (!client.commands.has(interaction.data.name)) return;
-
-    try {
-        client.commands.get(interaction.data.name).execute(client, interaction);
-    } catch (error) {
-        console.log(`Error from command ${interaction.data.name} : ${error.message}`);
-        console.log(`${error.stack}\n`)
-        client.api.interactions(interaction.id, interaction.token).callback.post({data: {
-			type: 4,
+   for (const fileName of cmdFiles) {
+		const File = require(`./commands/${fileName}`);
+		Commands.push(File);
+		await Bot.api.applications(Bot.user.id).commands.post({
 			data: {
-					content: `Sorry, there was an error executing that command!`
-				}
-			}
-		})
-    }
+				name: File.name,
+				description: File.description,
+				options: File.options,
+			},
+		});
+	}
+	console.info(`Logged in as ${Bot.user.username}`);
+	
 })
-
+Bot.ws.on("INTERACTION_CREATE", (interaction) => {
+	const CMDFile = Commands.find(
+		(cmd) => cmd.name.toLowerCase() === interaction.data.name.toLowerCase(),
+	);
+	if (CMDFile)
+		CMDFile.execute(Bot, say, interaction, interaction.data.options);
+});
 
 client.login(process.env.token)
+async function say(interaction, content) {
+	return Bot.api
+		.interactions(interaction.id, interaction.token)
+		.callback.post({
+			data: {
+				type: 4,
+				data: await createAPIMessage(interaction, content),
+			},
+		});
+}
 
+async function createAPIMessage(interaction, content) {
+	const apiMessage = await APIMessage.create(
+		Bot.channels.resolve(interaction.channel_id),
+		content,
+	)
+		.resolveData()
+		.resolveFiles();
+	return { ...apiMessage.data, files: apiMessage.files };
+}
 client.on('messageDelete', async(message) => {
     require('./Logging/MessageDelete')(message)
 })

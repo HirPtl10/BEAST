@@ -29,7 +29,7 @@ client.prefix = async function(message) {
       );
   
       for (let file of events) {
-        let pull = require(`../events/${file}`);
+        let pull = require(`./events/${file}`);
   
         if (pull.name) {
           client.events.set(pull.name, pull);

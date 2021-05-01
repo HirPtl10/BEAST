@@ -12,12 +12,12 @@ module.exports = {
 			required: true,
 		},
 	],
-	async execute(bot, say, interaction, args) {
+	async execute(client, say, interaction, args) {
 		const embed = new MessageEmbed()
 			.setDescription(args[0].value)
 			.setColor("RANDOM")
 			.setTimestamp()
-			.setFooter(bot.user.username);
+			.setFooter(client.user.username);
 		await say(interaction, embed);
 	},
 };

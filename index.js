@@ -125,7 +125,7 @@ client.on('guildDelete', async (guild) => {
     })
 })      
 
-
+const Commands = [];
 const cmdFiles = readdirSync("./slashcommands").filter((file) =>
 	file.endsWith(".js"),
 );

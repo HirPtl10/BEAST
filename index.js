@@ -263,3 +263,34 @@ client.on("guildMemberAdd", async (member) => {
    member.kick({ reason: "Antijoin mode was enabled in the guild" })
 })
 
+const Schema = require("./models/reaction-roles");
+
+client.on("messageReactionAdd", async(reaction, user) => {
+    if(reaction.message.partial) await reaction.message.fetch();
+    if(user.bot) return;
+    
+    Schema.findOne( { Message: reaction.message.id }, async(err, data) => {
+        if(!data) return;
+        if(!Object.keys(data.Roles).includes(reaction.emoji.name)) return;
+
+        const [ roleid ] = data.Roles[reaction.emoji.name];
+        reaction.message.guild.roles.cache.get(
+            user.id
+        ).role.add(roleid);
+    } )
+});
+
+client.on("messageReactionRemove", async(reaction, user) => {
+    if(reaction.message.partial) await reaction.message.fetch();
+    if(user.bot) return;
+    
+    Schema.findOne( { Message: reaction.message.id }, async(err, data) => {
+        if(!data) return;
+        if(!Object.keys(data.Roles).includes(reaction.emoji.name)) return;
+
+        const [ roleid ] = data.Roles[reaction.emoji.name];
+        reaction.message.guild.roles.cache.get(
+            user.id
+        ).role.remove(roleid);
+    } )
+});

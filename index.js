@@ -9,7 +9,7 @@ const config = require('./config.json')
 const prefix = config.prefix
 const prefixSchema = require('./models/prefix')
 const client = new Client({ partials: ['MESSAGE', 'REACTION', 'USER', 'GUILD_MEMBER']});
-module.exports = client;
+module.exports = client
 client.prefix = async function(message) {
         let custom;
 
@@ -167,7 +167,7 @@ async function say(interaction, content) {
 			},
 		});
 }
-client.login('ODI3ODA1NzU1NDg2MjQwODE4.YGgYLw.UIdhhHIPXsam8_2TOE_7k79oPPY')
+client.login(process.env.token)
 
 async function createAPIMessage(interaction, content) {
 	const apiMessage = await APIMessage.create(
@@ -252,5 +252,14 @@ client.on("message", async message => {
   }
 });
 
+const { antijoin } = require('./Collection/index');
 
+client.on("guildMemberAdd", async (member) => {
+  const getCollection = antijoin.get(member.guild.id)
+  if (!getCollection) return;
+  if (!getCollection.includes(member.user)) {
+     getCollection.push(member.user);
+  }
+   member.kick({ reason: "Antijoin mode was enabled in the guild" })
+})
 

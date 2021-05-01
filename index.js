@@ -8,7 +8,8 @@ const schema = require('./models/schema')
 const config = require('./config.json')
 const prefix = config.prefix
 const prefixSchema = require('./models/prefix')
-const client = new Client({ partials: ['MESSAGE', 'REACTION']});
+const client = new Client({ partials: ['MESSAGE', 'REACTION', 'USER', 'GUILD_MEMBER']});
+module.exports = client;
 client.prefix = async function(message) {
         let custom;
 
@@ -24,7 +25,7 @@ client.prefix = async function(message) {
     }
 
   
-module.exports = client;
+
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://last:last@test.8ukwy.mongodb.net/Data', { useNewUrlParser: true, useUnifiedTopology: true, })
@@ -166,7 +167,7 @@ async function say(interaction, content) {
 			},
 		});
 }
-client.login(process.env.token)
+client.login('ODI3ODA1NzU1NDg2MjQwODE4.YGgYLw.UIdhhHIPXsam8_2TOE_7k79oPPY')
 
 async function createAPIMessage(interaction, content) {
 	const apiMessage = await APIMessage.create(
@@ -193,9 +194,7 @@ require('./Logging/memberUpdate')(member, role)
 client.on('guildBanAdd', async (user, guild)=>{
 require('./Logging/Ban')(user, guild)
 })
-client.on('guildMemberAdd', async (member)=>{
-    require('./Logging/guildMemberAdd')(member)
-})
+
 client.on('channelCreate', async(channel)=>{
     require('./Logging/ChannelCreate')
 })

@@ -55,8 +55,10 @@ module.exports = {
         data.Message = msg.id;
         data.save();
 
-        const reactions = Object.values(data.Roles).map((val) => val[1].id);
-        reactions.map((emoji) => msg.react(emoji));
+        const reactions = Object.values(data.Roles).map(
+          (val) => val[1].id
+        );
+        reactions.map((emoji) => msg.react(emoji))
       });
     });
   },

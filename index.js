@@ -166,7 +166,7 @@ async function say(interaction, content) {
 			},
 		});
 }
-client.login('ODI3ODA1NzU1NDg2MjQwODE4.YGgYLw.UIdhhHIPXsam8_2TOE_7k79oPPY')
+client.login(process.env.token)
 
 async function createAPIMessage(interaction, content) {
 	const apiMessage = await APIMessage.create(

@@ -135,7 +135,7 @@ client.on("ready", async () => {
 
     console.log(`Done`)
    for (const fileName of cmdFiles) {
-		const File = require(`./commands/${fileName}`);
+		const File = require(`./slashcommands/${fileName}`);
 		Commands.push(File);
 		await client.api.applications(client.user.id).commands.post({
 			data: {

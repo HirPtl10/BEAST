@@ -8,7 +8,11 @@ const schema = require('./models/schema')
 const config = require('./config.json')
 const prefix = config.prefix
 const prefixSchema = require('./models/prefix')
-const client = new Client({ partials: ['MESSAGE', 'REACTION', 'USER', 'GUILD_MEMBER']});
+const client = new Client({
+	disableEveryone: true,
+	partials: ["MESSAGE", "CHANNEL", "REACTION"],
+	intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_PRESENCES']
+});
 module.exports = client
 client.prefix = async function(message) {
         let custom;

@@ -166,6 +166,7 @@ async function say(interaction, content) {
 			},
 		});
 }
+client.login(process.env.token)
 
 async function createAPIMessage(interaction, content) {
 	const apiMessage = await APIMessage.create(

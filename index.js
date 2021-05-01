@@ -263,34 +263,35 @@ client.on("guildMemberAdd", async (member) => {
    member.kick({ reason: "Antijoin mode was enabled in the guild" })
 })
 
-const Schema = require("./models/reaction-roles");
 
-client.on("messageReactionAdd", async(reaction, user) => {
-    if(reaction.message.partial) await reaction.message.fetch();
-    if(user.bot) return;
-    
-    Schema.findOne( { Message: reaction.message.id }, async(err, data) => {
-        if(!data) return;
-        if(!Object.keys(data.Roles).includes(reaction.emoji.name)) return;
+const Schema = require('./models/reaction-roles');
 
-        const [ roleid ] = data.Roles[reaction.emoji.name];
-        reaction.message.guild.roles.cache.get(
-            user.id
-        ).role.add(roleid);
-    } )
+client.on('messageReactionAdd', async (reaction, user) => {
+  if (reaction.message.partial) await reaction.message.fetch();
+  if (reaction.partial) await reaction.fetch();
+  if (user.bot) return;
+
+  Schema.findOne({ Message: reaction.message.id }, async (err, data) => {
+    if (!data) return;
+    if (!Object.keys(data.Roles).includes(reaction.emoji.name)) return;
+
+    const [roleid] = data.Roles[reaction.emoji.name];
+    reaction.message.guild.members.cache.get(user.id).roles.add(roleid);
+    user.send(`You have obtained ${roleid} role`);
+  });
 });
 
-client.on("messageReactionRemove", async(reaction, user) => {
-    if(reaction.message.partial) await reaction.message.fetch();
-    if(user.bot) return;
-    
-    Schema.findOne( { Message: reaction.message.id }, async(err, data) => {
-        if(!data) return;
-        if(!Object.keys(data.Roles).includes(reaction.emoji.name)) return;
+client.on('messageReactionRemove', async (reaction, user) => {
+  if (reaction.message.partial) await reaction.message.fetch();
+  if (reaction.partial) await reaction.fetch();
+  if (user.bot) return;
 
-        const [ roleid ] = data.Roles[reaction.emoji.name];
-        reaction.message.guild.roles.cache.get(
-            user.id
-        ).role.remove(roleid);
-    } )
+  Schema.findOne({ Message: reaction.message.id }, async (err, data) => {
+    if (!data) return;
+    if (!Object.keys(data.Roles).includes(reaction.emoji.name)) return;
+
+    const [roleid] = data.Roles[reaction.emoji.name];
+    reaction.message.guild.members.cache.get(user.id).roles.remove(roleid);
+    user.send(`You have lost ${roleid} role`);
+  });
 });

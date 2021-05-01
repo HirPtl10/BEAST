@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const reactionrolesSchema = require('../../models/reaction-roles');
+const Schema = require('../../models/reaction-roles');
 
 module.exports = {
   name: 'panel',
@@ -28,7 +28,7 @@ module.exports = {
 
     const channel = message.mentions.channels.first() || message.channel;
 
-    reactionrolesSchema.findOne({ GuildID: message.guild.id }, async (err, data) => {
+    Schema.findOne({ Guild: message.guild.id }, async (err, data) => {
       const noDataEmbed = new Discord.MessageEmbed()
         .setColor('#f54842')
         .setTitle('❗ ERROR')
@@ -52,7 +52,7 @@ module.exports = {
         .setTimestamp();
 
       channel.send(rolesPanelEmbed).then((msg) => {
-        data.MessageID = msg.id;
+        data.Message = msg.id;
         data.save();
 
         const reactions = Object.values(data.Roles).map((val) => val[1].id);

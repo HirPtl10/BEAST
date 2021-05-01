@@ -156,7 +156,6 @@ client.ws.on("INTERACTION_CREATE", (interaction) => {
 		CMDFile.execute(client, say, interaction, interaction.data.options);
 });
 
-client.login(process.env.token)
 async function say(interaction, content) {
 	return client.api
 		.interactions(interaction.id, interaction.token)

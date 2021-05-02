@@ -1,5 +1,5 @@
 const { Collection, Client, Discord, Intents  } = require('discord.js');    
-  
+      
 const fs = require('fs')
 const {readdirSync} = require('fs')
 const ms = require('ms')
@@ -36,7 +36,7 @@ manager.on('shardCreate', shard => console.log(`Launched shard ${shard.id}`));
 manager.spawn();
 
 
-// functions
+// function
 client.bal = (id) => new Promise(async  ful => {
     const data = await schema.findOne({ id })
     if (!data) return ful(0);

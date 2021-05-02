@@ -8,7 +8,11 @@ const schema = require('./models/schema')
 const config = require('./config.json')
 const prefix = config.prefix
 const prefixSchema = require('./models/prefix')
-const client = new Client({ partials: ['MESSAGE', 'REACTION', 'USER', 'GUILD_MEMBER']});
+const client = new Client({
+	disableEveryone: true,
+	partials: ["MESSAGE", "CHANNEL", "REACTION"],
+	intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_PRESENCES']
+});
 module.exports = client
 client.prefix = async function(message) {
         let custom;
@@ -263,3 +267,35 @@ client.on("guildMemberAdd", async (member) => {
    member.kick({ reason: "Antijoin mode was enabled in the guild" })
 })
 
+
+const Schema = require('./models/reaction-roles');
+
+client.on('messageReactionAdd', async (reaction, user) => {
+  if (reaction.message.partial) await reaction.message.fetch();
+  if (reaction.partial) await reaction.fetch();
+  if (user.bot) return;
+
+  Schema.findOne({ Message: reaction.message.id }, async (err, data) => {
+    if (!data) return;
+    if (!Object.keys(data.Roles).includes(reaction.emoji.name)) return;
+
+    const [roleid] = data.Roles[reaction.emoji.name];
+    reaction.message.guild.members.cache.get(user.id).roles.add(roleid);
+    user.send(`You have obtained ${roleid} role`);
+  });
+});
+
+client.on('messageReactionRemove', async (reaction, user) => {
+  if (reaction.message.partial) await reaction.message.fetch();
+  if (reaction.partial) await reaction.fetch();
+  if (user.bot) return;
+
+  Schema.findOne({ Message: reaction.message.id }, async (err, data) => {
+    if (!data) return;
+    if (!Object.keys(data.Roles).includes(reaction.emoji.name)) return;
+
+    const [roleid] = data.Roles[reaction.emoji.name];
+    reaction.message.guild.members.cache.get(user.id).roles.remove(roleid);
+    user.send(`You have lost ${roleid} role`);
+  });
+});

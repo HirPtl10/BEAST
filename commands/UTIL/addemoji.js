@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const { Discord, Util } = require('discord.js');
 
 module.exports = {
     name: 'addemoji',
@@ -34,12 +34,8 @@ return {
 }
 }
 
-if(!['571375744635109394'].includes(message.author.id) && !message.member.permissions.has('MANAGE_EMOJIS')) {
-  return message.channel.send('**<:aloi_aviso:777754787855859714> | Você não pode usar este comando**\n**Permissão necessária: [\`GERENCIAR_EMOJIS\`]**')
-  }
- if(!message.guild.me.permissions.has('MANAGE_EMOJIS')) {
-  return message.channel.send('**<:aloi_aviso:777754787855859714> | Eu não posso usar este comando**\n**Permissão necessária: [\`GERENCIAR_EMOJIS\`]**')
-  }
+
+
 
 let link = message.content.match("https://")
 let nome = ""

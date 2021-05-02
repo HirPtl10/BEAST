@@ -58,7 +58,7 @@ const embed2 = new Discord.MessageEmbed()
     if (message.attachments.first()) {
 link = message.attachments.first().url
 
-nome = args[0]
+nome = args[1]
 if(!nome) return message.channel.send("**<:aloi_aviso:777754787855859714> | (imagem) você esqueceu de especificar um nome**")
 
 let treco = message.attachments.first().size

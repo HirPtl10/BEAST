@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 
-module.exports.run = async (client, message, args) => {
+module.exports = {
+    name: 'addemoji',
+    run: async (client, message, args) => {
 
 function converter(bytes) {
     let formatos = ['B', 'KB', 'MB', 'GB', 'TB'];
@@ -101,4 +103,5 @@ const embed = new Discord.MessageEmbed()
 .setColor("#8b6eff")
 .setDescription(`Added`) 
  message.channel.send(embed)
+}
 }

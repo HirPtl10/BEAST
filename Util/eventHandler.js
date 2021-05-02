@@ -1,7 +1,7 @@
 
 const reqEvent = (event) => require(`../events/${event}`)
 
-module.exports = bot => {
+module.exports = client => {
     client.on("ready", function() {reqEvent("ready") (client) });
  }
 

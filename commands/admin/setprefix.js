@@ -9,7 +9,7 @@ module.exports = {
         prefixSchema.findOne({ Guild : message.guild.id }, async(err, data) => {
             if(err) throw err;
             if(data) {
-                prefixSchema.findOneAndRemove({ Guild : message.guild.id })
+                prefixSchema.findOneAndUpdate({ Guild : message.guild.id })
                 data = new prefixSchema({
                     Guild : message.guild.id,
                     Prefix : res

@@ -3,6 +3,12 @@ const Schema = require('../../models/reaction-roles')
 module.exports = {
     name: 'panel',
 
+    /**
+     * @param {Client} client
+     * @param {Message} message
+     * @param {String[]} args
+     */
+
     run: async (client, message, args) => {
         if (!message.member.permissions.has('ADMINISTRATOR')) return;
 

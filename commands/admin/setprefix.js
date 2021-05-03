@@ -17,11 +17,7 @@ module.exports = {
                 data.save()
                 message.channel.send(`Your prefix has been updated to **${res}**`)
             } else {
-                newData = new prefixSchema({
-                    Guild : message.guild.id,
-                    Prefix : res
-                })
-               newData.save()
+                data.updateOne({ Prefix: res })
                 message.channel.send(`Custom prefix in this server is now set to **${res}**`)
             }
         })

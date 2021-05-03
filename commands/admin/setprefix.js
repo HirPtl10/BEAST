@@ -9,7 +9,7 @@ module.exports = {
         prefixSchema.findOne({ Guild : message.guild.id }, async(err, data) => {
             if(err) throw err;
             if(data) {
-                prefixSchema.findOneAndUpdate({ Guild : message.guild.id })
+                prefixSchema.findOneAndRemove({ Guild : message.guild.id })
                 data = new prefixSchema({
                     Guild : message.guild.id,
                     Prefix : res
@@ -17,11 +17,7 @@ module.exports = {
                 data.save()
                 message.channel.send(`Your prefix has been updated to **${res}**`)
             } else {
-                newData = new prefixSchema.updateOne({
-                    Guild : message.guild.id,
-                    Prefix : res
-                })
-               newData.save()
+                data.updateOne({ Prefix: res })
                 message.channel.send(`Custom prefix in this server is now set to **${res}**`)
             }
         })

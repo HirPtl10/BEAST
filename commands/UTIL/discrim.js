@@ -17,3 +17,5 @@ const discrim = args[0] ?? message.author.discriminator;
     }
 
 }
+
+

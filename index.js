@@ -274,7 +274,7 @@ const Schema = require('./models/reaction-roles');
 client.on('messageReactionAdd', async (reaction, user) => {
   if (reaction.message.partial) await reaction.message.fetch();
   if (reaction.partial) await reaction.fetch();
-  if (user.bot) return;
+  
 
   Schema.findOne({ Message: reaction.message.id }, async (err, data) => {
     if (!data) return;
@@ -289,7 +289,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
 client.on('messageReactionRemove', async (reaction, user) => {
   if (reaction.message.partial) await reaction.message.fetch();
   if (reaction.partial) await reaction.fetch();
-  if (user.bot) return;
+
 
   Schema.findOne({ Message: reaction.message.id }, async (err, data) => {
     if (!data) return;

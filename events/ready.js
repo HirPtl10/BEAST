@@ -10,7 +10,7 @@ module.exports = client => {
     }
     const express = require('express')
     const app = express();
-    const port = 5000
+    const port = process.env.PORT || 5001
     app.get("/", (req, res) => {
         res.status(200).sendFile(path.join(__dirname, "..", "pages", "landingPage.html"))
     })

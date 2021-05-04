@@ -10,13 +10,13 @@ module.exports = client => {
     }
     const express = require('express')
     const app = express();
-    const port = 3000 || 3001
+    const port = 5000
     app.get("/", (req, res) => {
-        res.status(200).send('Home Page')
+        res.status(200).sendFile(path.join(__dirname, "..", "pages", "landingPage.html"))
     })
     app.get("/info", (req, res) => {
         res.status(200).send(clientDetails)
     })
     app.listen(port)
-    
+   
 }

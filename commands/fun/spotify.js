@@ -1,4 +1,4 @@
-
+const { MessageAttachment } = require('discord.js')
 const canvacord = require("canvacord");
 module.exports = {
   name: 'spotify',

@@ -57,7 +57,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://last:last@test.8ukwy.mongodb.net/Data', { useNewUrlParser: true, useUnifiedTopology: true, })
 
 const { ShardingManager } = require('discord.js');
-const manager = new ShardingManager('./bot.js', { token: process.env.boken });
+const manager = new ShardingManager('./bot.js', { token: process.env.token });
 manager.on('shardCreate', shard => console.log(`Launched shard ${shard.id}`));
 manager.spawn();
 
@@ -152,47 +152,8 @@ client.on('guildDelete', async (guild) => {
     })
 })      
 
-const Commands = [];
-const cmdFiles = readdirSync("./slashcommands").filter((file) =>
-	file.endsWith(".js"),
-);
 
 
-client.on("ready", async () => {
-
-    console.log(`Done`)
-   for (const fileName of cmdFiles) {
-		const File = require(`./slashcommands/${fileName}`);
-		Commands.push(File);
-		await client.api.applications(client.user.id).commands.post({
-			data: {
-				name: File.name,
-				description: File.description,
-				options: File.options,
-			},
-		});
-	}
-	console.info(`Logged in as ${client.user.username}`);
-	
-})
-client.ws.on("INTERACTION_CREATE", (interaction) => {
-	const CMDFile = Commands.find(
-		(cmd) => cmd.name.toLowerCase() === interaction.data.name.toLowerCase(),
-	);
-	if (CMDFile)
-		CMDFile.execute(client, say, interaction, interaction.data.options);
-});
-
-async function say(interaction, content) {
-	return client.api
-		.interactions(interaction.id, interaction.token)
-		.callback.post({
-			data: {
-				type: 4,
-				data: await createAPIMessage(interaction, content),
-			},
-		});
-}
 client.login(process.env.token)
 
 async function createAPIMessage(interaction, content) {

@@ -14,9 +14,7 @@ const card = new canvacord.Spotify()
     .setImage(image)
     .setTitle(data.title);
 
-card.build()
-    .then(buffer => {
-        canvacord.write(buffer, "spotify.png");
-    });
+const img = await card.build()
+  message.channel.send(new MessageAttachment(img, "spotify.png"))
   }
 }

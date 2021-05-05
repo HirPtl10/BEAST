@@ -1,20 +1,34 @@
-const { MessageAttachment } = require('discord.js')
-const canvacord = require("canvacord");
+const { MessageEmbed } = require('discord.js');
+
 module.exports = {
-  name: 'spotify',
-  run: async (client, message, args) => {
-const image = "https://is5-ssl.mzstatic.com/image/thumb/Features111/v4/a4/89/a1/a489a1cb-4543-6861-a276-4470d41d6a90/mzl.zcdmhnlk.jpg/800x800bb.jpeg";
-const data = getDataSomehow();
+  
+        name: 'spotify',
+       
+    run: async (bot, message, args) => {
+        let user = message.mentions.users.first() || message.author;
 
-const card = new canvacord.Spotify()
-    .setAuthor(data.author)
-    .setAlbum(data.album)
-    .setStartTimestamp(data.start)
-    .setEndTimestamp(data.end)
-    .setImage(image)
-    .setTitle(data.title);
+        if(user.presence.game !== null && user.presence.game.type === 2 && user.presence.game.name === 'Spotify' && user.presence.game.assets !== null) {
 
-const img = await card.build()
-  message.channel.send(new MessageAttachment(img, "spotify.png"))
-  }
+            let trackIMG = `https://i.scdn.co/image/${user.presence.activities.assets.largeImage.slice(8)}`;
+            let trackURL = `https://open.spotify.com/track/${user.presence.activities.syncID}`;
+            let trackName = user.presence.activities.details;
+            let trackAuthor = user.presence.activities.state;
+            let trackAlbum = user.presence.activities.assets.largeText;
+
+            const embed = new MessageEmbed()
+     
+                .setColor("GREEN")
+                .setThumbnail(trackIMG)
+                .addField('Song Name', trackName, true)
+                .addField('Album', trackAlbum, true)
+                .addField('Author', trackAuthor, false)
+                .addField('Listen to Track', `${trackURL}`, false)
+              
+                .setTimestamp()
+
+            message.channel.send(embed);
+        } else {
+            message.channel.send('**This user isn\'t listening to Spotify!**');
+        }
+    }
 }

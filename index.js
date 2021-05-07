@@ -34,7 +34,7 @@ client.on('ready', () => {
  client.user.setActivity("Wut", {type: "PLAYING"});
 });
   
-
+   
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://last:last@test.8ukwy.mongodb.net/Data', { useNewUrlParser: true, useUnifiedTopology: true, })

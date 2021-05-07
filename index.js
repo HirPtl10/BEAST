@@ -14,7 +14,7 @@ const client = new Client({
 	partials: ["MESSAGE", "CHANNEL", "REACTION"],
 	intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_PRESENCES']
 });
-require("./Util/eventHandler")(client)
+
 
 client.prefix = async function(message) {
         let custom;

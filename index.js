@@ -1,5 +1,6 @@
 const { Collection, Client, Discord, Intents  } = require('discord.js');    
       
+
 const fs = require('fs')
 const {readdirSync} = require('fs')
 const ms = require('ms')
@@ -13,7 +14,7 @@ const client = new Client({
 	partials: ["MESSAGE", "CHANNEL", "REACTION"],
 	intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_PRESENCES']
 });
-require("./Util/eventHandler")(client)
+
 
 client.prefix = async function(message) {
         let custom;
@@ -28,9 +29,12 @@ client.prefix = async function(message) {
         }
         return custom;
     }
-
+client.on('ready', () => {
+ console.log(`${client.user.username} is online`)
+ client.user.setActivity("Wut", {type: "PLAYING"});
+});
   
-
+   
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://last:last@test.8ukwy.mongodb.net/Data', { useNewUrlParser: true, useUnifiedTopology: true, })
@@ -131,47 +135,8 @@ client.on('guildDelete', async (guild) => {
     })
 })      
 
-const Commands = [];
-const cmdFiles = readdirSync("./slashcommands").filter((file) =>
-	file.endsWith(".js"),
-);
 
 
-client.on("ready", async () => {
-
-    console.log(`Done`)
-   for (const fileName of cmdFiles) {
-		const File = require(`./slashcommands/${fileName}`);
-		Commands.push(File);
-		await client.api.applications(client.user.id).commands.post({
-			data: {
-				name: File.name,
-				description: File.description,
-				options: File.options,
-			},
-		});
-	}
-	console.info(`Logged in as ${client.user.username}`);
-	
-})
-client.ws.on("INTERACTION_CREATE", (interaction) => {
-	const CMDFile = Commands.find(
-		(cmd) => cmd.name.toLowerCase() === interaction.data.name.toLowerCase(),
-	);
-	if (CMDFile)
-		CMDFile.execute(client, say, interaction, interaction.data.options);
-});
-
-async function say(interaction, content) {
-	return client.api
-		.interactions(interaction.id, interaction.token)
-		.callback.post({
-			data: {
-				type: 4,
-				data: await createAPIMessage(interaction, content),
-			},
-		});
-}
 client.login(process.env.token)
 
 async function createAPIMessage(interaction, content) {

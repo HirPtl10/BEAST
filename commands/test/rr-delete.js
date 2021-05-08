@@ -1,5 +1,5 @@
 const { Client, Message, MessageEmbed, Discord } = require('discord.js');
-const Schema = require('../../models/prefix')
+const Schema = require('../../models/reaction-roles')
 module.exports = {
    name: 'rr-delete',
    description: '',

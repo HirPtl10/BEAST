@@ -89,6 +89,9 @@ client.categories = fs.readdirSync("./commands/");
 const blacklist = require('./models/blacklist')
 client.on('message', async message =>{
 	const p = await client.prefix(message)
+	if(message.mentions.users.first()) {
+        if(message.mentions.users.first().id === '827805755486240818') return message.channel.send(`Prefix in ${message.guild.name} is ${p}`)
+    }
 	 if(message.author.bot) return;
 	if(!message.content.startsWith(p)) return;
 	 blacklist.findOne({ id : message.author.id }, async(err, data) => {

@@ -29,10 +29,71 @@ client.prefix = async function(message) {
         }
         return custom;
     }
-client.on('ready', () => {
- console.log(`${client.user.username} is online`)
- client.user.setActivity("Wut", {type: "PLAYING"});
+client.slashcommand = new Discord.Collection();
+client.on('ready', async () => {
+  console.log(`\nLogged in : ${client.user.tag}\n`)
+
+  try {
+    fs.readdirSync('./slashcommands').forEach(dir => {
+      const slashFiles = fs.readdirSync(`./slashcommands/${dir}`).filter(file => file.endsWith('.js'));
+      for (const file of slashFiles) {
+        const slashcommand = require(`./slashcommands/${dir}/${file}`);
+        client.api.applications(client.user.id).commands.post({
+          data: {
+            name: command.name,
+            description: command.description,
+            options: command.commandOptions
+          }
+        })
+        if (slashcommand.global == true) {
+          client.api.applications(client.user.id).commands.post({
+            data: {
+              name: slashcommand.name,
+              description: slashcommand.description,
+              options: slashcommand.commandOptions
+            }
+          })
+        }
+
+        client.commands.set(slashcommand.name, slashcommand);
+        console.log(`Command POST : ${slashcommand.name} from ${file} (${slashcommand.global ? "global" : "guild"})`)
+      }
+      console.log("")
+    })
+  } catch (error) { console.log(error) }
+  let cmdArrGlobal = await client.api.applications(client.user.id).commands.get()
+  let cmdArrGuild = await client.api.applications(client.user.id).guilds(config.guildID).commands.get()
+  cmdArrGlobal.forEach(element => {
+    console.log("Global command loaded : " + element.name + " (" + element.id + ")")
+  });
+  console.log("")
+  cmdArrGuild.forEach(element => {
+    console.log("Guild command loaded : " + element.name + " (" + element.id + ")")
+  });
+  console.log("")
 });
+
+
+client.ws.on('INTERACTION_CREATE', async interaction => {
+
+  if (!client.commands.has(interaction.data.name)) return;
+
+  try {
+    client.commands.get(interaction.data.name).execute(interaction, client);
+  } catch (error) {
+    console.log(`Error from command ${interaction.data.name} : ${error.message}`);
+    console.log(`${error.stack}\n`)
+    client.api.interactions(interaction.id, interaction.token).callback.post({
+      data: {
+        type: 4,
+        data: {
+          content: `Sorry, there was an error executing that command!`
+        }
+      }
+    })
+  }
+
+})
 
    
 

@@ -14,7 +14,7 @@ const client = new Client({
 	partials: ["MESSAGE", "CHANNEL", "REACTION"],
 	intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_PRESENCES']
 });
-const gld = '805086929426579477',
+const gld = '805086929426579477'
 const chn = gld.channels.cache.get('811472250733592626')  
 
 client.prefix = async function(message) {

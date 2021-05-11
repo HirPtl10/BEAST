@@ -29,7 +29,7 @@ client.prefix = async function(message) {
         }
         return custom;
     }
-client.slashcommand = new Discord.Collection();
+client.slashcommand = new Collection();
 client.on('ready', async () => {
   console.log(`\nLogged in : ${client.user.tag}\n`)
 

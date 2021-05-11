@@ -3,7 +3,8 @@ module.exports = {
     description: 'Ping!',
     commandOptions: null,
     global: false,
-    execute(interaction, client) {
+}
+ module.exports.execute = async (client, message, args) => {
         
         client.api.interactions(interaction.id, interaction.token).callback.post({data: {
             type: 4,
@@ -13,4 +14,4 @@ module.exports = {
             }
         })
     },
-};
+

@@ -38,10 +38,11 @@ client.on('ready', () => {
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://last:last@test.8ukwy.mongodb.net/Data', { useNewUrlParser: true, useUnifiedTopology: true, })
-
+const gld = '805086929426579477',
+const chn = gld.channels.cache.get('811472250733592626')      
 const { ShardingManager } = require('discord.js');
 const manager = new ShardingManager('./bot.js', { token: process.env.token });
-manager.on('shardCreate', shard => console.log(`Launched shard ${shard.id}`));
+manager.on('shardCreate', shard => chn.send(`Launched shard ${shard.id}`));
 manager.spawn();
 
 

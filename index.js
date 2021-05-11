@@ -14,7 +14,8 @@ const client = new Client({
 	partials: ["MESSAGE", "CHANNEL", "REACTION"],
 	intents: ['GUILDS', 'GUILD_MESSAGES', 'GUILD_MEMBERS', 'GUILD_PRESENCES']
 });
-
+const gld = '805086929426579477',
+const chn = gld.channels.cache.get('811472250733592626')  
 
 client.prefix = async function(message) {
         let custom;
@@ -33,8 +34,7 @@ client.on('ready', () => {
  console.log(`${client.user.username} is online`)
  client.user.setActivity("Wut", {type: "PLAYING"});
 });
-const gld = '805086929426579477',
-const chn = gld.channels.cache.get('811472250733592626')  
+
    
 
 const mongoose = require('mongoose');

@@ -271,7 +271,7 @@ client.on('messageReactionRemove', async (reaction, user) => {
 client.on('message', async message => {
 	if (!client.application?.owner) await client.application?.fetch();
 
-	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
+	if (message.content.toLowerCase() === '!deploy' && message.author.id === '827793921144913971') {
 		const data = {
 			name: 'phing',
 			description: 'Bots ping!',

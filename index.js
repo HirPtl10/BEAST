@@ -268,3 +268,20 @@ client.on('messageReactionRemove', async (reaction, user) => {
     user.send(`You have lost ${roleid} role`);
   });
 });
+client.on('message', async message => {
+	if (!client.application?.owner) await client.application?.fetch();
+
+	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
+		const data = {
+			name: 'phing',
+			description: 'Bots ping!',
+		};
+
+		const command = await client.application?.commands.create(data);
+		console.log(command);
+	}
+});
+client.on('interaction', async interaction => {
+	if (!interaction.isCommand()) return;
+	if (interaction.commandName === 'phing') await interaction.reply(`${client.ws.ping}`, { ephemeral: true });
+});

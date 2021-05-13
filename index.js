@@ -78,7 +78,7 @@ client.db = require("quick.db");
 module.exports = client
 client.categories = fs.readdirSync("./commands/");
 ["command"].forEach(handler => {
-  require(./handlers/${handler})(client)
+  require(`./handlers/${handler}`)(client)
 })
 client.aliases = new Collection();
 

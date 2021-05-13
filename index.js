@@ -6,7 +6,7 @@ const {readdirSync} = require('fs')
 const ms = require('ms')
 const Levels = require('discord-xp')
 const schema = require('./models/schema')
-module.exports = client
+
 const config = require('./config.json')
 const prefix = config.prefix
 const prefixSchema = require('./models/prefix')
@@ -75,6 +75,7 @@ const Timeout = new Collection();
 client.commands = new Collection();
 client.cachedMessageReactions = new Map();
 client.db = require("quick.db");
+module.exports = client
 client.aliases = new Collection();
 
 client.categories = fs.readdirSync("./commands/");

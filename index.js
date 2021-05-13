@@ -78,10 +78,7 @@ client.db = require("quick.db");
 module.exports = client
 client.aliases = new Collection();
 
-client.categories = fs.readdirSync("./commands/");
-["command"].forEach(handler => {
-  require(`./handlers/${handler}`)(client)
-})
+
 
 const blacklist = require('./models/blacklist')
 client.on('message', async message =>{

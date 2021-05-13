@@ -18,7 +18,7 @@ module.exports= (client) => {
         }
     });
     console.log(table.toString());
-    eaddirSync("./events/").forEach((file) => {
+    readdirSync("./events/").forEach((file) => {
     const events = readdirSync("./events/").filter((file) =>
       file.endsWith(".js")
     );

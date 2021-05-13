@@ -76,12 +76,12 @@ client.commands = new Collection();
 client.cachedMessageReactions = new Map();
 client.db = require("quick.db");
 module.exports = client
+
+client.aliases = new Collection();
 client.categories = fs.readdirSync("./commands/");
 ["command"].forEach(handler => {
   require(`./handlers/${handler}`)(client)
 })
-client.aliases = new Collection();
-
 
 
 const blacklist = require('./models/blacklist')

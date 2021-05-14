@@ -7,7 +7,7 @@ module.exports = {
         if (message.author.id !== '827793921144913971') return;
           const command = args.join(' ')
           child.exec(command, (err, res) => {
-            if (err) return console.log(err
+            if (err) return console.log(err)
                 message.channel.send(res.slice(0, 2000), { code: "js" })
           }) 
   }

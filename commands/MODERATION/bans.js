@@ -19,7 +19,7 @@ module.exports = {
         .join("\n");
         const embed = new MessageEmbed()
         .setTitle("Ban List")
-        .setDescription(bannedMembers \n reason)
+        .setDescription(${bannedMembers} = ${reason})
         .setColor("FF0000")
         .setTimestamp()
 

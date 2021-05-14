@@ -13,13 +13,13 @@ module.exports = {
 
         const fetchBans = message.guild.fetchBans();
         const bannedMembers = (await fetchBans)
-        const reason = fetchBans.reason
+        const reason = (await fetchBans.reason)
       
-        .map ((member, reason) => member.user.tag, reason)
+        .map ((member, reason) => member.user.tag, fetchBans.reason)
         .join("\n");
         const embed = new MessageEmbed()
         .setTitle("Ban List")
-        .setDescription(bannedMembers)
+        .setDescription(bannedMembers -> reason)
         .setColor("FF0000")
         .setTimestamp()
 

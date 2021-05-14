@@ -13,18 +13,18 @@ module.exports = {
 
         const fetchBans = message.guild.fetchBans();
         const bannedMembers = (await fetchBans)
-        const reason = (await fetchBans.reason)
+       
       
-        .map ((member, reason) => member.user.tag, fetchBans.reason)
+        .map ((member) => member.user.tag)
         .join("\n");
         const embed = new MessageEmbed()
         .setTitle("Ban List")
-        .setDescription(`${bannedMembers} = ${reason}`)
+        .setDescription(bannedMembers).join("\")
         .setColor("FF0000")
         .setTimestamp()
 
         message.channel.send(embed)
-        .join("\n")
+        
     },
 
 };

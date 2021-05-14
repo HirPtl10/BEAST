@@ -326,12 +326,9 @@ client.on("message", async message => {
     }
     channel = client.channels.cache.get(active.channelID);
     var msg = message.content;
-    var isPaused = await dbTable.get(`suspended${message.author.id}`);
-    var isBlocked = await dbTable.get(`isBlocked${message.author.id}`);
-    if(isPaused === true){
-    	return message.channel.send("Sorry, but your ticket is currently paused. I'll message you back when the support team unpause it.")
-    }
-    if(isBlocked === true) return; // the user is blocked, so we're just gonna move on.
+
+   
+   
     if(message.attachments.size > 0){
       let attachment = new Discord.MessageAttachment(message.attachments.first().url)
       try {
@@ -358,89 +355,11 @@ client.on("message", async message => {
     let supportUser = client.users.cache.get(support.targetID);
     if(!supportUser) return message.channel.delete();
     
-    // reply (with user and role)
-    if(message.content.startsWith(`${config.prefix}reply`)){
-      var isPause = await table.get(`suspended${support.targetID}`);
-      let isBlock = await table.get(`isBlocked${support.targetID}`);
-      if(isPause === true) return message.channel.send("This ticket already paused. Unpause it to continue.")
-      if(isBlock === true) return message.channel.send("The user is blocked. Unblock them to continue or close the ticket.")
-      var args = message.content.split(" ").slice(1)
-      let msg = args.join(" ");
-      message.react("✅");
-      if(message.attachments.size > 0){
-        let attachment = new Discord.MessageAttachment(message.attachments.first().url)
-        return supportUser.send(`${message.author.username} > ${msg}`, {files: [message.attachments.first().url]})
-      } else {
-        return supportUser.send(`${message.author.username} > ${msg}`);
-      }
+    
     };
     
-    // anonymous reply
-    if(message.content.startsWith(`${config.prefix}areply`)){
-      var isPause = await table.get(`suspended${support.targetID}`);
-      let isBlock = await table.get(`isBlocked${support.targetID}`);
-      if(isPause === true) return message.channel.send("This ticket already paused. Unpause it to continue.")
-      if(isBlock === true) return message.channel.send("The user is blocked. Unblock them to continue or close the ticket.")
-      var args = message.content.split(" ").slice(1)
-      let msg = args.join(" ");
-      message.react("✅");
-      return supportUser.send(`Support Team > ${msg}`);
-    };
-    
-    // print user ID
-    if(message.content === `${config.prefix}id`){
-      return message.channel.send(`User's ID is **${support.targetID}**.`);
-    };
-    
-    // suspend a thread
-    if(message.content === `${config.prefix}pause`){
-      var isPause = await table.get(`suspended${support.targetID}`);
-      if(isPause === true || isPause === "true") return message.channel.send("This ticket already paused. Unpause it to continue.")
-      await table.set(`suspended${support.targetID}`, true);
-      var suspend = new MessageEmbed()
-      .setDescription(`⏸️ This thread has been **locked** and **suspended**. Do \`${config.prefix}continue\` to cancel.`)
-      .setTimestamp()
-      .setColor("YELLOW")
-      message.channel.send({embed: suspend});
-      return client.users.cache.get(support.targetID).send("Your ticket has been paused. We'll send you a message when we're ready to continue.")
-    };
-    
-    // continue a thread
-    if(message.content === `${config.prefix}continue`){
-      var isPause = await table.get(`suspended${support.targetID}`);
-      if(isPause === null || isPause === false) return message.channel.send("This ticket was not paused.");
-      await table.delete(`suspended${support.targetID}`);
-      var c = new MessageEmbed()
-      .setDescription("▶️ This thread has been **unlocked**.")
-      .setColor("BLUE").setTimestamp()
-      message.channel.send({embed: c});
-      return client.users.cache.get(support.targetID).send("Hi! Your ticket isn't paused anymore. We're ready to continue!");
-    }
-    
-    // block a user
-    if(message.content.startsWith(`${config.prefix}block`)){
-    var args = message.content.split(" ").slice(1)
-	  let reason = args.join(" ");
-	  if(!reason) reason = `Unspecified.`
-	  let user = client.users.fetch(`${support.targetID}`); // djs want a string here
-	  const blocked = new MessageEmbed()
-		.setColor("RED").setAuthor(user.tag)
-		.setTitle("User blocked")
-		.addField("Channel", `<#${message.channel.id}>`, true)
-		.addField("Reason", reason, true)
-	  if(config.logs){
-	    client.channels.cache.get(config.log).send({embed: blocked})
-	  }
-      let isBlock = await table.get(`isBlocked${support.targetID}`);
-      if(isBlock === true) return message.channel.send("The user is already blocked.")
-      await table.set(`isBlocked${support.targetID}`, true);
-      var c = new MessageEmbed()
-      .setDescription("⏸️ The user has been blocked from the modmail. You may now close the ticket or unblock them to continue.")
-      .setColor("RED").setTimestamp()
-      message.channel.send({embed: c});
-      return;
-    }
-    
+   
+
     // complete
     if(message.content.toLowerCase() === `${config.prefix}complete`){
         var embed = new MessageEmbed()
@@ -459,23 +378,4 @@ client.on("message", async message => {
     };
 })
 
-client.on("message", async message => {
-  if(message.content.startsWith(`${config.prefix}unblock`)){
-    if(message.guild.member(message.author).roles.cache.has(config.roles.mod)){
-      var args = message.content.split(" ").slice(1);
-      client.users.fetch(`${args[0]}`).then(async user => {
-      	let data = await table.get(`isBlocked${args[0]}`);
-        if(data === true){
-          await table.delete(`isBlocked${args[0]}`);
-                return message.channel.send(`Successfully unblocked ${user.username} (${user.id}) from the modmail service.`);
-        } else {
-          return message.channel.send(`${user.username} (${user.id}) is not blocked from the modmail at the moment.`)
-        }
-            }).catch(err => {
-              if(err) return message.channel.send("Unknown user.");
-            })
-    } else {
-      return message.channel.send("You can not use that.");
-    }
-  }
-})
+

@@ -6,6 +6,7 @@ const {readdirSync} = require('fs')
 const ms = require('ms')
 const Levels = require('discord-xp')
 const schema = require('./models/schema')
+const db = require("quick.db");
 
 const config = require('./config.json')
 const prefix = config.prefix

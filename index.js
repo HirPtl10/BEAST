@@ -1,4 +1,4 @@
-const { Collection, Client, Discord, Intents  } = require('discord.js');    
+const { Collection, Client, Discord, Intents, MessageEmbed } = require('discord.js');    
       
 
 const fs = require('fs')
@@ -397,7 +397,7 @@ client.on("message", async message => {
       var isPause = await table.get(`suspended${support.targetID}`);
       if(isPause === true || isPause === "true") return message.channel.send("This ticket already paused. Unpause it to continue.")
       await table.set(`suspended${support.targetID}`, true);
-      var suspend = new Discord.MessageEmbed()
+      var suspend = new MessageEmbed()
       .setDescription(`⏸️ This thread has been **locked** and **suspended**. Do \`${config.prefix}continue\` to cancel.`)
       .setTimestamp()
       .setColor("YELLOW")
@@ -410,7 +410,7 @@ client.on("message", async message => {
       var isPause = await table.get(`suspended${support.targetID}`);
       if(isPause === null || isPause === false) return message.channel.send("This ticket was not paused.");
       await table.delete(`suspended${support.targetID}`);
-      var c = new Discord.MessageEmbed()
+      var c = new MessageEmbed()
       .setDescription("▶️ This thread has been **unlocked**.")
       .setColor("BLUE").setTimestamp()
       message.channel.send({embed: c});
@@ -423,7 +423,7 @@ client.on("message", async message => {
 	  let reason = args.join(" ");
 	  if(!reason) reason = `Unspecified.`
 	  let user = client.users.fetch(`${support.targetID}`); // djs want a string here
-	  const blocked = new Discord.MessageEmbed()
+	  const blocked = new MessageEmbed()
 		.setColor("RED").setAuthor(user.tag)
 		.setTitle("User blocked")
 		.addField("Channel", `<#${message.channel.id}>`, true)
@@ -434,7 +434,7 @@ client.on("message", async message => {
       let isBlock = await table.get(`isBlocked${support.targetID}`);
       if(isBlock === true) return message.channel.send("The user is already blocked.")
       await table.set(`isBlocked${support.targetID}`, true);
-      var c = new Discord.MessageEmbed()
+      var c = new MessageEmbed()
       .setDescription("⏸️ The user has been blocked from the modmail. You may now close the ticket or unblock them to continue.")
       .setColor("RED").setTimestamp()
       message.channel.send({embed: c});
@@ -443,7 +443,7 @@ client.on("message", async message => {
     
     // complete
     if(message.content.toLowerCase() === `${config.prefix}complete`){
-        var embed = new Discord.MessageEmbed()
+        var embed = new MessageEmbed()
         .setDescription(`This ticket will be deleted in **10** seconds...\n:lock: This thread has been locked and closed.`)
         .setColor("RED").setTimestamp()
         message.channel.send({embed: embed})

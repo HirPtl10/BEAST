@@ -6,6 +6,7 @@ const {readdirSync} = require('fs')
 const ms = require('ms')
 const Levels = require('discord-xp')
 const schema = require('./models/schema')
+
 const config = require('./config.json')
 const prefix = config.prefix
 const prefixSchema = require('./models/prefix')
@@ -29,16 +30,11 @@ client.prefix = async function(message) {
         }
         return custom;
     }
-client.on('ready', () => {
- console.log(`${client.user.username} is online`)
- client.user.setActivity("Wut", {type: "PLAYING"});
-});
-  
-   
+
 
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://last:last@test.8ukwy.mongodb.net/Data', { useNewUrlParser: true, useUnifiedTopology: true, })
-
+      
 const { ShardingManager } = require('discord.js');
 const manager = new ShardingManager('./bot.js', { token: process.env.token });
 manager.on('shardCreate', shard => console.log(`Launched shard ${shard.id}`));
@@ -79,12 +75,14 @@ const Timeout = new Collection();
 client.commands = new Collection();
 client.cachedMessageReactions = new Map();
 client.db = require("quick.db");
-client.aliases = new Collection();
+module.exports = client
 
+client.aliases = new Collection();
 client.categories = fs.readdirSync("./commands/");
 ["command"].forEach(handler => {
   require(`./handlers/${handler}`)(client)
 })
+
 
 const blacklist = require('./models/blacklist')
 client.on('message', async message =>{
@@ -142,15 +140,6 @@ client.on('guildDelete', async (guild) => {
 
 client.login(process.env.token)
 
-async function createAPIMessage(interaction, content) {
-	const apiMessage = await APIMessage.create(
-		client.channels.resolve(interaction.channel_id),
-		content,
-	)
-		.resolveData()
-		.resolveFiles();
-	return { ...apiMessage.data, files: apiMessage.files };
-}
 client.on('messageDelete', async(message) => {
     require('./Logging/MessageDelete')(message)
 })
@@ -268,20 +257,4 @@ client.on('messageReactionRemove', async (reaction, user) => {
     user.send(`You have lost ${roleid} role`);
   });
 });
-client.on('message', async message => {
-	if (!client.application?.owner) await client.application?.fetch();
 
-	if (message.content.toLowerCase() === '!deploy' && message.author.id === client.application?.owner.id) {
-		const data = {
-			name: 'phing',
-			description: 'Bots ping!',
-		};
-
-		const command = await client.application?.commands.create(data);
-		console.log(command);
-	}
-});
-client.on('interaction', async interaction => {
-	if (!interaction.isCommand()) return;
-	if (interaction.commandName === 'phing') await interaction.reply(`${client.ws.ping}`, { ephemeral: true });
-});

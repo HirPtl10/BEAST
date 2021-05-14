@@ -15,7 +15,7 @@ module.exports = {
     if (msgs.first().content.toLowerCase() === 'yes') {
     client.users.fetch(useri).then(async user => {
       await message.guild.members.ban(useri, {reason: reason});
-      return message.channel.send(`<@${useri}> has been banned from the server`);
+      return message.channel.send(`https://tenor.com/view/discord-ban-server-discord-server-discord-server-ban-gif-18150385\n<@${useri}> has been banned from the server`);
     })
       } else {
  return message.reply(`Cancelles`)

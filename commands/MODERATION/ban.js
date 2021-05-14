@@ -11,7 +11,14 @@ module.exports = {
     usage: `${p}@member reason`,
     permissions: 'BAN MEMBERS',
     run: async (client, message, args) => {
-        message.delete();
+      const answers = [
+		'https://tenor.com/view/cosmic-ban-hammers-gif-20478007',
+		'https://tenor.com/view/star-wars-banhammer-moderator-ban-discord-gif-17302394',
+		'https://tenor.com/view/thor-banhammer-discord-banned-banned-by-admin-gif-12646581',
+		'https://tenor.com/view/discord-ban-server-discord-server-discord-server-ban-gif-18150385',
+		'https://tenor.com/view/banned-admin-hulk-gif-18033317',
+		
+	];
 
         const member = message.mentions.members.first() || message.guild.members.cache.get(args[0]) || message.guild.members.cache.find(x => x.user.username.toLowerCase() === args.slice(0).join(" ") || x.user.username === args[0]);
 
@@ -83,7 +90,7 @@ module.exports = {
 
         member.send(`👢You were Banned from **${message.guild.name}** \n**Reason**: ${reason}.`);
         member.ban(reason);
-        message.channel.send(`${member} was **Banned**! Reason ${reason}`);
+        message.channel.send(`${answers[Math.floor(Math.random() * answers.length)]} \n ${member} was **Banned**! Reason ${reason}`);
         if (!logChannel) {
             return
         } else {

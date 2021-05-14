@@ -13,6 +13,7 @@ module.exports = {
 
         const fetchBans = message.guild.fetchBans();
         const bannedMembers = (await fetchBans)
+        const reason = fetchBans.reason
       
         .map ((member, reason) => member.user.tag, reason)
         .join("\n");

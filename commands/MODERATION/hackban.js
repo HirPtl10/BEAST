@@ -1,4 +1,4 @@
-const { Client, Message, MessageEmbed } = require('discord.js');
+const { Client, Message, MessageEmbed, Discord } = require('discord.js');
 module.exports = {
   name: 'hackban',
   description: 'bans member outside server',

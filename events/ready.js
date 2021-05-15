@@ -2,7 +2,8 @@ const client = require('../index')
 const fs = require('fs')
 const Discord = require('discord.js')
 const path = require('path');
-
+const { getCommands } = require('../util')
+ 
 client.on('ready', () => {
  console.log(`Bot is online`)
     client.user.setActivity("Developer Using DJS", {type: "PLAYING"});
@@ -17,6 +18,10 @@ client.on('ready', () => {
     app.set("view engine", "ejs")
     app.get("/", (req, res) => {
         res.status(200).sendFile(path.join(__dirname, "..", "pages", "landingPage.html"))
+    })
+    app.get("commands", (req, res) => {
+     const commands = getCommands()
+     res.status(200).render('commands', { commands })
     })
     app.get("/info", (req, res) => {
         res.status(200).send(clientDetails)

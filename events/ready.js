@@ -22,5 +22,4 @@ client.on('ready', () => {
         res.status(200).send(clientDetails)
     })
     app.listen(port)
-   
 });

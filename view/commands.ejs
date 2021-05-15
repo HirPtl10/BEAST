@@ -1,1 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Beast Commands</title>
+    </head>
+
+    <body>
+        <a href="/"><img class="avatar"src="https://cdn.discordapp.com/avatars/811265195186978828/ba22fccacfad4fbffa0bdb6d9e820264.png?size=256" 
+            alt="Bot Avatar"></a>
+        <section class="main-content">
+            <p>To get a look of commands in discord, use <code>h!help</code> to view the commands!</p>
+
+            <% commands.forEach(({ name, value }) => { %>
+                <table style="width: 100%">
+                    <h1 style="text-align: center;">
+                    <%= name %>
+                    </h1>
+                    <tr>
+                        <th>Command Name</th>
+                        <th>Usage</th>
+                        <th>Description</th>
+                        <th>Aliases</th>
+                    </tr>
+                   <% value.forEach(({ name, description, aliases, usage }) => { %>
+                        <tr>
+                                <td><%= name %></td>
+                                <td><%= usage %></td>
+                                <td><%= descripton %></td>
+                                <td><%= typeof aliases === 'string' ? aliases : aliases.join(', ') %></td>
+                        </tr>
+                    <% }) %>
+                </table>
+            <% }) %>
+        </section>
+    </body>
+</html>
 

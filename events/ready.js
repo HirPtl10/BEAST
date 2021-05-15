@@ -1,4 +1,6 @@
 const client = require('../index')
+const fs = require('fs')
+const Discord = require('discord.js')
 
 client.on('ready', () => {
  console.log(`Bot is online`)

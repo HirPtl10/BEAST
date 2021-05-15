@@ -19,7 +19,7 @@ client.on('ready', () => {
     app.get("/", (req, res) => {
         res.status(200).sendFile(path.join(__dirname, "..", "pages", "landingPage.html"))
     })
-    app.get("commands", (req, res) => {
+    app.get("/commands", (req, res) => {
      const commands = getCommands()
      res.status(200).render('commands', { commands })
     })

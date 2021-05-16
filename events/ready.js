@@ -2,7 +2,7 @@ const client = require('../index')
 const fs = require('fs')
 const Discord = require('discord.js')
 const path = require('path');
-const { getCommands } = require('../util')
+const { getCommands } = require('../utils')
  
 client.on('ready', () => {
  console.log(`Bot is online`)

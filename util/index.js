@@ -9,7 +9,7 @@ function getCommands() {
         const value = []
 
         const commands = directories.map((command) => {
-            const file = require(`../${dir}/${command}`)
+            const file = require(`../commands/${dir}/${command}`)
 
             value.push({
                 name: file.name ? file.name : 'no command name',

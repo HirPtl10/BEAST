@@ -19,22 +19,26 @@
         <button class="btn">Invite</button>
         <button class="btn">Support</button>
         
-    </div>
-    <div id='container'>
- <img src='https://media.discordapp.net/attachments/843415787325620234/843416023377248297/Screen_Shot_1943-02-26_at_2.43.37_PM.PNG' style='float: right;'/>
- <p>TICKET SYSTEM <br> Advanced ticket system</p>
-</div>
-    </div>
+ 
     <div id='container'>
  <img src='https://media.discordapp.net/attachments/843416748212224001/843417121564131348/Screen_Shot_1943-02-26_at_2.47.47_PM.PNG?width=476&height=407' style='float: left;'/>
  <p>MODERATION <br>Powerfull Moderation System with best modertion commands</p>
 </div>
      </div>
-    <div id='container'>
- <img src='https://media.discordapp.net/attachments/843417406973673512/843417615455748096/Screen_Shot_1943-02-26_at_2.50.07_PM.PNG?width=487&height=407' style='float: right;'/>
- <p>MODLOGS <br> Advanced logging system</p>
-</div>
+    
     <style>
+        .container {
+        padding: 50px;
+        background-color: green;
+        transition: transform .2s; /* Animation */
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+    }
+
+        .container:hover {
+  transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
         .btn {
             background-color: paleturquoise;
             color: black;

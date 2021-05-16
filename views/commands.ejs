@@ -17,15 +17,15 @@
                     </h1>
                     <tr>
                         <th>Command Name</th>
-                        <th>Usage</th>
+                        
                         <th>Description</th>
                         <th>Aliases</th>
                     </tr>
                    <% value.forEach(({ name, description, aliases, usage }) => { %>
                         <tr>
                                 <td><%= name %></td>
-                                <td><%= usage %></td>
-                                <td><%= descripton %></td>
+                               
+                                <td><%= description %></td>
                                 <td><%= typeof aliases === 'string' ? aliases : aliases.join(', ') %></td>
                         </tr>
                     <% }) %>

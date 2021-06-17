@@ -47,4 +47,4 @@ card.build()
       return message.channel.send(attachment);
        })}
 }
-    }
+  }

@@ -37,10 +37,7 @@ client.prefix = async function(message) {
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://last:last@test.8ukwy.mongodb.net/Data', { useNewUrlParser: true, useUnifiedTopology: true, })
       
-const { Player } = require('discord-player');
 
-const player = new Player(client);
-client.player = player;
 
 // function
 client.bal = (id) => new Promise(async  ful => {

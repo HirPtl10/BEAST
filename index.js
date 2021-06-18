@@ -46,7 +46,7 @@ fs.readdir('./player-events/', (err, files) => {
         const event = require(`./player-events/${file}`);
         let eventName = file.split(".")[0];
         console.log(`Loading player event ${eventName}`);
-        client.player.on(eventName, event.bind(null, client));
+        client.player.on(eventName, event.run.bind(null, client));
     });
 });
 

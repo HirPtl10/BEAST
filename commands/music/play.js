@@ -15,16 +15,13 @@ module.exports = {
         //Checking for the voicechannel and permissions (you can add more permissions if you like).
         const voice_channel = message.member.voice.channel;
         if (!voice_channel) return message.channel.send('You need to be in a channel to execute this command!');
-        const permissions = voice_channel.permissionsFor(message.client.user);
-        if (!permissions.has('CONNECT')) return message.channel.send('You dont have the correct permissins');
-        if (!permissions.has('SPEAK')) return message.channel.send('You dont have the correct permissins');
-
+       
         //This is our server queue. We are getting this server queue from the global queue.
         const server_queue = queue.get(message.guild.id);
         const query = args[0];
         //If the user has used the play command
         if (query === 'play'){
-            if (!args.length) return message.channel.send('You need to send the second argument!');
+            if (!query) return message.channel.send('You need to send the second argument!');
             let song = {};
 
             //If the first argument is a link. Set the song object to have two keys. Title and URl.

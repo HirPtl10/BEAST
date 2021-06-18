@@ -40,15 +40,6 @@ const { Player } = require('discord-player');
 
 const player = new Player(client);
 client.player = player;
-fs.readdir('./player-events/', (err, files) => {
-    if (err) return console.error(err);
-    files.forEach(file => {
-        const event = require(`./player-events/${file}`);
-        let eventName = file.split(".")[0];
-        console.log(`Loading player event ${eventName}`);
-        client.player.on(eventName, event.run.bind(null, client));
-    });
-});
 
 // function
 client.bal = (id) => new Promise(async  ful => {

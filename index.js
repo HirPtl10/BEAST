@@ -134,7 +134,12 @@ client.on('guildDelete', async (guild) => {
     })
 })      
 
-
+const distube = require('distube')
+const player = new distube(client)
+player.on('playSong', (message, queue, song) => {
+    message.channel.send(`${song.name} Started playing ok?`)
+})
+client.player = player;
 
 client.login(process.env.token)
 

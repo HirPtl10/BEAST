@@ -40,7 +40,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://last:last@test.8ukwy.mongodb.net/Data', { useNewUrlParser: true, useUnifiedTopology: true, })
 
 
-
+//ok
 client.bal = (id) => new Promise(async  ful => {
     const data = await schema.findOne({ id })
     if (!data) return ful(0);

@@ -141,7 +141,7 @@ player.on('playSong', (message, queue, song) => {
     message.channel.send(`${song.name} Started playing ok?`)
 })
 client.player = player;
-distube.on("addSong", (message, queue, song) => message.channel.send(
+player.on("addSong", (message, queue, song) => message.channel.send(
     `Added **${song.name}** - \`${song.formattedDuration}\` to the queue by ${song.user}`
 ));
 client.login(process.env.token)

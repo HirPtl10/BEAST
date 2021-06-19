@@ -1,5 +1,5 @@
-const { Collection, Client, Discord, Intents, MessageEmbed } = require('discord.js');    
-      
+const { Collection, Client, Discord, Intents, MessageEmbed } = require('discord.js');
+
 
 const fs = require('fs')
 const {readdirSync} = require('fs')
@@ -24,7 +24,7 @@ client.prefix = async function(message) {
 
         const data = await prefixSchema.findOne({ Guild : message.guild.id })
             .catch(err => console.log(err))
-        
+
         if(data) {
             custom = data.Prefix;
         } else {
@@ -34,9 +34,11 @@ client.prefix = async function(message) {
     }
 
 
+
+
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://last:last@test.8ukwy.mongodb.net/Data', { useNewUrlParser: true, useUnifiedTopology: true, })
-      
+
 
 
 // function
@@ -103,7 +105,7 @@ client.on('message', async message =>{
     if (hasLeveledUp) {
         const user = await Levels.fetch(message.author.id, message.guild.id);
         message.channel.send(`You leveled up to ${user.level}! Keep it going!`);
-    }	    
+    }
     if(cmd.length == 0 ) return;
     let command = client.commands.get(cmd)
     if(!command) command = client.commands.get(client.aliases.get(cmd));
@@ -117,13 +119,13 @@ client.on('message', async message =>{
             }, command.timeout)
         } else {
           command.run(client, message, args)
-        } 
+        }
     }
 	} else {
 	  message.channel.send('You are blacklisted')
 	}
 })
-  
+
 })
 client.on('guildDelete', async (guild) => {
     prefixSchema.findOne({ Guild: guild.id }, async (err, data) => {
@@ -132,7 +134,7 @@ client.on('guildDelete', async (guild) => {
             prefixSchema.findOneAndDelete({ Guild : guild.id }).then(console.log('deleted data.'))
         }
     })
-})      
+})
 
 const distube = require('distube')
 const player = new distube(client)
@@ -234,7 +236,7 @@ const Schema = require('./models/reaction-roles');
 client.on('messageReactionAdd', async (reaction, user) => {
   if (reaction.message.partial) await reaction.message.fetch();
   if (reaction.partial) await reaction.fetch();
-  
+
 
   Schema.findOne({ Message: reaction.message.id }, async (err, data) => {
     if (!data) return;
@@ -260,6 +262,3 @@ client.on('messageReactionRemove', async (reaction, user) => {
     user.send(`You have lost ${roleid} role`);
   });
 });
-
-
-

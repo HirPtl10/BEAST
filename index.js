@@ -138,11 +138,11 @@ client.on('guildDelete', async (guild) => {
 const distube = require('distube')
 const player = new distube(client)
 player.on('playSong', (message, queue, song) => {
-    message.channel.send(`${song.name} Started playing ok?`)
+    message.channel.send(`Started Playing **${song.name}** - \`${song.formattedDuration}\` requested by ${song.user}`)
 })
 client.player = player;
 player.on("addSong", (message, queue, song) => message.channel.send(
-    `Added **${song.name}** - \`${song.formattedDuration}\` to the queue by ${song.user}`
+    `Added **${song.name}** - \`${song.formattedDuration}\` has been added to queue by ${song.user}`
 ));
 client.login(process.env.token)
 

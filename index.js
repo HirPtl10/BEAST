@@ -144,6 +144,7 @@ client.player = player;
 player.on("addSong", (message, queue, song) => message.channel.send(
     `Added **${song.name}** - \`${song.formattedDuration}\` has been added to queue by ${song.user}`
 ));
+player.on("finish", message => message.channel.send("Finished playing Xd"));
 client.login(process.env.token)
 
 client.on('messageDelete', async(message) => {

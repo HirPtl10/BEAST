@@ -10,7 +10,7 @@ module.exports = {
    timeout: '',
    cooldown: '',
    run: async (client, message, args) => {
-    if (message.author.id !== '416358583220043796') return;
+    if (message.author.id !== '844825143381590016') return;
     const embed = new MessageEmbed()
     .setTitle('Eval')
     .addField("Input", "```js\n" + args.join(" ") + "```")

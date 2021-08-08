@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Beast Commands</title>
+           <link rel = "icon" href = 
+"https://images-ext-1.discordapp.net/external/7-8BkjOOTNJNDDr5LtZdl9U7Z8CbTU6YYFNBHUtz-Ew/%3Fsize%3D256/https/cdn.discordapp.com/avatars/827805755486240818/09eaebbed8b99cdec734220afa69d4cd.png" 
+        type = "image/x-icon">
+    </head>
+
+    <body>
+        <a href="/"><img class="avatar"src="https://images-ext-1.discordapp.net/external/7-8BkjOOTNJNDDr5LtZdl9U7Z8CbTU6YYFNBHUtz-Ew/%3Fsize%3D256/https/cdn.discordapp.com/avatars/827805755486240818/09eaebbed8b99cdec734220afa69d4cd.png" 
+            alt="Bot Avatar"></a>
+        <section class="main-content">
+            <p>To get a look of commands in discord, use <code>h!help</code> to view the commands!</p>
+
+            <% commands.forEach(({ name, value }) => { %>
+                <table style="width: 100%">
+                    <h1 style="text-align: center;">
+                    <%= name %>
+                    </h1>
+                    <tr>
+                        <th>Command Name</th>
+                        
+                        <th>Description</th>
+                        <th>Aliases</th>
+                    </tr>
+                   <% value.forEach(({ name, description, aliases, usage }) => { %>
+                        <tr>
+                                <td><%= name %></td>
+                               
+                                <td><%= description %></td>
+                                <td><%= typeof aliases === 'string' ? aliases : aliases.join(', ') %></td>
+                        </tr>
+                    <% }) %>
+                </table>
+            <% }) %>
+        </section>
+    </body>
+    <style>
+     body {
+            background-color: black;
+        }
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: "Serif";
+            font-size: 16px;
+            line-height: 1.5;
+            color: #FF0000;
+        }
+        .main-content {
+            word-wrap: break-word;
+        }
+        @media screen and (min-width: 64em) {
+               .main-content {
+                    max-width: 64rem;
+                    padding: 2rem 6rem;
+                    margin: 0 auto;
+                    font-size: 1.1rem;
+            }
+        }
+         @media screen and (min-width: 42rem) and (min-width: 64em) {
+               .main-content {
+                 
+                    padding: 2rem 4rem;
+                  
+                    font-size: 1.1rem;
+            }
+        }
+         @media screen and (min-width: 42em) {
+               .main-content {
+                    
+                    padding: 2rem 1rem;
+                   
+                    font-size: 1rem;
+            }
+        }
+        .main-content h1,
+        .main-content h2,
+        .main-content h3,
+        .main-content h4,
+        .main-content h5,
+        .main-content h6 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: normal;
+            color: #FF0000
+        }   
+     .main-content table th,
+     .main-content table td {
+        padding: 0.5rem 1rem;
+        border: 1px solid #00FFFF;
+        }
+        .avatar {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border: 4px solid black;
+            border-radius: 100%;
+            width: 20%;
+            height: 20%;
+            -webkit-transform: -webkit-transform .8s ease-in-out;
+            transition: transform .8s ease-in-out;
+        }
+        .avatar:hover{
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg)
+        }
+    </style>
+</html>
+

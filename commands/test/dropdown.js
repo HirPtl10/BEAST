@@ -30,7 +30,7 @@ module.exports = {
     const embed = new MessageEmbed().setDescription(
       "Please choose"
     );
-      const components = (state) => []
+      const components = (state) => [
         new MessageActionRow().addComponents(
           .setCustomId("help")
           .setPlaceholder("please select")

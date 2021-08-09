@@ -22,8 +22,8 @@ module.exports = {
       });
 
         return {
-          directory: formatString(dir)
-          commands: getCommands
+          directory: formatString(dir),
+          commands: getCommands,
         };
     });
 

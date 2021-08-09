@@ -5,7 +5,7 @@ const path = require('path');
 const { getCommands } = require('../utils')
  
 client.on('ready', () => {
- console.log(`Bot is online`)
+ console.log(process.version)
     client.user.setActivity("Developer Using DJS", {type: "PLAYING"});
 
     const clientDetails = {

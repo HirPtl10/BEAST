@@ -33,7 +33,7 @@ client.prefix = async function(message) {
         return custom;
     }
 
-
+//thius is test
 
 
 const mongoose = require('mongoose');

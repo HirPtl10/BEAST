@@ -7,8 +7,7 @@ module.exports = {
 
     ];
 
-    const formatString = (str) =>
-    `${str[0].toUpperCase()}${str.slice(1).toLowerCase()}`;
+  const formatString = (str) => `${str[0].toUpperCase()}${str.slice(1).toLowerCase()}`
 
     const categories = directories.map((dir) => {
       const getCommands = client.commands.filter(

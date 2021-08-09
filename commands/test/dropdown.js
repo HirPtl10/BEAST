@@ -32,6 +32,7 @@ module.exports = {
     );
       const components = (state) => [
         new MessageActionRow().addComponents(
+          new MessageSelectMenu()
           .setCustomId("help")
           .setPlaceholder("please select")
           .setDisabled(state)

@@ -23,7 +23,7 @@ module.exports = {
 
         return {
           directory: formatString(dir)
-          command: getCommands
+          commands: getCommands
         };
     });
 

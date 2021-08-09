@@ -3,7 +3,7 @@ const { Client, Message, MessageEmbed, MessageActionRow, MessageSelectMenu } = r
 module.exports = {
   name: 'dropdown',
   run: async (client, message, args) => {
-    const directories = [..new Set(client.commands.map(cmd => cmd.directory)),
+    const directories = [...new Set(client.commands.map(cmd => cmd.directory)),
 
     ];
 
